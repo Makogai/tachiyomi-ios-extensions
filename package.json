@@ -1,0 +1,18 @@
+{
+  "name": "tachiyomi-ios-extensions",
+  "private": true,
+  "type": "module",
+  "description": "Sources for tachiyomi-ios, ported from keiyoushi/extensions-source to TypeScript.",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit -p .",
+    "test": "node --test sdk/test/",
+    "check": "npm run typecheck && npm test && npm run build"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2",
+    "@types/node": "26.6.6"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "routes": [
+    { "url": "https://www.mangahere.cc/directory/1.htm", "file": "fixtures/popular.html" },
+    {
+      "url": "https://www.mangahere.cc/search?type=0&artist_method=cw&artist=&author_method=cw&author=&genres=&nogenres=&rating_method=gt&rating=0&released_method=eq&released=&st=0&page=1&title=blue%20lock&sort&stype=1&name",
+      "file": "fixtures/search.html"
+    },
+    { "url": "https://www.mangahere.cc/manga/blue_lock_episode_nagi/", "file": "fixtures/manga.html" },
+    { "url": "https://www.mangahere.cc/manga/blue_lock_episode_nagi/c036/1.html", "file": "fixtures/chapter_paged.html" },
+    {
+      "url": "https://www.mangahere.cc/manga/blue_lock_episode_nagi/c036/chapterfun.ashx?",
+      "match": "prefix",
+      "file": "fixtures/chapterfun.js"
+    }
+  ],
+  "cases": [
+    {
+      "name": "popular lists the directory",
+      "call": "popular",
+      "args": [1],
+      "expect": {
+        "mangas.length": 70,
+        "mangas.0.title": "Onepunch-Man",
+        "mangas.0.url": "/manga/onepunch_man/",
+        "mangas.0.thumbnail_url": { "contains": "fmcdn.mangahere.com/store/manga/11912/cover.jpg" },
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "search builds upstream's URL and parses results",
+      "call": "search",
+      "args": [1, "blue lock"],
+      "expect": {
+        "mangas.length": 12,
+        "mangas.0.url": "/manga/blue_lock_episode_nagi/",
+        "mangas.0.title": { "contains": "Blue Lock" }
+      }
+    },
+    {
+      "name": "details and chapters come from the manga page",
+      "call": "mangaUpdate",
+      "args": [{ "url": "/manga/blue_lock_episode_nagi/", "title": "Blue Lock: Episode Nagi" }],
+      "expect": {
+        "manga.author": "KANESHIRO Muneyuki",
+        "manga.status": 1,
+        "manga.genre": { "contains": "Sports" },
+        "chapters.length": 39,
+        "chapters.0.name": "Ch.036",
+        "chapters.0.url": "/manga/blue_lock_episode_nagi/c036/1.html",
+        "chapters.0.date_upload": { "localDate": "2025-07-09" }
+      }
+    },
+    {
+      "name": "paged chapters resolve the key and image URLs through packed scripts",
+      "call": "pages",
+      "args": [{ "url": "/manga/blue_lock_episode_nagi/c036/1.html", "name": "Ch.036" }],
+      "expect": {
+        "length": 67,
+        "0.url": { "contains": "chapterfun.ashx?cid=1585415&page=1&key=0abdcc248c3856f7#https://www.mangahere.cc/manga/blue_lock_episode_nagi/c036/1.html" },
+        "66.imageUrl": "https://zjcdn.mangahere.org/store/manga/43269/036.0/compressed/s001.jpg"
+      }
+    },
+    {
+      "name": "the image URL of a page comes from chapterfun.ashx",
+      "call": "imageURL",
+      "args": [{ "index": 0, "url": "https://www.mangahere.cc/manga/blue_lock_episode_nagi/c036/chapterfun.ashx?cid=1585415&page=1&key=0abdcc248c3856f7#https://www.mangahere.cc/manga/blue_lock_episode_nagi/c036/1.html" }],
+      "expect": { "": "https://zjcdn.mangahere.org/store/manga/43269/036.0/compressed/s001.jpg" }
+    }
+  ],
+  "live": [
+    { "name": "popular", "call": "popular", "args": [1], "expect": { "mangas.length": { "gt": 0 } } }
+  ]
+}

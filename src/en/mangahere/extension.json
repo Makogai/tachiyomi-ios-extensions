@@ -1,0 +1,7 @@
+{
+  "name": "Mangahere",
+  "lang": "en",
+  "versionCode": 1,
+  "nsfw": false,
+  "upstream": { "path": "src/en/mangahere", "commit": "d9420cd1" }
+}

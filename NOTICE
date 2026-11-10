@@ -1,0 +1,8 @@
+tachiyomi-ios-extensions
+
+The sources in this repository are TypeScript ports of sources from
+keiyoushi/extensions-source (https://github.com/keiyoushi/extensions-source),
+licensed under the Apache License, Version 2.0. Each port names the upstream
+file and commit it was taken from; SOURCES.md lists them all.
+
+Not affiliated with Tachiyomi, Mihon, TachiyomiJ2K or Keiyoushi.
