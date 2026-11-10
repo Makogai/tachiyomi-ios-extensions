@@ -103,7 +103,7 @@ export class SharedPreferences {
 
   private read(key: string): unknown {
     const json = host().prefGet(this.sourceIndex(), key);
-    return json === null ? undefined : JSON.parse(json);
+    return json == null ? undefined : JSON.parse(json);
   }
 
   getBoolean(key: string, defaultValue: boolean): boolean {

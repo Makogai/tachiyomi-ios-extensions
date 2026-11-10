@@ -161,3 +161,43 @@ export function startOfDay(daysAgo = 0, now: Date = new Date()): number {
 /** Durations, as Kotlin's `2.seconds`. */
 export const seconds = (value: number) => value * 1000;
 export const minutes = (value: number) => value * 60_000;
+
+// WebView (API level 2)
+
+export interface WebViewOptions {
+  url: string;
+  userAgent?: string;
+  headers?: Record<string, string>;
+  /** Runs before the page's scripts; may call `__tachiyomi.post(text)` and `__tachiyomi.done()`. */
+  script?: string;
+  /** Evaluated every half second after load; a non-empty string ends the run. */
+  pollScript?: string;
+  timeoutMs?: number;
+  loadImages?: boolean;
+  /** Shows the page so the user can solve a captcha by hand. */
+  visible?: boolean;
+}
+
+export interface WebViewResult {
+  payloads: string[];
+  result: string | null;
+  html: string;
+  url: string;
+  timedOut: boolean;
+}
+
+/**
+ * Runs a page in a real browser (WKWebView in the app) and returns what its scripts handed back.
+ * Replaces upstream's `runWebView` for collecting data; Android-only parts (request interception,
+ * simulated touches) have no equivalent.
+ */
+export function runWebView(options: WebViewOptions): Promise<WebViewResult> {
+  const native = host();
+  if (!native.webview) return Promise.reject(new Error("This app version has no WebView for extensions"));
+  return new Promise((resolve, reject) => {
+    native.webview!(JSON.stringify({ timeoutMs: 30000, ...options }), (error, json) => {
+      if (error !== null || json === null) reject(new Error(error ?? "WebView failed"));
+      else resolve(JSON.parse(json) as WebViewResult);
+    });
+  });
+}

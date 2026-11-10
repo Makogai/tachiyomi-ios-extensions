@@ -1,0 +1,790 @@
+{
+ "data": [
+  {
+   "hid": "Fl6rN8T",
+   "chap": "62",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-12-16T19:14:16.000000Z",
+   "updated_at": "2025-12-16T19:14:16.000000Z"
+  },
+  {
+   "hid": "FYxa1OU",
+   "chap": "61",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-12-08T22:31:30.000000Z",
+   "updated_at": "2025-12-08T22:31:30.000000Z"
+  },
+  {
+   "hid": "FYxUB6X",
+   "chap": "60",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-12-08T22:30:05.000000Z",
+   "updated_at": "2025-12-08T22:30:05.000000Z"
+  },
+  {
+   "hid": "FYxicAj",
+   "chap": "59",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-12-08T22:33:36.000000Z",
+   "updated_at": "2025-12-08T22:33:36.000000Z"
+  },
+  {
+   "hid": "F8L1T29",
+   "chap": "58",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-11-21T17:01:33.000000Z",
+   "updated_at": "2025-11-22T05:46:05.000000Z"
+  },
+  {
+   "hid": "EyKIeZv",
+   "chap": "57",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-11-15T05:31:18.000000Z",
+   "updated_at": "2025-12-02T09:47:46.000000Z"
+  },
+  {
+   "hid": "EyKxYfZ",
+   "chap": "56",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-11-15T05:41:12.000000Z",
+   "updated_at": "2025-11-20T09:15:42.000000Z"
+  },
+  {
+   "hid": "EyK05i5",
+   "chap": "55",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-11-15T05:26:47.000000Z",
+   "updated_at": "2025-11-20T09:07:04.000000Z"
+  },
+  {
+   "hid": "EyKvhSP",
+   "chap": "54",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-11-15T05:40:46.000000Z",
+   "updated_at": "2025-11-20T06:56:10.000000Z"
+  },
+  {
+   "hid": "EyJZYYe",
+   "chap": "53",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-11-15T05:20:22.000000Z",
+   "updated_at": "2025-12-02T05:18:47.000000Z"
+  },
+  {
+   "hid": "EyJJbaY",
+   "chap": "52",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-11-15T05:16:30.000000Z",
+   "updated_at": "2025-11-20T06:02:05.000000Z"
+  },
+  {
+   "hid": "EyJ3Ntz",
+   "chap": "51",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-11-15T05:12:34.000000Z",
+   "updated_at": "2025-11-20T05:53:15.000000Z"
+  },
+  {
+   "hid": "EyJ1s49",
+   "chap": "50",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-11-15T05:12:11.000000Z",
+   "updated_at": "2025-11-20T01:24:38.000000Z"
+  },
+  {
+   "hid": "EyHuiKg",
+   "chap": "49",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-11-15T04:55:25.000000Z",
+   "updated_at": "2025-11-19T15:47:11.000000Z"
+  },
+  {
+   "hid": "EyIQc0P",
+   "chap": "48",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-11-15T05:03:09.000000Z",
+   "updated_at": "2025-11-19T15:37:26.000000Z"
+  },
+  {
+   "hid": "IXWLOnB",
+   "chap": "47",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:50:28.000000Z",
+   "updated_at": "2025-10-10T12:03:23.000000Z"
+  },
+  {
+   "hid": "IXWD4fD",
+   "chap": "46",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:48:28.000000Z",
+   "updated_at": "2025-10-23T16:22:17.000000Z"
+  },
+  {
+   "hid": "IXW4y7V",
+   "chap": "45",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:46:29.000000Z",
+   "updated_at": "2025-10-10T11:50:43.000000Z"
+  },
+  {
+   "hid": "IXVwVnd",
+   "chap": "44",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:44:27.000000Z",
+   "updated_at": "2025-10-10T11:41:40.000000Z"
+  },
+  {
+   "hid": "IXVo7k1",
+   "chap": "43",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:42:25.000000Z",
+   "updated_at": "2025-10-10T11:36:32.000000Z"
+  },
+  {
+   "hid": "IXVg8vK",
+   "chap": "42",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:40:28.000000Z",
+   "updated_at": "2025-10-10T11:31:31.000000Z"
+  },
+  {
+   "hid": "IXVPVb7",
+   "chap": "41",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:36:26.000000Z",
+   "updated_at": "2025-10-10T11:23:50.000000Z"
+  },
+  {
+   "hid": "IXVXlSr",
+   "chap": "40",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:38:26.000000Z",
+   "updated_at": "2025-12-01T19:35:42.000000Z"
+  },
+  {
+   "hid": "IXVHT3B",
+   "chap": "39",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:34:29.000000Z",
+   "updated_at": "2025-10-10T11:10:33.000000Z"
+  },
+  {
+   "hid": "IXV9DeM",
+   "chap": "38",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:32:30.000000Z",
+   "updated_at": "2025-12-01T19:18:59.000000Z"
+  },
+  {
+   "hid": "IXV1Ay9",
+   "chap": "37",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:30:32.000000Z",
+   "updated_at": "2025-10-10T10:28:04.000000Z"
+  },
+  {
+   "hid": "IXUsiRu",
+   "chap": "36",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:28:30.000000Z",
+   "updated_at": "2025-10-10T10:22:55.000000Z"
+  },
+  {
+   "hid": "IXUkXRb",
+   "chap": "35",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:26:31.000000Z",
+   "updated_at": "2025-10-10T09:24:33.000000Z"
+  },
+  {
+   "hid": "IXUcHuT",
+   "chap": "34",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:24:30.000000Z",
+   "updated_at": "2025-10-10T09:17:04.000000Z"
+  },
+  {
+   "hid": "IXUU2RW",
+   "chap": "33",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:22:31.000000Z",
+   "updated_at": "2025-10-10T09:11:00.000000Z"
+  },
+  {
+   "hid": "IXULRSr",
+   "chap": "32",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:20:25.000000Z",
+   "updated_at": "2025-10-10T09:04:43.000000Z"
+  },
+  {
+   "hid": "IXUDGnB",
+   "chap": "31",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:18:27.000000Z",
+   "updated_at": "2025-10-10T09:00:09.000000Z"
+  },
+  {
+   "hid": "IXU4x3x",
+   "chap": "30",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:16:26.000000Z",
+   "updated_at": "2025-10-10T08:53:35.000000Z"
+  },
+  {
+   "hid": "IXTx6ll",
+   "chap": "29",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:14:31.000000Z",
+   "updated_at": "2025-10-10T08:18:19.000000Z"
+  },
+  {
+   "hid": "IXToF0c",
+   "chap": "28",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:12:22.000000Z",
+   "updated_at": "2025-10-10T08:06:10.000000Z"
+  },
+  {
+   "hid": "IXTfmYV",
+   "chap": "27",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:10:20.000000Z",
+   "updated_at": "2025-10-10T07:57:20.000000Z"
+  },
+  {
+   "hid": "IXTXsnb",
+   "chap": "26",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:08:25.000000Z",
+   "updated_at": "2025-10-10T07:52:19.000000Z"
+  },
+  {
+   "hid": "IXTPZCb",
+   "chap": "25",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:06:23.000000Z",
+   "updated_at": "2025-10-10T07:46:26.000000Z"
+  },
+  {
+   "hid": "IXT988B",
+   "chap": "24",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:02:25.000000Z",
+   "updated_at": "2025-12-01T08:11:19.000000Z"
+  },
+  {
+   "hid": "IXTHJT7",
+   "chap": "23",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:04:24.000000Z",
+   "updated_at": "2025-10-10T07:33:37.000000Z"
+  },
+  {
+   "hid": "IXT1VI2",
+   "chap": "22",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T04:00:33.000000Z",
+   "updated_at": "2025-10-10T07:26:43.000000Z"
+  },
+  {
+   "hid": "IXSsm3N",
+   "chap": "21",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:58:26.000000Z",
+   "updated_at": "2025-10-10T06:55:49.000000Z"
+  },
+  {
+   "hid": "IXSkS3d",
+   "chap": "20",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:56:25.000000Z",
+   "updated_at": "2025-10-10T06:19:44.000000Z"
+  },
+  {
+   "hid": "IXSc8GH",
+   "chap": "19",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:54:24.000000Z",
+   "updated_at": "2026-07-17T03:16:46.000000Z"
+  },
+  {
+   "hid": "IXSLhmz",
+   "chap": "18",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:50:25.000000Z",
+   "updated_at": "2026-07-17T03:01:05.000000Z"
+  },
+  {
+   "hid": "IXSU5Vy",
+   "chap": "17",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:52:27.000000Z",
+   "updated_at": "2026-07-17T02:50:42.000000Z"
+  },
+  {
+   "hid": "IXRwxBh",
+   "chap": "16",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:44:26.000000Z",
+   "updated_at": "2026-07-17T02:42:54.000000Z"
+  },
+  {
+   "hid": "IXRoZGL",
+   "chap": "15",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:42:24.000000Z",
+   "updated_at": "2025-10-09T21:38:20.000000Z"
+  },
+  {
+   "hid": "IXS5Gmh",
+   "chap": "14",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:46:27.000000Z",
+   "updated_at": "2025-10-09T21:30:41.000000Z"
+  },
+  {
+   "hid": "IXSDNrN",
+   "chap": "13",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:48:24.000000Z",
+   "updated_at": "2026-07-16T16:22:48.000000Z"
+  },
+  {
+   "hid": "IXRgJzl",
+   "chap": "12",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:40:23.000000Z",
+   "updated_at": "2026-07-16T16:09:38.000000Z"
+  },
+  {
+   "hid": "IXRYCif",
+   "chap": "11",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:38:25.000000Z",
+   "updated_at": "2026-07-16T16:04:36.000000Z"
+  },
+  {
+   "hid": "IXRQ1Vx",
+   "chap": "10",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:36:26.000000Z",
+   "updated_at": "2025-10-09T12:28:40.000000Z"
+  },
+  {
+   "hid": "IXRHdzN",
+   "chap": "9",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:34:25.000000Z",
+   "updated_at": "2025-10-09T12:21:53.000000Z"
+  },
+  {
+   "hid": "IXR9Wyo",
+   "chap": "8",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:32:27.000000Z",
+   "updated_at": "2026-06-23T21:53:56.000000Z"
+  },
+  {
+   "hid": "IXR1Plp",
+   "chap": "7",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:30:29.000000Z",
+   "updated_at": "2025-11-24T19:08:16.000000Z"
+  },
+  {
+   "hid": "IXQkZWb",
+   "chap": "6",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:26:24.000000Z",
+   "updated_at": "2025-11-30T11:35:02.000000Z"
+  },
+  {
+   "hid": "IXQt1Zx",
+   "chap": "5",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:28:26.000000Z",
+   "updated_at": "2025-10-22T21:54:53.000000Z"
+  },
+  {
+   "hid": "IXQcOS9",
+   "chap": "4",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:24:25.000000Z",
+   "updated_at": "2025-11-24T18:58:29.000000Z"
+  },
+  {
+   "hid": "IXQUDNh",
+   "chap": "3",
+   "title": "",
+   "vol": null,
+   "lang": "en",
+   "publish_at": null,
+   "group_name": [
+    "Bato"
+   ],
+   "created_at": "2025-09-25T03:22:25.000000Z",
+   "updated_at": "2026-07-16T15:00:54.000000Z"
+  }
+ ],
+ "pagination": {
+  "current_page": 1,
+  "per_page": 60,
+  "last_page": 2,
+  "total": 62
+ }
+}

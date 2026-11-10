@@ -1,0 +1,10 @@
+[
+ {
+  "id": "g-action",
+  "genre_name": "Action"
+ },
+ {
+  "id": "g-comedy",
+  "genre_name": "Comedy"
+ }
+]

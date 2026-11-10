@@ -1,0 +1,7 @@
+{
+  "name": "Weeb Central",
+  "lang": "en",
+  "versionCode": 1,
+  "nsfw": true,
+  "upstream": { "path": "src/en/weebcentral", "commit": "d9420cd1" }
+}

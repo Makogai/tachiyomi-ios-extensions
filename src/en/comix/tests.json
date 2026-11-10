@@ -1,0 +1,87 @@
+{
+  "routes": [
+    { "url": "https://comix.to/title/zdlj5-absolute-regression", "file": "fixtures/title.html" }
+  ],
+  "cases": [
+    {
+      "name": "details come from the title page's initial data over HTTP",
+      "call": "details",
+      "args": [{ "url": "/zdlj5-absolute-regression", "title": "Absolute Regression" }],
+      "expect": {
+        "url": "/zdlj5-absolute-regression",
+        "title": "Absolute Regression",
+        "author": "Jang Yeonghun (장영훈), JP",
+        "artist": "Park Jin-Hwan (박진환)",
+        "status": 1,
+        "genre": "Manhwa, Action, Adventure, Fantasy, Historical, Wuxia, Seinen",
+        "thumbnail_url": "https://comix.to/images/covers/d5/a7/d5a7950dfd49e5bf551d82eea46a90c343b80fa6.jpg",
+        "description": { "contains": "★★★★★ 9.6\n\nThe past has changed, but like a fiery comet, he still comes." }
+      }
+    },
+    {
+      "name": "the description carries upstream's extra info and tracker links",
+      "call": "details",
+      "args": [{ "url": "/zdlj5-absolute-regression", "title": "Absolute Regression" }],
+      "expect": {
+        "description": { "contains": "**Year:** 2024 · **Language:** KO · **Content rating:** Suggestive · **Rank:** #98 · **Rated by:** 3362 · **Followed by:** 58153\n\n**Trackers:**\n- [AniList](https://anilist.co/manga/180891)" }
+      }
+    },
+    {
+      "name": "algo 3 descramble: xorshift order, seed xor hash 03632, whole image first",
+      "call": "imageTransform",
+      "args": [{ "index": 0, "url": "", "imageUrl": "https://img.example.site/si/abc#scramble=123456789,5x5,3,03632" }, 1000, 1500],
+      "expect": {
+        "width": 1000,
+        "height": 1500,
+        "tiles.length": 26,
+        "tiles.0.sw": 1000,
+        "tiles.0.sh": 1500,
+        "tiles.1.sx": 200,
+        "tiles.1.sy": 0,
+        "tiles.1.dx": 0,
+        "tiles.1.dy": 0,
+        "tiles.1.sw": 200,
+        "tiles.1.sh": 300,
+        "tiles.25.sx": 400,
+        "tiles.25.sy": 600,
+        "tiles.25.dx": 800,
+        "tiles.25.dy": 1200
+      }
+    },
+    {
+      "name": "algo 1 descramble: LCG order with a seed past Int.MAX_VALUE",
+      "call": "imageTransform",
+      "args": [{ "index": 0, "url": "", "imageUrl": "https://img.example.site/i/abc#scramble=3000000000,5x5,1," }, 1003, 1504],
+      "expect": {
+        "tiles.length": 26,
+        "tiles.1.sx": 400,
+        "tiles.1.sy": 0,
+        "tiles.2.sx": 800,
+        "tiles.2.sy": 1200,
+        "tiles.2.dx": 200,
+        "tiles.2.sw": 200,
+        "tiles.2.sh": 300
+      }
+    },
+    {
+      "name": "images on the plain /hi/ path are left alone without a request",
+      "call": "imageTransform",
+      "args": [{ "index": 0, "url": "", "imageUrl": "https://rxn.example.site/hi/abc" }, 800, 1200],
+      "expect": { "": null }
+    },
+    {
+      "name": "a scramble grid other than 5x5 is left alone",
+      "call": "imageTransform",
+      "args": [{ "index": 0, "url": "", "imageUrl": "https://img.example.site/si/abc#scramble=42,4x4,1," }, 800, 1200],
+      "expect": { "": null }
+    }
+  ],
+  "live": [
+    {
+      "name": "details over HTTP",
+      "call": "details",
+      "args": [{ "url": "/pvry-one-piece", "title": "One Piece" }],
+      "expect": { "title": "One Piece", "genre": { "contains": "Manga" } }
+    }
+  ]
+}

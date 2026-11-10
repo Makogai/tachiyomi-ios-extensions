@@ -1,0 +1,7 @@
+{
+  "name": "Atsumaru",
+  "lang": "en",
+  "versionCode": 1,
+  "nsfw": true,
+  "upstream": { "path": "src/en/atsumaru", "commit": "d9420cd1" }
+}

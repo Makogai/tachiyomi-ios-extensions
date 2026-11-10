@@ -1,0 +1,79 @@
+{
+ "title": "One-Punch Man",
+ "slug": "one-punch-man",
+ "description": "Saitama is a hero who only became a hero for fun.\nAfter three years of training he can defeat any enemy with one punch.",
+ "upload_status": "ONGOING",
+ "format": "Manga",
+ "source_id": "7c1d2e3f-4a5b-4c6d-8e7f-9a0b1c2d3e4f",
+ "series_staff": [
+  {
+   "staff_id": "s-1",
+   "name": "ONE",
+   "native_name": "ONE",
+   "role": "Story",
+   "priority": 0
+  },
+  {
+   "staff_id": "s-2",
+   "name": "Yusuke Murata",
+   "native_name": "村田雄介",
+   "role": "Art",
+   "priority": 1
+  },
+  {
+   "staff_id": "s-3",
+   "name": "John Doe Translations",
+   "role": "Translator",
+   "priority": 2
+  }
+ ],
+ "genres": [
+  {
+   "genre_name": "Action"
+  },
+  {
+   "genre_name": "Comedy"
+  }
+ ],
+ "tags": [
+  {
+   "tag_name": "Superheroes"
+  }
+ ],
+ "series_alternate_titles": [
+  {
+   "title": "ワンパンマン",
+   "label": "ja"
+  },
+  {
+   "title": "Wanpanman",
+   "label": null
+  }
+ ],
+ "edition_info": "Digital",
+ "tracker_id": "tracker-1",
+ "series_links": [
+  {
+   "url": "https://example.com/opm",
+   "label": "Publisher",
+   "kind": "Official"
+  }
+ ],
+ "average_rating": 87.5,
+ "total_ratings": 1200,
+ "series_covers": [
+  {
+   "image_id": "c0ffee00-0000-4000-8000-000000000001"
+  }
+ ],
+ "age_rating": "FifteenPlus",
+ "is_pornographic": false,
+ "is_disturbing": false,
+ "original_language": "ja",
+ "translated_language": "en",
+ "start_year": 2012,
+ "end_year": null,
+ "current_volumes": 30,
+ "total_views": 15300000,
+ "subscriber_count": 4200
+}

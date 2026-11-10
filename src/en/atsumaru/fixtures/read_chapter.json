@@ -1,0 +1,226 @@
+{
+ "readChapter": {
+  "id": "QFzH1d",
+  "number": 71,
+  "title": "Chapter 71",
+  "scanlationMangaId": "cml34uh73001001pgz495ibyj",
+  "pages": [
+   {
+    "id": "QFzH1d-0",
+    "image": "/static/pages/QFzH1d/d79927e6760f99ef.avif",
+    "number": 0,
+    "width": 1532,
+    "height": 1024,
+    "aspectRatio": 1.49609375,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-1",
+    "image": "/static/pages/QFzH1d/ab96d83ac569ecce.webp",
+    "number": 1,
+    "width": 900,
+    "height": 16000,
+    "aspectRatio": 0.05625,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-2",
+    "image": "/static/pages/QFzH1d/5d9435f698a8e393.avif",
+    "number": 2,
+    "width": 900,
+    "height": 2750,
+    "aspectRatio": 0.32727272727272727,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-3",
+    "image": "/static/pages/QFzH1d/ce356bc02384293f.webp",
+    "number": 3,
+    "width": 900,
+    "height": 16000,
+    "aspectRatio": 0.05625,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-4",
+    "image": "/static/pages/QFzH1d/80a3244d07ab2423.avif",
+    "number": 4,
+    "width": 900,
+    "height": 2081,
+    "aspectRatio": 0.4324843825084094,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-5",
+    "image": "/static/pages/QFzH1d/9cf6b62aceeb1680.webp",
+    "number": 5,
+    "width": 900,
+    "height": 16000,
+    "aspectRatio": 0.05625,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-6",
+    "image": "/static/pages/QFzH1d/d8aa0cd313199b2f.avif",
+    "number": 6,
+    "width": 900,
+    "height": 1412,
+    "aspectRatio": 0.6373937677053825,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-7",
+    "image": "/static/pages/QFzH1d/3130d753f5cf169a.webp",
+    "number": 7,
+    "width": 900,
+    "height": 16000,
+    "aspectRatio": 0.05625,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-8",
+    "image": "/static/pages/QFzH1d/277cc14554d54469.avif",
+    "number": 8,
+    "width": 900,
+    "height": 2750,
+    "aspectRatio": 0.32727272727272727,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-9",
+    "image": "/static/pages/QFzH1d/809682ee36b4c0e9.webp",
+    "number": 9,
+    "width": 900,
+    "height": 16000,
+    "aspectRatio": 0.05625,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-10",
+    "image": "/static/pages/QFzH1d/b6069871496f6156.avif",
+    "number": 10,
+    "width": 900,
+    "height": 2581,
+    "aspectRatio": 0.3487020534676482,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-11",
+    "image": "/static/pages/QFzH1d/70804c43449bdee5.webp",
+    "number": 11,
+    "width": 900,
+    "height": 16000,
+    "aspectRatio": 0.05625,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-12",
+    "image": "/static/pages/QFzH1d/fa779c192e76787e.avif",
+    "number": 12,
+    "width": 900,
+    "height": 1438,
+    "aspectRatio": 0.6258692628650904,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-13",
+    "image": "/static/pages/QFzH1d/b41ebeb0e5465e57.webp",
+    "number": 13,
+    "width": 900,
+    "height": 16000,
+    "aspectRatio": 0.05625,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-14",
+    "image": "/static/pages/QFzH1d/86c133d351ea87a7.avif",
+    "number": 14,
+    "width": 900,
+    "height": 2750,
+    "aspectRatio": 0.32727272727272727,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-15",
+    "image": "/static/pages/QFzH1d/0a73eb9bb02cd413.webp",
+    "number": 15,
+    "width": 900,
+    "height": 16000,
+    "aspectRatio": 0.05625,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-16",
+    "image": "/static/pages/QFzH1d/c6f485b556b4ab0a.avif",
+    "number": 16,
+    "width": 900,
+    "height": 1906,
+    "aspectRatio": 0.472193074501574,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-17",
+    "image": "/static/pages/QFzH1d/903786ef0f90d30e.webp",
+    "number": 17,
+    "width": 900,
+    "height": 16000,
+    "aspectRatio": 0.05625,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-18",
+    "image": "/static/pages/QFzH1d/718d37c13b40737b.avif",
+    "number": 18,
+    "width": 900,
+    "height": 1912,
+    "aspectRatio": 0.4707112970711297,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-19",
+    "image": "/static/pages/QFzH1d/49a04b9d3295b987.webp",
+    "number": 19,
+    "width": 900,
+    "height": 16000,
+    "aspectRatio": 0.05625,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-20",
+    "image": "/static/pages/QFzH1d/db5939edb47f76a0.avif",
+    "number": 20,
+    "width": 900,
+    "height": 2750,
+    "aspectRatio": 0.32727272727272727,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-21",
+    "image": "/static/pages/QFzH1d/b84dde1f7bfb200d.webp",
+    "number": 21,
+    "width": 900,
+    "height": 16000,
+    "aspectRatio": 0.05625,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-22",
+    "image": "/static/pages/QFzH1d/bb99ebf8e3b60d8e.avif",
+    "number": 22,
+    "width": 900,
+    "height": 538,
+    "aspectRatio": 1.6728624535315986,
+    "spreadStart": false
+   },
+   {
+    "id": "QFzH1d-23",
+    "image": "/static/pages/QFzH1d/337c75e4b0ba2927.avif",
+    "number": 23,
+    "width": 900,
+    "height": 5400,
+    "aspectRatio": 0.16666666666666666,
+    "spreadStart": false
+   }
+  ]
+ }
+}

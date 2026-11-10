@@ -41,6 +41,8 @@ export interface Host {
   base64Encode(text: string): string;
   base64Decode(text: string): string | null;
   log(level: "debug" | "warn" | "error", message: string): void;
+  /** API level 2: runs a page in a real browser. `callback(error, resultJSON)` runs once. */
+  webview?(payloadJSON: string, callback: (error: string | null, result: string | null) => void): void;
 }
 
 declare const __host: Host;

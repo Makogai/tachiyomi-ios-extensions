@@ -1,0 +1,132 @@
+{
+  "routes": [
+    {
+      "url": "https://weebcentral.com/search/data?text=&sort=Popularity&order=Descending&official=Any&anime=Any&adult=Any&limit=32&offset=0&display_mode=Full%20Display",
+      "file": "fixtures/search.html"
+    },
+    {
+      "url": "https://weebcentral.com/search/data?text=&sort=Latest%20Updates&order=Descending&official=Any&anime=Any&adult=Any&limit=32&offset=0&display_mode=Full%20Display",
+      "file": "fixtures/latest.html"
+    },
+    {
+      "url": "https://weebcentral.com/search/data?text=blue%20lock&sort=Best%20Match&order=Descending&official=Any&anime=Any&adult=Any&limit=32&offset=0&display_mode=Full%20Display",
+      "file": "fixtures/search_query.html"
+    },
+    {
+      "url": "https://weebcentral.com/series/01J76XYD7E91K8QP6CY0Y53900/Blue-Lock",
+      "file": "fixtures/series.html"
+    },
+    {
+      "url": "https://weebcentral.com/series/01J76XYD7E91K8QP6CY0Y53900/full-chapter-list",
+      "file": "fixtures/chapters.html"
+    },
+    {
+      "url": "https://weebcentral.com/chapters/01M7317M9CEQV7V0BAREE0V0VZ/images?is_prev=False&reading_style=long_strip",
+      "file": "fixtures/pages.html"
+    }
+  ],
+  "cases": [
+    {
+      "name": "popular searches sorted by popularity",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 32,
+        "mangas.0.title": "One Piece",
+        "mangas.0.url": "/series/01J76XY7E9FNDZ1DBBM6PBJPFK/One-Piece",
+        "mangas.0.thumbnail_url": "https://temp.compsci88.com/cover/normal/01J76XY7E9FNDZ1DBBM6PBJPFK.webp",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "latest searches sorted by latest updates",
+      "call": "latest",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 8,
+        "mangas.0.url": "/series/01KTEJ25A4SKCXXJJR52J3H9QZ/rojiura-de-hirotta-onnanoko-ga-bad-endgo-no-otome-game-no-heroine-datta-ken",
+        "mangas.0.title": "Rojiura de Hirotta Onnanoko ga Bad End-go no Otome Game no Heroine Datta Ken",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "search builds upstream's URL with the default filters",
+      "call": "search",
+      "args": [
+        1,
+        "blue lock"
+      ],
+      "expect": {
+        "mangas.length": 2,
+        "mangas.0.url": "/series/01J76XYD7E91K8QP6CY0Y53900/Blue-Lock",
+        "mangas.0.title": "Blue Lock",
+        "mangas.1.title": {
+          "contains": "Blue Lock"
+        },
+        "hasNextPage": false
+      }
+    },
+    {
+      "name": "details and chapters come from the series page and the full chapter list",
+      "call": "mangaUpdate",
+      "args": [
+        {
+          "url": "/series/01J76XYD7E91K8QP6CY0Y53900/Blue-Lock",
+          "title": "Blue Lock"
+        }
+      ],
+      "expect": {
+        "manga.title": "Blue Lock",
+        "manga.url": "/series/01J76XYD7E91K8QP6CY0Y53900/Blue-Lock",
+        "manga.status": 1,
+        "manga.author": "KANESHIRO Muneyuki, NOMURA Yuusuke",
+        "manga.genre": {
+          "contains": "Sports"
+        },
+        "manga.description": {
+          "contains": "After a disastrous defeat at the 2018 World Cup"
+        },
+        "manga.thumbnail_url": "https://temp.compsci88.com/cover/normal/01J76XYD7E91K8QP6CY0Y53900.webp",
+        "chapters.0.scanlator": "Unknown",
+        "chapters.length": 5,
+        "chapters.0.name": "Chapter 368",
+        "chapters.0.url": "/chapters/01M7317M9CEQV7V0BAREE0V0VZ",
+        "chapters.0.date_upload": {
+          "localDate": "2026-11-10"
+        }
+      }
+    },
+    {
+      "name": "pages come from the long-strip images fragment",
+      "call": "pages",
+      "args": [
+        {
+          "url": "/chapters/01M7317M9CEQV7V0BAREE0V0VZ",
+          "name": "Chapter 368"
+        }
+      ],
+      "expect": {
+        "length": 20,
+        "0.imageUrl": "https://temp.compsci88.com/manga/Blue-Lock/0368-001.png"
+      }
+    }
+  ],
+  "live": [
+    {
+      "name": "popular",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        }
+      }
+    }
+  ]
+}

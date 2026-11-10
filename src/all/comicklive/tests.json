@@ -1,0 +1,83 @@
+{
+  "routes": [
+    { "url": "https://comick.live/api/comics/top?day=7&type=follow", "file": "fixtures/popular.json" },
+    { "url": "https://comick.live/api/metadata", "file": "fixtures/metadata.json" },
+    { "url": "https://comick.live/api/chapters/latest?order=new&page=1", "file": "fixtures/latest.json" },
+    {
+      "url": "https://comick.live/api/search?order_by=created_at&order_direction=desc&showAll=false&exclude_mylist=false&q=solo%20leveling&type=comic",
+      "file": "fixtures/search.json"
+    },
+    { "url": "https://comick.live/comic/solo-leveling-ragnarok-official", "file": "fixtures/comic.html" },
+    { "url": "https://comick.live/api/comics/solo-leveling-ragnarok-official/chapter-list?lang=en", "file": "fixtures/chapter_list_1.json" },
+    { "url": "https://comick.live/api/comics/solo-leveling-ragnarok-official/chapter-list?lang=en&page=2", "file": "fixtures/chapter_list_2.json" },
+    { "url": "https://comick.live/comic/solo-leveling-ragnarok-official/Fl6rN8T-chapter-62-en", "file": "fixtures/chapter.html" }
+  ],
+  "cases": [
+    {
+      "name": "popular lists the weekly top follows",
+      "call": "popular",
+      "args": [1],
+      "expect": {
+        "mangas.length": 50,
+        "mangas.0.url": "after-reincarnating-as-a-villain-saving-the-world-and-being-betrayed-and-banished-my-former-companions-somehow-came-chasing-after-me-with-yandere-eyes",
+        "mangas.0.title": { "contains": "After Reincarnating as a Villain" },
+        "mangas.0.thumbnail_url": { "contains": "cdn1.comicknew.pictures/after-reincarnating-as-a-villain" },
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "latest follows the cursor API",
+      "call": "latest",
+      "args": [1],
+      "expect": {
+        "mangas.length": 20,
+        "mangas.0.url": "how-to-love-a-cursed-girl",
+        "mangas.0.title": "How to Love a Cursed Girl",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "search builds upstream's URL with the default filters",
+      "call": "search",
+      "args": [1, "solo leveling"],
+      "expect": {
+        "mangas.length": 20,
+        "mangas.0.url": "00-solo-leveling",
+        "mangas.0.title": "Solo Leveling",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "details come from #comic-data and chapters from every chapter-list page",
+      "call": "mangaUpdate",
+      "args": [{ "url": "solo-leveling-ragnarok-official", "title": "Solo Leveling: Ragnarok (Official)" }],
+      "expect": {
+        "manga.title": "Solo Leveling: Ragnarok (Official)",
+        "manga.url": "solo-leveling-ragnarok-official",
+        "manga.status": 1,
+        "manga.author": "DangdoDaul, Dangdo, Daul",
+        "manga.genre": { "contains": "Full Color" },
+        "manga.description": { "contains": "After witnessing the death of one of their own" },
+        "manga.thumbnail_url": "https://cdn1.comicknew.pictures/solo-leveling-ragnarok-official/covers/ec809bee.webp",
+        "chapters.length": 62,
+        "chapters.0.url": "/comic/solo-leveling-ragnarok-official/Fl6rN8T-chapter-62-en",
+        "chapters.0.name": "Ch. 62",
+        "chapters.0.scanlator": "Bato",
+        "chapters.0.date_upload": { "localDate": "2025-12-16" },
+        "chapters.61.name": "Ch. 1"
+      }
+    },
+    {
+      "name": "pages come from #sv-data",
+      "call": "pages",
+      "args": [{ "url": "/comic/solo-leveling-ragnarok-official/Fl6rN8T-chapter-62-en", "name": "Ch. 62" }],
+      "expect": {
+        "length": 89,
+        "0.imageUrl": "https://cdn1.comicknew.pictures/solo-leveling-ragnarok-official/0_62/en/6f2081b8/0.webp"
+      }
+    }
+  ],
+  "live": [
+    { "name": "popular", "call": "popular", "args": [1], "expect": { "mangas.length": { "gt": 0 } } }
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "routes": [
+    {
+      "url": "https://mangafire.to/api/titles?languages%5B%5D=en&limit=50&order%5Bviews_30d%5D=desc&page=1&vrf=8sK3xtqdFZdDWTKuDVd13pWwhD44iM3livd8XbC0A2LleSdV44JJHt-XhAc2dQlCxBg_vIDx03846DWcLw",
+      "file": "fixtures/popular.json"
+    },
+    {
+      "url": "https://mangafire.to/api/titles?languages%5B%5D=es-la&limit=50&order%5Bchapter_updated_at%5D=desc&page=1&vrf=8sK3xtqdFZdDWTKuDVd13pWwhD44iNzIRThrwJ82XdXKpcse6wbTI8i8lj8-1HYfaQQcUn7IWRbHtg6y5ymTkdhvt50C0b4wwQ",
+      "file": "fixtures/latest_esla.json"
+    },
+    {
+      "url": "https://mangafire.to/api/titles?genres_mode=and&keyword=kagurabachi&languages%5B%5D=en&limit=50&order%5Brelevance%5D=desc&page=1&theme_mode=and&vrf=8sK3xtqdFZcCRT11BJBKh-X6a2zK_pw6HuwZwVG9WZ76JQ14USC-PFfWpPgcQjvx43aUi43VirnNFxG5P03NcnfuNzyg1Fx0lODPM14f40CjSUOGjadkZVxP5UIXfHIEbzo1_X2JI60oAWn6vXKF7Q",
+      "file": "fixtures/search.json"
+    },
+    {
+      "url": "https://mangafire.to/api/titles?genres_mode=and&keyword=kagura%20bachi%2B1&languages%5B%5D=pt-br&limit=50&order%5Brelevance%5D=desc&page=2&theme_mode=and&vrf=8sK3xtqdFZcCRT11BJBKh-X6a2zK_pw6HuwZwVG9WZ76JQ14USDTSPGooTf7IbfHVpNfU-1GvzJp8a53py5s0bxFQbPDDowOl9GyVTnwBUgEVC8-n2FTSp2g5dkvu_Q2AJFHdJCUOIK_cF1VbQ0mZWSh9ZyixA",
+      "file": "fixtures/search.json"
+    },
+    {
+      "url": "https://mangafire.to/api/titles/v92q7?vrf=8sK3xtqdFdu4nssdoA",
+      "file": "fixtures/details.json"
+    },
+    {
+      "url": "https://mangafire.to/api/titles/v92q7/chapters?language=en&limit=200&order=desc&page=1&sort=number&vrf=8sK3xtqdFdu4nssdoM69PoQJ7vyiXVPfiPtiSW5eVYYipqiHiurVZMh2USt8GSr14cJnKU-AcFo6XWKJFdkPbvzeE_pTmfMt8AM",
+      "file": "fixtures/chapters.json"
+    },
+    {
+      "url": "https://mangafire.to/api/titles/v92q7/chapters?language=en&limit=200&order=desc&page=2&sort=number&vrf=8sK3xtqdFdu4nssdoM69PoQJ7vyiXVPfiPtiSW5eVYYipqiHiurVZMh2USt8GSr14cJnKU-AcFo6XWKJFaHEMtPJmO7uhh-vDmc",
+      "file": "fixtures/chapters2.json"
+    },
+    {
+      "url": "https://mangafire.to/api/chapters/9559927?vrf=8vPRXa1JjvVTxnnTAGLE9PY",
+      "file": "fixtures/pages.json"
+    },
+    {
+      "url": "https://mangafire.to/api/volumes/356400?vrf=8iollBwznxjRXRobsBbp",
+      "file": "fixtures/volume_pages.json"
+    }
+  ],
+  "cases": [
+    {
+      "name": "popular signs /api/titles with vrf and parses items",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 5,
+        "mangas.0.title": "Overgeared (Team Argo)",
+        "mangas.0.url": "/title/728q1-overgeared-team-argoo",
+        "mangas.0.thumbnail_url": "https://static.mfcdn.nl/5fef/i/8/86/863abcec054f608cd476039e78425cac.jpg",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "latest on the es-419 source asks for languages[]=es-la",
+      "source": 2,
+      "call": "latest",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 5,
+        "mangas.0.url": "/title/4n07-return-of-the-blossoming-bladee",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "search adds the default filters and sorts the query before signing",
+      "call": "search",
+      "args": [
+        1,
+        "kagurabachi"
+      ],
+      "expect": {
+        "mangas.length": 1,
+        "mangas.0.url": "/title/v92q7-kagurabachii",
+        "mangas.0.title": "Kagurabachi",
+        "hasNextPage": false
+      }
+    },
+    {
+      "name": "vrf is computed over the decoded query (space and plus) on the pt-BR source",
+      "source": 6,
+      "call": "search",
+      "args": [
+        2,
+        " kagura bachi+1 "
+      ],
+      "expect": {
+        "mangas.length": 1
+      }
+    },
+    {
+      "name": "details and all chapter pages come from the API",
+      "call": "mangaUpdate",
+      "args": [
+        {
+          "url": "/title/v92q7-kagurabachii",
+          "title": "Kagurabachi"
+        }
+      ],
+      "expect": {
+        "manga.title": "Kagurabachi",
+        "manga.author": "Hokazono Takeru",
+        "manga.artist": "Hokazono Takeru",
+        "manga.status": 1,
+        "manga.genre": "Manga, Action, Comedy, Drama, Mystery, Crime, Tragedy, Mature, Mafia, Magic, Ninja, Samurai, Supernatural",
+        "manga.description": {
+          "contains": "Young Chihiro spends his days training"
+        },
+        "manga.thumbnail_url": "https://static.mfcdn.nl/8936/i/4/21/b0e14cfeba2b3a71c26a783516d03c21.jpg",
+        "chapters.length": 287,
+        "chapters.0.url": "/title/v92q7-kagurabachii/9559927-chapter-138-en",
+        "chapters.0.name": "Ch. 138 - Heavy Charge",
+        "chapters.0.scanlator": "official",
+        "chapters.0.chapter_number": 138,
+        "chapters.0.date_upload": 1794182500000,
+        "chapters.1.name": "Ch. 138",
+        "chapters.1.scanlator": "unofficial",
+        "chapters.51.name": "Chapter 112.5 [LuCaZ]",
+        "chapters.51.chapter_number": 112.5,
+        "chapters.51.url": "/title/v92q7-kagurabachii/9406250-chapter-112.5-en",
+        "chapters.53.url": "/title/v92q7-kagurabachii/7369690-chapter-112.1-en",
+        "chapters.286.url": "/title/v92q7-kagurabachii/9391535-chapter-0-en",
+        "chapters.286.name": "Ch. 0 - Volume 8"
+      }
+    },
+    {
+      "name": "chapter pages come from /api/chapters/<id>",
+      "call": "pages",
+      "args": [
+        {
+          "url": "/title/v92q7-kagurabachii/9559927-chapter-138-en",
+          "name": "Ch. 138"
+        }
+      ],
+      "expect": {
+        "length": 15,
+        "0.imageUrl": "https://o48.mfcdn3.xyz/mf/12a3db61fa0f4f41a6cd794e85a7e8049736ac4654bfa1b34b5a37edf329c58d235ddf1e496423eaff35/h/p.jpg",
+        "14.imageUrl": "https://o48.mfcdn3.xyz/mf/12a3db61fa0f4f41a6cd794e85a7e8049736ac4654bfa1b24f5a37edf329c58d235ddf1e496423eaff35/h/p.jpg"
+      }
+    },
+    {
+      "name": "volume pages come from /api/volumes/<id>",
+      "call": "pages",
+      "args": [
+        {
+          "url": "/title/v92q7-kagurabachii/volume/356400",
+          "name": "Vol. 13"
+        }
+      ],
+      "expect": {
+        "length": 76,
+        "0.imageUrl": "https://q73.mfcdn2.xyz/mf/12a3db61fa0c4f41a6cf791b90a7e00f9532ac4459a7beb2541e2dfab23ccb812a5cd519486725eaff/h/p.jpg"
+      }
+    }
+  ],
+  "live": [
+    {
+      "name": "popular",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        }
+      }
+    },
+    {
+      "name": "latest (ja)",
+      "source": 4,
+      "call": "latest",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        }
+      }
+    },
+    {
+      "name": "search",
+      "call": "search",
+      "args": [
+        1,
+        "one piece"
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        }
+      }
+    },
+    {
+      "name": "details and chapters",
+      "call": "mangaUpdate",
+      "args": [
+        {
+          "url": "/title/dkw-one-piece",
+          "title": "One Piece"
+        }
+      ],
+      "expect": {
+        "manga.title": "One Piece",
+        "chapters.length": {
+          "gt": 1000
+        }
+      }
+    },
+    {
+      "name": "pages",
+      "call": "pages",
+      "args": [
+        {
+          "url": "/title/v92q7-kagurabachii/9559927-chapter-138-en",
+          "name": "Ch. 138"
+        }
+      ],
+      "expect": {
+        "length": {
+          "gt": 0
+        }
+      }
+    }
+  ]
+}

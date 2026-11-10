@@ -1,0 +1,221 @@
+{
+  "routes": [
+    {
+      "url": "https://api.asurascans.com/api/series?offset=0&limit=20&sort=popular&order=desc",
+      "file": "fixtures/popular.json"
+    },
+    {
+      "url": "https://api.asurascans.com/api/series?offset=0&limit=20&sort=latest&order=desc",
+      "file": "fixtures/latest.json"
+    },
+    {
+      "url": "https://api.asurascans.com/api/series?offset=0&limit=20&search=nano%20machine&sort=latest&order=desc",
+      "file": "fixtures/search.json"
+    },
+    {
+      "url": "https://asurascans.com/comics/nano-machine",
+      "file": "fixtures/manga.html"
+    },
+    {
+      "url": "https://asurascans.com/comics/nano-machine/chapter/336",
+      "file": "fixtures/chapter_constructed.html"
+    }
+  ],
+  "cases": [
+    {
+      "name": "popular sorts the series API by popularity",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 20,
+        "mangas.0.title": "Overgeared",
+        "mangas.0.url": "/series/overgeared",
+        "mangas.0.thumbnail_url": "https://cdn.asurascans.com/asura-images/covers/overgeared.905990.webp",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "latest sorts the series API by update",
+      "call": "latest",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 20,
+        "mangas.0.title": "Cyberpunk Chivalry",
+        "mangas.0.url": "/series/cyberpunk-chivalry",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "search adds the query and the default filters",
+      "call": "search",
+      "args": [
+        1,
+        "nano machine"
+      ],
+      "expect": {
+        "mangas.length": 1,
+        "mangas.0.title": "Nano Machine",
+        "mangas.0.url": "/series/nano-machine",
+        "hasNextPage": false
+      }
+    },
+    {
+      "name": "details and chapters come from the Astro props of the series page",
+      "call": "mangaUpdate",
+      "args": [
+        {
+          "url": "/series/nano-machine",
+          "title": "Nano Machine"
+        }
+      ],
+      "expect": {
+        "manga.url": "/series/nano-machine",
+        "manga.title": "Nano Machine",
+        "manga.author": "Hanjung Wolya",
+        "manga.artist": "REDICE Studio",
+        "manga.status": 2,
+        "manga.genre": "Manhwa, Action, Adventure, Fantasy, Murim, System",
+        "manga.thumbnail_url": "https://cdn.asurascans.com/asura-images/covers/nano-machine.e31bdb.webp",
+        "manga.description": {
+          "contains": "Rank: #4 • Rating: 9.26 • Bookmarks: 153.6K\n\nNanotechnology meets martial arts"
+        },
+        "chapters.length": 8,
+        "chapters.0.name": "Chapter 337 - Finale (2)",
+        "chapters.0.url": "/series/nano-machine/chapter/337",
+        "chapters.0.date_upload": {
+          "localDate": "2026-11-05"
+        },
+        "chapters.7.url": "/series/nano-machine/chapter/330"
+      }
+    },
+    {
+      "name": "pages carry the tile order of scrambled images in the fragment",
+      "call": "pages",
+      "args": [
+        {
+          "url": "/series/nano-machine/chapter/336",
+          "name": "Chapter 336 - Finale (1)"
+        }
+      ],
+      "expect": {
+        "length": 3,
+        "0.imageUrl": "https://cdn.asurascans.com/asura-images/chapters/nano-machine/336/0209bc.webp?v=1793931695",
+        "1.imageUrl": {
+          "contains": "/336/6257d5.webp?v=1793931695#{\"tiles\":[19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0],\"tileCols\":4,\"tileRows\":5}"
+        }
+      }
+    },
+    {
+      "name": "a scrambled page is unscrambled as upstream's Canvas does",
+      "call": "imageTransform",
+      "args": [
+        {
+          "index": 1,
+          "imageUrl": "https://cdn.asurascans.com/asura-images/chapters/nano-machine/336/6257d5.webp?v=1793931695#{\"tiles\":[19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0],\"tileCols\":4,\"tileRows\":5}"
+        },
+        903,
+        16003
+      ],
+      "expect": {
+        "width": 900,
+        "height": 16000,
+        "tiles.length": 20,
+        "tiles.0.sx": 0,
+        "tiles.0.sy": 0,
+        "tiles.0.sw": 225,
+        "tiles.0.sh": 3200,
+        "tiles.0.dx": 675,
+        "tiles.0.dy": 12800,
+        "tiles.6.sx": 450,
+        "tiles.6.sy": 3200,
+        "tiles.6.dx": 225,
+        "tiles.6.dy": 9600,
+        "tiles.19.sx": 675,
+        "tiles.19.sy": 12800,
+        "tiles.19.dx": 0,
+        "tiles.19.dy": 0
+      }
+    },
+    {
+      "name": "a normal page needs no transform",
+      "call": "imageTransform",
+      "args": [
+        {
+          "index": 0,
+          "imageUrl": "https://cdn.asurascans.com/asura-images/chapters/nano-machine/336/0209bc.webp?v=1793931695"
+        },
+        1532,
+        1024
+      ],
+      "expect": {
+        "": null
+      }
+    }
+  ],
+  "live": [
+    {
+      "name": "popular",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        },
+        "mangas.0.url": {
+          "contains": "/series/"
+        }
+      }
+    },
+    {
+      "name": "search",
+      "call": "search",
+      "args": [
+        1,
+        "nano machine"
+      ],
+      "expect": {
+        "mangas.0.url": "/series/nano-machine"
+      }
+    },
+    {
+      "name": "details (series page, Cloudflare)",
+      "call": "mangaUpdate",
+      "args": [
+        {
+          "url": "/series/nano-machine",
+          "title": "Nano Machine"
+        }
+      ],
+      "expect": {
+        "manga.title": "Nano Machine",
+        "chapters.length": {
+          "gt": 300
+        }
+      }
+    },
+    {
+      "name": "pages (chapter page, Cloudflare)",
+      "call": "pages",
+      "args": [
+        {
+          "url": "/series/nano-machine/chapter/336",
+          "name": "x"
+        }
+      ],
+      "expect": {
+        "length": {
+          "gt": 0
+        },
+        "0.imageUrl": {
+          "contains": "/chapters/nano-machine/336/"
+        }
+      }
+    }
+  ]
+}

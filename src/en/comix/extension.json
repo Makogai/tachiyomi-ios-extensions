@@ -1,0 +1,7 @@
+{
+  "name": "Comix",
+  "lang": "en",
+  "versionCode": 1,
+  "nsfw": true,
+  "upstream": { "path": "src/en/comix", "commit": "d9420cd1" }
+}

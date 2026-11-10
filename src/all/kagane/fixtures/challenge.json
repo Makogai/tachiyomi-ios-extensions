@@ -1,0 +1,22 @@
+{
+ "access_token": "test-access-token",
+ "cache_url": "https://cache.example-kagane.test",
+ "manifest": {
+  "pages": [
+   {
+    "page_no": 1,
+    "page_id": "p0000000-0000-4000-8000-000000000001",
+    "ext": "jxl"
+   },
+   {
+    "page_no": 2,
+    "page_id": "p0000000-0000-4000-8000-000000000002",
+    "ext": "webp"
+   },
+   {
+    "page_no": 3,
+    "page_id": "p0000000-0000-4000-8000-000000000003"
+   }
+  ]
+ }
+}

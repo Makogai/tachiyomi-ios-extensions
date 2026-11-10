@@ -1,0 +1,7 @@
+{
+  "name": "Comick (Unoriginal)",
+  "lang": "all",
+  "versionCode": 1,
+  "nsfw": true,
+  "upstream": { "path": "src/all/comicklive", "commit": "d9420cd1" }
+}

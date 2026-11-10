@@ -1,0 +1,810 @@
+{
+ "genres": [
+  {
+   "id": 264,
+   "name": "Romance",
+   "slug": "romance",
+   "group": "Genre"
+  },
+  {
+   "id": 250,
+   "name": "Drama",
+   "slug": "drama",
+   "group": "Genre"
+  },
+  {
+   "id": 247,
+   "name": "Comedy",
+   "slug": "comedy",
+   "group": "Genre"
+  },
+  {
+   "id": 252,
+   "name": "Fantasy",
+   "slug": "fantasy",
+   "group": "Genre"
+  },
+  {
+   "id": 269,
+   "name": "Slice of Life",
+   "slug": "slice-of-life",
+   "group": "Genre"
+  },
+  {
+   "id": 244,
+   "name": "Action",
+   "slug": "action",
+   "group": "Genre"
+  },
+  {
+   "id": 265,
+   "name": "School Life",
+   "slug": "school-life",
+   "group": "Theme"
+  },
+  {
+   "id": 282,
+   "name": "Full Color",
+   "slug": "full-color",
+   "group": "Format"
+  },
+  {
+   "id": 272,
+   "name": "Supernatural",
+   "slug": "supernatural",
+   "group": "Theme"
+  },
+  {
+   "id": 813,
+   "name": "Others",
+   "slug": "others",
+   "group": "Genre"
+  },
+  {
+   "id": 245,
+   "name": "Adventure",
+   "slug": "adventure",
+   "group": "Genre"
+  },
+  {
+   "id": 274,
+   "name": "Long Strip",
+   "slug": "long-strip",
+   "group": "Format"
+  },
+  {
+   "id": 275,
+   "name": "Yaoi",
+   "slug": "yaoi",
+   "group": "Genre"
+  },
+  {
+   "id": 251,
+   "name": "Ecchi",
+   "slug": "ecchi",
+   "group": "Content"
+  },
+  {
+   "id": 281,
+   "name": "Web Comic",
+   "slug": "web-comic",
+   "group": "Format"
+  },
+  {
+   "id": 279,
+   "name": "Adaptation",
+   "slug": "adaptation",
+   "group": "Format"
+  },
+  {
+   "id": 255,
+   "name": "Historical",
+   "slug": "historical",
+   "group": "Genre"
+  },
+  {
+   "id": 262,
+   "name": "Oneshot",
+   "slug": "oneshot",
+   "group": "Format"
+  },
+  {
+   "id": 261,
+   "name": "Mystery",
+   "slug": "mystery",
+   "group": "Genre"
+  },
+  {
+   "id": 263,
+   "name": "Psychological",
+   "slug": "psychological",
+   "group": "Genre"
+  },
+  {
+   "id": 273,
+   "name": "Tragedy",
+   "slug": "tragedy",
+   "group": "Genre"
+  },
+  {
+   "id": 249,
+   "name": "Doujinshi",
+   "slug": "doujinshi",
+   "group": "Format"
+  },
+  {
+   "id": 303,
+   "name": "Magic",
+   "slug": "magic",
+   "group": "Theme"
+  },
+  {
+   "id": 278,
+   "name": "Isekai",
+   "slug": "isekai",
+   "group": "Genre"
+  },
+  {
+   "id": 266,
+   "name": "Sci-Fi",
+   "slug": "sci-fi",
+   "group": "Genre"
+  },
+  {
+   "id": 257,
+   "name": "Martial Arts",
+   "slug": "martial-arts",
+   "group": "Theme"
+  },
+  {
+   "id": 256,
+   "name": "Horror",
+   "slug": "horror",
+   "group": "Genre"
+  },
+  {
+   "id": 276,
+   "name": "Yuri",
+   "slug": "yuri",
+   "group": "Genre"
+  },
+  {
+   "id": 310,
+   "name": "Reincarnation",
+   "slug": "reincarnation",
+   "group": "Theme"
+  },
+  {
+   "id": 254,
+   "name": "Harem",
+   "slug": "harem",
+   "group": "Theme"
+  },
+  {
+   "id": 268,
+   "name": "Shounen Ai",
+   "slug": "shounen-ai",
+   "group": "Genre"
+  },
+  {
+   "id": 2,
+   "name": "Adult",
+   "slug": "adult",
+   "group": "Genre"
+  },
+  {
+   "id": 305,
+   "name": "Monsters",
+   "slug": "monsters",
+   "group": "Theme"
+  },
+  {
+   "id": 292,
+   "name": "Thriller",
+   "slug": "thriller",
+   "group": "Genre"
+  },
+  {
+   "id": 271,
+   "name": "Sports",
+   "slug": "sports",
+   "group": "Genre"
+  },
+  {
+   "id": 297,
+   "name": "Demons",
+   "slug": "demons",
+   "group": "Theme"
+  },
+  {
+   "id": 307,
+   "name": "Office Workers",
+   "slug": "office-workers",
+   "group": "Theme"
+  },
+  {
+   "id": 283,
+   "name": "User Created",
+   "slug": "user-created",
+   "group": "Format"
+  },
+  {
+   "id": 314,
+   "name": "Survival",
+   "slug": "survival",
+   "group": "Theme"
+  },
+  {
+   "id": 315,
+   "name": "Time Travel",
+   "slug": "time-travel",
+   "group": "Theme"
+  },
+  {
+   "id": 286,
+   "name": "Gore",
+   "slug": "gore",
+   "group": "Content"
+  },
+  {
+   "id": 296,
+   "name": "Crossdressing",
+   "slug": "crossdressing",
+   "group": "Theme"
+  },
+  {
+   "id": 287,
+   "name": "Sexual Violence",
+   "slug": "sexual-violence",
+   "group": "Content"
+  },
+  {
+   "id": 295,
+   "name": "Animals",
+   "slug": "animals",
+   "group": "Theme"
+  },
+  {
+   "id": 280,
+   "name": "Anthology",
+   "slug": "anthology",
+   "group": "Format"
+  },
+  {
+   "id": 267,
+   "name": "Shoujo Ai",
+   "slug": "shoujo-ai",
+   "group": "Genre"
+  },
+  {
+   "id": 277,
+   "name": "Video Games",
+   "slug": "video-games",
+   "group": "Theme"
+  },
+  {
+   "id": 288,
+   "name": "Crime",
+   "slug": "crime",
+   "group": "Genre"
+  },
+  {
+   "id": 304,
+   "name": "Military",
+   "slug": "military",
+   "group": "Theme"
+  },
+  {
+   "id": 322,
+   "name": "Villainess",
+   "slug": "villainess",
+   "group": "Theme"
+  },
+  {
+   "id": 243,
+   "name": "4-Koma",
+   "slug": "4-koma",
+   "group": "Format"
+  },
+  {
+   "id": 298,
+   "name": "Delinquents",
+   "slug": "delinquents",
+   "group": "Theme"
+  },
+  {
+   "id": 301,
+   "name": "Monster Girls",
+   "slug": "monster-girls",
+   "group": "Theme"
+  },
+  {
+   "id": 316,
+   "name": "Vampires",
+   "slug": "vampires",
+   "group": "Theme"
+  },
+  {
+   "id": 300,
+   "name": "Ghosts",
+   "slug": "ghosts",
+   "group": "Theme"
+  },
+  {
+   "id": 258,
+   "name": "Mecha",
+   "slug": "mecha",
+   "group": "Genre"
+  },
+  {
+   "id": 248,
+   "name": "Cooking",
+   "slug": "cooking",
+   "group": "Theme"
+  },
+  {
+   "id": 260,
+   "name": "Music",
+   "slug": "music",
+   "group": "Theme"
+  },
+  {
+   "id": 290,
+   "name": "Philosophical",
+   "slug": "philosophical",
+   "group": "Genre"
+  },
+  {
+   "id": 313,
+   "name": "Shota",
+   "slug": "shota",
+   "group": "Theme"
+  },
+  {
+   "id": 1,
+   "name": "Gender Bender",
+   "slug": "gender-bender",
+   "group": "Genre"
+  },
+  {
+   "id": 299,
+   "name": "Genderswap",
+   "slug": "genderswap",
+   "group": "Theme"
+  },
+  {
+   "id": 308,
+   "name": "Police",
+   "slug": "police",
+   "group": "Theme"
+  },
+  {
+   "id": 293,
+   "name": "Wuxia",
+   "slug": "wuxia",
+   "group": "Genre"
+  },
+  {
+   "id": 309,
+   "name": "Post-Apocalyptic",
+   "slug": "post-apocalyptic",
+   "group": "Theme"
+  },
+  {
+   "id": 311,
+   "name": "Reverse Harem",
+   "slug": "reverse-harem",
+   "group": "Theme"
+  },
+  {
+   "id": 320,
+   "name": "Incest",
+   "slug": "incest",
+   "group": "Theme"
+  },
+  {
+   "id": 246,
+   "name": "Award Winning",
+   "slug": "award-winning",
+   "group": "Format"
+  },
+  {
+   "id": 294,
+   "name": "Aliens",
+   "slug": "aliens",
+   "group": "Theme"
+  },
+  {
+   "id": 321,
+   "name": "Mafia",
+   "slug": "mafia",
+   "group": "Theme"
+  },
+  {
+   "id": 291,
+   "name": "Superhero",
+   "slug": "superhero",
+   "group": "Genre"
+  },
+  {
+   "id": 319,
+   "name": "Zombies",
+   "slug": "zombies",
+   "group": "Theme"
+  },
+  {
+   "id": 253,
+   "name": "Gyaru",
+   "slug": "gyaru",
+   "group": "Theme"
+  },
+  {
+   "id": 259,
+   "name": "Medical",
+   "slug": "medical",
+   "group": "Genre"
+  },
+  {
+   "id": 3,
+   "name": "Mature",
+   "slug": "mature",
+   "group": "Genre"
+  },
+  {
+   "id": 289,
+   "name": "Magical Girls",
+   "slug": "magical-girls",
+   "group": "Genre"
+  },
+  {
+   "id": 318,
+   "name": "Virtual Reality",
+   "slug": "virtual-reality",
+   "group": "Theme"
+  },
+  {
+   "id": 302,
+   "name": "Loli",
+   "slug": "loli",
+   "group": "Theme"
+  },
+  {
+   "id": 270,
+   "name": "Smut",
+   "slug": "smut",
+   "group": "Content"
+  },
+  {
+   "id": 312,
+   "name": "Samurai",
+   "slug": "samurai",
+   "group": "Theme"
+  },
+  {
+   "id": 285,
+   "name": "Fan Colored",
+   "slug": "fan-colored",
+   "group": "Format"
+  },
+  {
+   "id": 306,
+   "name": "Ninja",
+   "slug": "ninja",
+   "group": "Theme"
+  },
+  {
+   "id": 284,
+   "name": "Official Colored",
+   "slug": "official-colored",
+   "group": "Format"
+  },
+  {
+   "id": 317,
+   "name": "Traditional Games",
+   "slug": "traditional-games",
+   "group": "Theme"
+  }
+ ],
+ "tags": [
+  {
+   "id": 1,
+   "name": "Webtoon",
+   "slug": "webtoon"
+  },
+  {
+   "id": 2,
+   "name": "Tower Climbing",
+   "slug": "tower-climbing"
+  },
+  {
+   "id": 3,
+   "name": "Full Color",
+   "slug": "full-color"
+  },
+  {
+   "id": 4,
+   "name": "Skill/s",
+   "slug": "skill-s"
+  },
+  {
+   "id": 4069,
+   "name": "Centipede",
+   "slug": "centipede"
+  },
+  {
+   "id": 2678494,
+   "name": "Former Comrade/s",
+   "slug": "former-comrade-s"
+  },
+  {
+   "id": 42,
+   "name": "Quirky Characters",
+   "slug": "quirky-characters"
+  },
+  {
+   "id": 66,
+   "name": "Legend",
+   "slug": "legend"
+  },
+  {
+   "id": 6261,
+   "name": "Monsters",
+   "slug": "monsters"
+  },
+  {
+   "id": 2677859,
+   "name": "hero king",
+   "slug": "hero-king"
+  },
+  {
+   "id": 1757075,
+   "name": "Villainess Female Lead",
+   "slug": "villainess-female-lead"
+  },
+  {
+   "id": 2677864,
+   "name": "knight king",
+   "slug": "knight-king"
+  },
+  {
+   "id": 2681227,
+   "name": "Tanned male lead",
+   "slug": "tanned-male-lead"
+  },
+  {
+   "id": 5138,
+   "name": "Careful Male Lead",
+   "slug": "careful-male-lead"
+  },
+  {
+   "id": 2692680,
+   "name": "Anti-racism",
+   "slug": "anti-racism"
+  },
+  {
+   "id": 1681665,
+   "name": "Overprotective Siblings",
+   "slug": "overprotective-siblings"
+  },
+  {
+   "id": 2683209,
+   "name": "Green Flag Male Lead",
+   "slug": "green-flag-male-lead"
+  },
+  {
+   "id": 2697005,
+   "name": "Omega Pretending to Be an Alpha",
+   "slug": "omega-pretending-to-be-an-alpha"
+  },
+  {
+   "id": 2686115,
+   "name": "Explosion/s",
+   "slug": "explosion-s"
+  },
+  {
+   "id": 1746,
+   "name": "Rich Seme",
+   "slug": "rich-seme"
+  },
+  {
+   "id": 2210,
+   "name": "Underworld Society",
+   "slug": "underworld-society"
+  },
+  {
+   "id": 1718797,
+   "name": "Pregnancy Sex",
+   "slug": "pregnancy-sex"
+  },
+  {
+   "id": 2685176,
+   "name": "Imprisoned Male Lead",
+   "slug": "imprisoned-male-lead"
+  },
+  {
+   "id": 4624,
+   "name": "Parenting",
+   "slug": "parenting"
+  },
+  {
+   "id": 2687705,
+   "name": "World Tree",
+   "slug": "world-tree"
+  },
+  {
+   "id": 3156,
+   "name": "Animal/s With Human-Like Intelligence",
+   "slug": "animal-s-with-human-like-intelligence"
+  },
+  {
+   "id": 1344,
+   "name": "Prostitution",
+   "slug": "prostitution"
+  },
+  {
+   "id": 223642,
+   "name": "Commoner Male Lead",
+   "slug": "commoner-male-lead"
+  },
+  {
+   "id": 55137,
+   "name": "Marquis Male Lead",
+   "slug": "marquis-male-lead"
+  },
+  {
+   "id": 2300,
+   "name": "Character/s Who Are Bad at Waking Up",
+   "slug": "character-s-who-are-bad-at-waking-up"
+  },
+  {
+   "id": 2476304,
+   "name": "Famous Family Member/s",
+   "slug": "famous-family-member-s"
+  },
+  {
+   "id": 2695685,
+   "name": "wars",
+   "slug": "wars"
+  },
+  {
+   "id": 1850,
+   "name": "Unrequited Love Stays Unrequited",
+   "slug": "unrequited-love-stays-unrequited"
+  },
+  {
+   "id": 1979636,
+   "name": "Heterochromy-Eyed Side Character",
+   "slug": "heterochromy-eyed-side-character"
+  },
+  {
+   "id": 3252,
+   "name": "Wolf Boy/s",
+   "slug": "wolf-boy-s"
+  },
+  {
+   "id": 2695041,
+   "name": "Ex-Lover/s",
+   "slug": "ex-lover-s"
+  },
+  {
+   "id": 2690825,
+   "name": "Author is his biggest fan",
+   "slug": "author-is-his-biggest-fan"
+  },
+  {
+   "id": 1832,
+   "name": "Bride/s",
+   "slug": "bride-s"
+  },
+  {
+   "id": 72244,
+   "name": "Second Person Perspective",
+   "slug": "second-person-perspective"
+  },
+  {
+   "id": 6257,
+   "name": "Trapping or Trapper/s",
+   "slug": "trapping-or-trapper-s"
+  },
+  {
+   "id": 2700602,
+   "name": "Tattooed Female Lead",
+   "slug": "tattooed-female-lead"
+  },
+  {
+   "id": 248,
+   "name": "European Ambient",
+   "slug": "european-ambient"
+  },
+  {
+   "id": 6367,
+   "name": "Sexless Couple",
+   "slug": "sexless-couple"
+  },
+  {
+   "id": 4849,
+   "name": "Focused Female Lead",
+   "slug": "focused-female-lead"
+  },
+  {
+   "id": 1521004,
+   "name": "Camouflage",
+   "slug": "camouflage"
+  },
+  {
+   "id": 643659,
+   "name": "Purple/Violet-Haired Seme",
+   "slug": "purple-violet-haired-seme"
+  },
+  {
+   "id": 1058,
+   "name": "Miscarriage",
+   "slug": "miscarriage"
+  },
+  {
+   "id": 5478,
+   "name": "Playful Uke",
+   "slug": "playful-uke"
+  },
+  {
+   "id": 5363,
+   "name": "Puppeteer/s",
+   "slug": "puppeteer-s"
+  },
+  {
+   "id": 195654,
+   "name": "Evil Sibling/s",
+   "slug": "evil-sibling-s"
+  },
+  {
+   "id": 268,
+   "name": "Demon King",
+   "slug": "demon-king"
+  },
+  {
+   "id": 6453,
+   "name": "Fanciness",
+   "slug": "fanciness"
+  },
+  {
+   "id": 107,
+   "name": "Manipulative Antagonist/s",
+   "slug": "manipulative-antagonist-s"
+  },
+  {
+   "id": 1575241,
+   "name": "Pasties",
+   "slug": "pasties"
+  },
+  {
+   "id": 1070,
+   "name": "Enemies Become Allies",
+   "slug": "enemies-become-allies"
+  },
+  {
+   "id": 2625,
+   "name": "Rich Antagonist/s",
+   "slug": "rich-antagonist-s"
+  },
+  {
+   "id": 4477,
+   "name": "Netorase",
+   "slug": "netorase"
+  },
+  {
+   "id": 2675822,
+   "name": "Reincarnated as the Hero/ine",
+   "slug": "reincarnated-as-the-hero-ine"
+  },
+  {
+   "id": 149854,
+   "name": "Legendary Beast/s",
+   "slug": "legendary-beast-s"
+  },
+  {
+   "id": 2678639,
+   "name": "Dirty Boxing",
+   "slug": "dirty-boxing"
+  }
+ ]
+}

@@ -1,0 +1,88 @@
+{
+  "routes": [
+    { "url": "https://kagane.moe/api/v2/search/series?page=0&size=35&sort=total_views%2Cdesc", "file": "fixtures/popular.json" },
+    { "url": "https://kagane.moe/api/v2/search/series?page=0&size=35&sort=updated_at%2Cdesc", "file": "fixtures/latest.json" },
+    { "url": "https://kagane.moe/api/v2/search/series?page=0&size=35", "file": "fixtures/search.json" },
+    { "url": "https://kagane.moe/api/v2/series/0d5e4c2a-1b3f-4a6e-9c7d-2f8e1a4b5c6d", "file": "fixtures/series.json" },
+    { "url": "https://kagane.moe/api/v2/series/0d5e4c2a-1b3f-4a6e-9c7d-2f8e1a4b5c6d/books/index?fields=List", "file": "fixtures/books_index.json" },
+    { "url": "https://kagane.moe/api/integrity", "file": "fixtures/integrity.json" },
+    { "url": "https://kagane.moe/api/v2/books/b0000000-0000-4000-8000-000000000001?intent=Read", "file": "fixtures/challenge.json" },
+    { "url": "https://kagane.moe/api/v2/genres/list", "file": "fixtures/genres.json" },
+    { "url": "https://kagane.moe/api/v2/tags/list", "file": "fixtures/tags.json" },
+    { "url": "https://kagane.moe/api/v2/sources/list", "file": "fixtures/sources.json" }
+  ],
+  "cases": [
+    {
+      "name": "popular sorts the series search by total views",
+      "call": "popular",
+      "args": [1],
+      "expect": {
+        "mangas.length": 3,
+        "mangas.0.title": "One-Punch Man",
+        "mangas.0.url": "0d5e4c2a-1b3f-4a6e-9c7d-2f8e1a4b5c6d",
+        "mangas.0.thumbnail_url": "https://kagane.moe/api/v2/image/c0ffee00-0000-4000-8000-000000000001",
+        "mangas.2.title": "Dandadan [Official]",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "latest sorts by update time",
+      "call": "latest",
+      "args": [1],
+      "expect": {
+        "mangas.length": 1,
+        "mangas.0.url": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "search with the default filters has no sort parameter",
+      "call": "search",
+      "args": [1, "one punch"],
+      "expect": {
+        "mangas.length": 1,
+        "mangas.0.title": "One-Punch Man",
+        "hasNextPage": false
+      }
+    },
+    {
+      "name": "details come from the series API and chapters from the compact book index",
+      "call": "mangaUpdate",
+      "args": [{ "url": "0d5e4c2a-1b3f-4a6e-9c7d-2f8e1a4b5c6d", "title": "One-Punch Man" }],
+      "expect": {
+        "manga.title": "One-Punch Man",
+        "manga.author": "ONE",
+        "manga.artist": "Yusuke Murata",
+        "manga.genre": "Action, Comedy",
+        "manga.status": 1,
+        "manga.thumbnail_url": "https://kagane.moe/api/v2/image/c0ffee00-0000-4000-8000-000000000001",
+        "manga.description": { "contains": "★★★★✬ 8.75 (1200)\n**Content Rating:** Fifteen Plus · **Followers:** 4.2K · **Format:** Manga · **Original Language:** Japanese · **Translated Language:** English · **Views:** 15.3M · **Volumes:** 30 · **Year:** 2012 · **Translator:** John Doe Translations" },
+        "chapters.length": 3,
+        "chapters.0.name": "Chapter 3 [Fan Group]",
+        "chapters.0.url": "/series/0d5e4c2a-1b3f-4a6e-9c7d-2f8e1a4b5c6d/reader/b0000000-0000-4000-8000-000000000003",
+        "chapters.0.scanlator": "Fan Group (Fan Group)",
+        "chapters.0.date_upload": { "localDate": "2023-11-17" },
+        "chapters.1.name": "The Second Punch",
+        "chapters.1.scanlator": "Viz, Fan Group",
+        "chapters.2.name": "Ch.1",
+        "chapters.2.chapter_number": -1
+      }
+    },
+    {
+      "name": "pages come from the read challenge with the book's token",
+      "call": "pages",
+      "args": [{ "url": "/series/0d5e4c2a-1b3f-4a6e-9c7d-2f8e1a4b5c6d/reader/b0000000-0000-4000-8000-000000000001", "name": "Ch.1" }],
+      "expect": {
+        "length": 3,
+        "0.index": 1,
+        "0.imageUrl": "https://cache.example-kagane.test/api/v2/books/page/original/b0000000-0000-4000-8000-000000000001/p0000000-0000-4000-8000-000000000001.jxl?token=test-access-token",
+        "1.imageUrl": { "contains": "/p0000000-0000-4000-8000-000000000002.webp?token=test-access-token" },
+        "2.imageUrl": { "contains": "/p0000000-0000-4000-8000-000000000003.jxl?token=" }
+      }
+    }
+  ],
+  "live": [
+    { "name": "popular", "call": "popular", "args": [1], "expect": { "mangas.length": { "gt": 0 } } },
+    { "name": "search", "call": "search", "args": [1, "one punch"], "expect": { "mangas.length": { "gt": 0 } } }
+  ]
+}

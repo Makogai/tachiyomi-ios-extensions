@@ -1,0 +1,18 @@
+{
+  "routes": [],
+  "cases": [],
+  "live": [
+    {
+      "name": "popular",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        }
+      }
+    }
+  ]
+}

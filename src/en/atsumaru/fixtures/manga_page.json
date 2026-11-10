@@ -1,0 +1,208 @@
+{
+ "mangaPage": {
+  "id": "OlBhf",
+  "released": 1704067200000,
+  "scanlators": [
+   {
+    "id": "cml34uh73001001pgz495ibyj",
+    "name": "Asura",
+    "score": 4
+   },
+   {
+    "id": "6289f2d3-b6eb-493f-8923-965086670994",
+    "name": "Demonic · CaeCipher",
+    "score": 3
+   },
+   {
+    "id": "cmq3p1t670006g0pc72r69qdh",
+    "name": "Flame",
+    "score": 1
+   },
+   {
+    "id": "cmgzlugffg7b1m1911euhkrz4",
+    "name": "Alpha",
+    "score": 0
+   },
+   {
+    "id": "cmrtfoeua0000lmqvhfyz63wg",
+    "name": "Dusk",
+    "score": 0
+   },
+   {
+    "id": "cmsm4bira000033odp7frzrb9",
+    "name": "Hijala",
+    "score": -1
+   }
+  ],
+  "views": "1.7M",
+  "authors": [
+   {
+    "id": "cmobyy95i0nvw6nm13hv3wesz",
+    "name": "Daul",
+    "slug": "daul",
+    "type": "Author"
+   },
+   {
+    "id": "cmobyy95l0nvx6nm1duqnqh51",
+    "name": "Do Dang",
+    "slug": "do-dang",
+    "type": "Author"
+   },
+   {
+    "id": "cmobxe06p0f0o6nm1pes26ecu",
+    "name": "REDICE",
+    "slug": "redice",
+    "type": "Artist"
+   },
+   {
+    "id": "cmm8x7ebx008t3old0r5c7ck0",
+    "name": "Jin",
+    "slug": "jin",
+    "type": "Artist"
+   }
+  ],
+  "genres": [
+   {
+    "id": "39",
+    "name": "Action",
+    "weight": "Defining"
+   },
+   {
+    "id": "37",
+    "name": "Adventure",
+    "weight": "Defining"
+   },
+   {
+    "id": "6",
+    "name": "Comedy",
+    "weight": "Defining"
+   },
+   {
+    "id": "31",
+    "name": "Drama",
+    "weight": "Defining"
+   },
+   {
+    "id": "36",
+    "name": "Fantasy",
+    "weight": "Defining"
+   }
+  ],
+  "tags": [
+   {
+    "id": "236",
+    "name": "Super Powers",
+    "namePath": "Themes > Super Powers",
+    "weight": "Core",
+    "isSpoiler": false
+   },
+   {
+    "id": "3188",
+    "name": "Cheat Skills",
+    "namePath": "Settings > Game Elements > Cheat Skills",
+    "weight": "Core",
+    "isSpoiler": true
+   },
+   {
+    "id": "399",
+    "name": "Game Elements",
+    "namePath": "Settings > Game Elements",
+    "weight": "Core",
+    "isSpoiler": false
+   },
+   {
+    "id": "4819",
+    "name": "Ranking System",
+    "namePath": "Settings > Level System > Ranking System",
+    "weight": "Core",
+    "isSpoiler": false
+   },
+   {
+    "id": "261",
+    "name": "Urban Fantasy",
+    "namePath": "Settings > Fantasy > Urban Fantasy",
+    "weight": "Core",
+    "isSpoiler": true
+   },
+   {
+    "id": "528",
+    "name": "Necromancy",
+    "namePath": "World Building > Magic > Necromancy",
+    "weight": "Core",
+    "isSpoiler": false
+   },
+   {
+    "id": "879",
+    "name": "Character Growth",
+    "namePath": "Narrative Tropes > Character Change > Character Growth",
+    "weight": "Core",
+    "isSpoiler": false
+   },
+   {
+    "id": "1176",
+    "name": "Hidden Powers",
+    "namePath": "Narrative Tropes > Power Dynamics > Hidden Powers",
+    "weight": "Core",
+    "isSpoiler": false
+   },
+   {
+    "id": "1064",
+    "name": "Weak to Strong",
+    "namePath": "Narrative Tropes > Character Change > Weak to Strong",
+    "weight": "Core",
+    "isSpoiler": false
+   },
+   {
+    "id": "3674",
+    "name": "Necromancer",
+    "namePath": "Occupations > Magic Users > Necromancer",
+    "weight": "Core",
+    "isSpoiler": false
+   },
+   {
+    "id": "2103",
+    "name": "Dungeon Exploring",
+    "namePath": "Activities > Dungeon Exploring",
+    "weight": "Core",
+    "isSpoiler": false
+   },
+   {
+    "id": "500",
+    "name": "Dungeon",
+    "namePath": "Locations > Dungeon",
+    "weight": "Core",
+    "isSpoiler": false
+   }
+  ],
+  "englishTitle": null,
+  "isAdult": false,
+  "poster": {
+   "id": "posters/XINjJ3nJmqbw1VCt.jpg",
+   "image": "posters/XINjJ3nJmqbw1VCt.jpg",
+   "smallImage": "posters/XINjJ3nJmqbw1VCt-small.avif",
+   "mediumImage": "posters/XINjJ3nJmqbw1VCt-medium.avif",
+   "largeImage": "posters/XINjJ3nJmqbw1VCt-large.avif"
+  },
+  "title": "Solo Leveling: Ragnarok",
+  "type": "Manwha",
+  "medium": "Comic",
+  "otherNames": [
+   "Solo Leveling: Ragnarok",
+   "I Alone Level Up: Ragnarok",
+   "Only I Level Up: Ragnarok",
+   "Na Honjaman Level Up: Ragnarok",
+   "Na Honjaman Rebereop: Ragnarok",
+   "Ore dake Level Up na Ken: Ragnarok",
+   "나 혼자만 레벨업 : 라그나로크",
+   "solo leveling: ragnarok",
+   "Upando Sozinho: Ragnarok",
+   "Поднятие уровня в одиночку: Рагнарёк",
+   "俺だけレベルアップな件〜ラグナロク〜",
+   "我独自升级 : 诸神黄昏"
+  ],
+  "synopsis": "In a world of gates, monsters, and hunters galore, Soo-Ho Sung is…well, he’s just an ordinary college student. Sure, his parents went missing right before the gates started appearing three years ago, and he occasionally had a weird dream where he could beat up monsters and level up like a video game, but other than that? There’s absolutely nothing special about him. So when a sudden monster outbreak occurs on his campus, he must fight back every instinct screaming at him to run away as he takes a page out of his dad’s book and rushes to save his classmate. The chances of making it alive are looking bleak, until—PING! \\[Congratulations on becoming a Player.\\]\n\n(Source: Ize Press)",
+  "status": "Hiatus",
+  "avgRating": 7.69266666666667,
+  "totalChapterCount": 71
+ }
+}

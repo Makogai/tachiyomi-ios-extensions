@@ -1,0 +1,7 @@
+{
+  "name": "MangaFire",
+  "lang": "all",
+  "versionCode": 1,
+  "nsfw": true,
+  "upstream": { "path": "src/all/mangafire", "commit": "d9420cd1" }
+}

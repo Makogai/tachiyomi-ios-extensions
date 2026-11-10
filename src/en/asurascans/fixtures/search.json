@@ -1,0 +1,17 @@
+{
+ "data": [
+  {
+   "id": 2017,
+   "slug": "nano-machine",
+   "title": "Nano Machine",
+   "cover": "https://cdn.asurascans.com/asura-images/covers/nano-machine.e31bdb.webp",
+   "status": "completed",
+   "type": "manhwa",
+   "public_url": "/comics/nano-machine-f212c582"
+  }
+ ],
+ "meta": {
+  "total": 1,
+  "per_page": 20
+ }
+}

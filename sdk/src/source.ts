@@ -9,6 +9,25 @@ export interface ImageRequest {
   headers: Headers;
 }
 
+/** One tile move: from (sx, sy, sw, sh) in the downloaded image to (dx, dy[, dw, dh]) in the output. */
+export interface ImageTile {
+  sx: number;
+  sy: number;
+  sw: number;
+  sh: number;
+  dx: number;
+  dy: number;
+  dw?: number;
+  dh?: number;
+}
+
+/** How to unscramble an image: output size and tile moves. The app draws them (API level 2). */
+export interface ImageTransform {
+  width: number;
+  height: number;
+  tiles: ImageTile[];
+}
+
 /**
  * Base class for a source. Mirrors keiyoushi's `KeiSource` (an `HttpSource` with lib 1.6's
  * `getMangaUpdate`), so a port overrides the same methods as its Kotlin original:
@@ -112,6 +131,14 @@ export abstract class KeiSource {
   getImageRequest(page: Page): ImageRequest {
     if (!page.imageUrl) throw new Error(`Page ${page.index + 1} has no image URL`);
     return { url: page.imageUrl, headers: this.headers };
+  }
+
+  /**
+   * Override to unscramble images (replaces upstream's Bitmap/Canvas interceptors): given the
+   * downloaded image's size, return the tile moves, or null to leave it as is.
+   */
+  async getImageTransform(_page: Page, _width: number, _height: number): Promise<ImageTransform | null> {
+    return null;
   }
 
   /** The page a person would open for this manga. Used by "Open in WebView". */

@@ -1,0 +1,450 @@
+{
+ "genres": [
+  {
+   "id": "39",
+   "name": "Action"
+  },
+  {
+   "id": "46",
+   "name": "Adult"
+  },
+  {
+   "id": "37",
+   "name": "Adventure"
+  },
+  {
+   "id": "180",
+   "name": "Boys Love"
+  },
+  {
+   "id": "6",
+   "name": "Comedy"
+  },
+  {
+   "id": "31",
+   "name": "Drama"
+  },
+  {
+   "id": "36",
+   "name": "Fantasy"
+  },
+  {
+   "id": "4",
+   "name": "Girls Love"
+  },
+  {
+   "id": "10",
+   "name": "Hentai"
+  },
+  {
+   "id": "45",
+   "name": "Historical"
+  },
+  {
+   "id": "44",
+   "name": "Horror"
+  },
+  {
+   "id": "29",
+   "name": "Martial Arts"
+  },
+  {
+   "id": "32",
+   "name": "Mystery"
+  },
+  {
+   "id": "18",
+   "name": "Psychological"
+  },
+  {
+   "id": "9",
+   "name": "Romance"
+  },
+  {
+   "id": "1",
+   "name": "Sci-Fi"
+  },
+  {
+   "id": "7",
+   "name": "Slice of Life"
+  },
+  {
+   "id": "41",
+   "name": "Smut"
+  },
+  {
+   "id": "22",
+   "name": "Supernatural"
+  },
+  {
+   "id": "19",
+   "name": "Thriller"
+  },
+  {
+   "id": "5",
+   "name": "Tragedy"
+  }
+ ],
+ "tags": [
+  {
+   "id": "248",
+   "name": "Working",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 1071,
+   "adultCount": 482
+  },
+  {
+   "id": "250",
+   "name": "Murder",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 1172,
+   "adultCount": 159
+  },
+  {
+   "id": "288",
+   "name": "Crimes",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 780,
+   "adultCount": 163
+  },
+  {
+   "id": "167",
+   "name": "Crossdressing",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 786,
+   "adultCount": 153
+  },
+  {
+   "id": "337",
+   "name": "Swordplay",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 877,
+   "adultCount": 43
+  },
+  {
+   "id": "285",
+   "name": "Blackmail",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 300,
+   "adultCount": 375
+  },
+  {
+   "id": "391",
+   "name": "Travel",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 605,
+   "adultCount": 24
+  },
+  {
+   "id": "1006",
+   "name": "Sexual Assault",
+   "group": "Activities",
+   "adult": true,
+   "safeCount": 314,
+   "adultCount": 292
+  },
+  {
+   "id": "417",
+   "name": "Slavery",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 482,
+   "adultCount": 122
+  },
+  {
+   "id": "878",
+   "name": "Kidnapping",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 412,
+   "adultCount": 158
+  },
+  {
+   "id": "376",
+   "name": "Acting",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 370,
+   "adultCount": 116
+  },
+  {
+   "id": "366",
+   "name": "Prostitution",
+   "group": "Activities",
+   "adult": true,
+   "safeCount": 229,
+   "adultCount": 239
+  },
+  {
+   "id": "1003",
+   "name": "Attempted Murder",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 390,
+   "adultCount": 42
+  },
+  {
+   "id": "392",
+   "name": "Gangs",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 320,
+   "adultCount": 104
+  },
+  {
+   "id": "695",
+   "name": "Training",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 379,
+   "adultCount": 16
+  },
+  {
+   "id": "269",
+   "name": "Childcare",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 342,
+   "adultCount": 32
+  },
+  {
+   "id": "251",
+   "name": "Mass Murder",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 324,
+   "adultCount": 34
+  },
+  {
+   "id": "410",
+   "name": "Drawing",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 297,
+   "adultCount": 43
+  },
+  {
+   "id": "353",
+   "name": "Mafia",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 244,
+   "adultCount": 82
+  },
+  {
+   "id": "351",
+   "name": "Organized Crime",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 244,
+   "adultCount": 67
+  },
+  {
+   "id": "669",
+   "name": "Cooking",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 272,
+   "adultCount": 15
+  },
+  {
+   "id": "393",
+   "name": "Cosplay",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 121,
+   "adultCount": 137
+  },
+  {
+   "id": "674",
+   "name": "Smoking",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 180,
+   "adultCount": 71
+  },
+  {
+   "id": "1081",
+   "name": "Investigation",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 188,
+   "adultCount": 23
+  },
+  {
+   "id": "597",
+   "name": "Writing",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 176,
+   "adultCount": 26
+  },
+  {
+   "id": "120",
+   "name": "Cannibalism",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 175,
+   "adultCount": 16
+  },
+  {
+   "id": "1873",
+   "name": "Tournaments",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 175,
+   "adultCount": 6
+  },
+  {
+   "id": "1091",
+   "name": "Competitions",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 163,
+   "adultCount": 14
+  },
+  {
+   "id": "3072",
+   "name": "Game",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 160,
+   "adultCount": 15
+  },
+  {
+   "id": "3080",
+   "name": "Strategic Minds",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 165,
+   "adultCount": 1
+  },
+  {
+   "id": "1867",
+   "name": "Fights",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 145,
+   "adultCount": 13
+  },
+  {
+   "id": "521",
+   "name": "Gambling",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 130,
+   "adultCount": 17
+  },
+  {
+   "id": "593",
+   "name": "Photography",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 101,
+   "adultCount": 44
+  },
+  {
+   "id": "703",
+   "name": "Archery",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 131,
+   "adultCount": 6
+  },
+  {
+   "id": "1927",
+   "name": "Terrorism",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 129,
+   "adultCount": 2
+  },
+  {
+   "id": "1856",
+   "name": "Hand to Hand Combat",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 117,
+   "adultCount": 7
+  },
+  {
+   "id": "2103",
+   "name": "Dungeon Exploring",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 112,
+   "adultCount": 7
+  },
+  {
+   "id": "517",
+   "name": "Modeling",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 74,
+   "adultCount": 37
+  },
+  {
+   "id": "3281",
+   "name": "Corrupt Organizations",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 99,
+   "adultCount": 7
+  },
+  {
+   "id": "3404",
+   "name": "Massacre",
+   "group": "Activities",
+   "adult": false,
+   "safeCount": 91,
+   "adultCount": 8
+  }
+ ],
+ "types": [
+  {
+   "id": "Manga",
+   "name": "Manga"
+  },
+  {
+   "id": "Manhwa",
+   "name": "Manhwa"
+  },
+  {
+   "id": "Manhua",
+   "name": "Manhua"
+  },
+  {
+   "id": "OEL",
+   "name": "OEL"
+  },
+  {
+   "id": "Other",
+   "name": "Other"
+  }
+ ],
+ "statuses": [
+  {
+   "id": "Ongoing",
+   "name": "Ongoing"
+  },
+  {
+   "id": "Completed",
+   "name": "Completed"
+  },
+  {
+   "id": "Hiatus",
+   "name": "Hiatus"
+  },
+  {
+   "id": "Canceled",
+   "name": "Canceled"
+  }
+ ]
+}

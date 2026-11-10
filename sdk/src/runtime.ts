@@ -1,10 +1,10 @@
 import { applyFilterStates, type FilterJSON } from "./filters.js";
 import { Page, SChapter, SManga } from "./models.js";
 import { PreferenceScreen } from "./preferences.js";
-import type { KeiSource } from "./source.js";
+import { KeiSource as KeiSourceBase, type KeiSource } from "./source.js";
 
 /** Host API level this SDK targets. Must match `extensionHostAPILevel` in the app. */
-export const API_LEVEL = 1;
+export const API_LEVEL = 2;
 
 type Callback = (error: string | null, resultJSON: string | null) => void;
 
@@ -41,6 +41,8 @@ const methods: Record<string, (source: KeiSource, args: unknown[]) => unknown> =
   getPageList: (source, [chapter]) => source.getPageList(SChapter.from(chapter as Partial<SChapter>)),
   getImageUrl: (source, [page]) => source.getImageUrl(Page.from(page as { index: number })),
   getImageRequest: (source, [page]) => source.getImageRequest(Page.from(page as { index: number })),
+  getImageTransform: (source, [page, width, height]) =>
+    source.getImageTransform(Page.from(page as { index: number }), width as number, height as number),
 };
 
 function describeError(error: unknown): string {
@@ -75,6 +77,7 @@ export function defineExtension(sources: KeiSource[]): ExtensionExports {
           rateLimits: builder.rateLimits.map(({ permits, periodMs, intervalMs }) => ({ permits, periodMs, intervalMs })),
         },
         preferences: screen.preferences.map((preference) => preference.toJSON()),
+        hasImageTransform: source.getImageTransform !== KeiSourceBase.prototype.getImageTransform,
       });
     },
     invoke(index, method, argumentsJSON, callback) {

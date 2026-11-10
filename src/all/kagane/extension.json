@@ -1,0 +1,7 @@
+{
+  "name": "Kagane",
+  "lang": "all",
+  "versionCode": 1,
+  "nsfw": true,
+  "upstream": { "path": "src/all/kagane", "commit": "d9420cd1" }
+}
