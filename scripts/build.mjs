@@ -1,8 +1,9 @@
-// Builds every extension under src/<lang>/<name>/ into dist/<pkg>.js and writes dist/index.json.
+// Builds every extension under src/<lang>/<name>/ into dist/<pkg>.js, copies its icon.png to
+// dist/icon/<pkg>.png (as keiyoushi publishes icons) and writes dist/index.json.
 //
 // Usage: node scripts/build.mjs [pkg ...]   (no arguments builds everything)
 import { createHash } from "node:crypto";
-import { mkdir, readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
@@ -47,6 +48,21 @@ function describeSources(code, pkg) {
   return { api: exported.api, sources: exported.sources.map((_, index) => JSON.parse(exported.describe(index))) };
 }
 
+/** Copies src/<lang>/<name>/icon.png to dist/icon/<pkg>.png; returns its path relative to the index. */
+async function copyIcon(extension) {
+  const source = path.join(extension.dir, "icon.png");
+  try {
+    await stat(source);
+  } catch {
+    console.warn(`${extension.pkg}: no icon.png`);
+    return undefined;
+  }
+  const relative = `icon/${extension.pkg}.png`;
+  await mkdir(path.join(distDir, "icon"), { recursive: true });
+  await copyFile(source, path.join(distDir, relative));
+  return relative;
+}
+
 async function build(extension) {
   const meta = JSON.parse(await readFile(path.join(extension.dir, "extension.json"), "utf8"));
   const outfile = path.join(distDir, `${extension.pkg}.js`);
@@ -66,6 +82,7 @@ async function build(extension) {
   });
   const code = await readFile(outfile);
   const { api, sources } = describeSources(code.toString("utf8"), extension.pkg);
+  const icon = await copyIcon(extension);
   return {
     name: meta.name,
     pkg: extension.pkg,
@@ -76,6 +93,7 @@ async function build(extension) {
     api,
     file: `${extension.pkg}.js`,
     sha256: createHash("sha256").update(code).digest("hex"),
+    ...(icon ? { icon } : {}),
     sources: sources.map((source) => ({
       name: source.name,
       lang: source.lang,

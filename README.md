@@ -27,9 +27,11 @@ sdk/test/           Node tests for the SDK and the build scripts
 src/<lang>/<name>/  one extension
   extension.json    name, lang, versionCode, nsfw, upstream path and commit
   index.ts          the port; `export default defineExtension([...])`
+  icon.png          upstream's res/mipmap-xxxhdpi/ic_launcher.png (the theme's for multisrc ports)
   fixtures/         saved responses from the site
   tests.json        what the port should return for those fixtures (run by the app repo)
-scripts/build.mjs   bundles each extension with esbuild and writes dist/index.json
+scripts/build.mjs   bundles each extension with esbuild, copies icons to dist/icon/<pkg>.png and
+                    writes dist/index.json
 ```
 
 ## Developing
