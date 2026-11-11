@@ -1,0 +1,320 @@
+[
+  {
+    "name": "Comick (Unoriginal)",
+    "pkg": "all.comicklive",
+    "versionCode": 1,
+    "versionName": "2.1",
+    "lang": "all",
+    "nsfw": true,
+    "api": 2,
+    "file": "all.comicklive.js",
+    "sha256": "55f89487fb7fef8a3e6c831be7bd9bfbce18d38e8ca0a8cd83c3477ecd942d0c",
+    "icon": "icon/all.comicklive.png",
+    "sources": [
+      {
+        "name": "Comick (Unoriginal)",
+        "lang": "all",
+        "id": "4972933717624256217",
+        "baseUrl": "https://comick.live"
+      }
+    ]
+  },
+  {
+    "name": "Kagane",
+    "pkg": "all.kagane",
+    "versionCode": 1,
+    "versionName": "2.1",
+    "lang": "all",
+    "nsfw": true,
+    "api": 2,
+    "file": "all.kagane.js",
+    "sha256": "0ed3c240e6201c3ebffd6d84f13ed08074297e5c5f686665ee8ed8a9e234e8a4",
+    "icon": "icon/all.kagane.png",
+    "sources": [
+      {
+        "name": "Kagane",
+        "lang": "en",
+        "id": "4024736764982024684",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "ja",
+        "id": "1157710231944574609",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "ko",
+        "id": "1720654391539317254",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "zh",
+        "id": "538178062602483073",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "es",
+        "id": "6291099060619088371",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "es-419",
+        "id": "3249170492103400191",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "fr",
+        "id": "6053574930456302165",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "de",
+        "id": "253007717341293260",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "pt",
+        "id": "3281832279225761326",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "pt-BR",
+        "id": "8929946374100381402",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "ru",
+        "id": "8751507648303673848",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "it",
+        "id": "1471532184931679941",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "id",
+        "id": "7702420917357144001",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "vi",
+        "id": "8791972639916297003",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "th",
+        "id": "2006734767320263070",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "pl",
+        "id": "1008382500205235233",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "hi",
+        "id": "9016992318016575502",
+        "baseUrl": "https://kagane.moe"
+      },
+      {
+        "name": "Kagane",
+        "lang": "ar",
+        "id": "7861921616625741963",
+        "baseUrl": "https://kagane.moe"
+      }
+    ]
+  },
+  {
+    "name": "MangaFire",
+    "pkg": "all.mangafire",
+    "versionCode": 1,
+    "versionName": "2.1",
+    "lang": "all",
+    "nsfw": true,
+    "api": 2,
+    "file": "all.mangafire.js",
+    "sha256": "52ccb8d1915ec88400c1d976b43dc1da66279b2d8d5c843574dbac50029771bd",
+    "icon": "icon/all.mangafire.png",
+    "sources": [
+      {
+        "name": "MangaFire",
+        "lang": "en",
+        "id": "6084907896154116083",
+        "baseUrl": "https://mangafire.to"
+      },
+      {
+        "name": "MangaFire",
+        "lang": "es",
+        "id": "8098539940032331958",
+        "baseUrl": "https://mangafire.to"
+      },
+      {
+        "name": "MangaFire",
+        "lang": "es-419",
+        "id": "3849324770075062403",
+        "baseUrl": "https://mangafire.to"
+      },
+      {
+        "name": "MangaFire",
+        "lang": "fr",
+        "id": "6228021941803932286",
+        "baseUrl": "https://mangafire.to"
+      },
+      {
+        "name": "MangaFire",
+        "lang": "ja",
+        "id": "524110931382140732",
+        "baseUrl": "https://mangafire.to"
+      },
+      {
+        "name": "MangaFire",
+        "lang": "pt",
+        "id": "758400875161895515",
+        "baseUrl": "https://mangafire.to"
+      },
+      {
+        "name": "MangaFire",
+        "lang": "pt-BR",
+        "id": "7842137233968841729",
+        "baseUrl": "https://mangafire.to"
+      }
+    ]
+  },
+  {
+    "name": "Asura Scans",
+    "pkg": "en.asurascans",
+    "versionCode": 1,
+    "versionName": "2.1",
+    "lang": "en",
+    "nsfw": false,
+    "api": 2,
+    "file": "en.asurascans.js",
+    "sha256": "2e402ca81be92ca3d232789054fea7fcb2fcf4d9445c28329982da6ae59dc9b3",
+    "icon": "icon/en.asurascans.png",
+    "sources": [
+      {
+        "name": "Asura Scans",
+        "lang": "en",
+        "id": "6247824327199706550",
+        "baseUrl": "https://asurascans.com"
+      }
+    ]
+  },
+  {
+    "name": "Atsumaru",
+    "pkg": "en.atsumaru",
+    "versionCode": 1,
+    "versionName": "2.1",
+    "lang": "en",
+    "nsfw": true,
+    "api": 2,
+    "file": "en.atsumaru.js",
+    "sha256": "f396fba914c6fa551e8d3df398c3c50002acf83595254dabdd8138d4e8725218",
+    "icon": "icon/en.atsumaru.png",
+    "sources": [
+      {
+        "name": "Atsumaru",
+        "lang": "en",
+        "id": "2327480808438768017",
+        "baseUrl": "https://atsu.moe"
+      }
+    ]
+  },
+  {
+    "name": "Comix",
+    "pkg": "en.comix",
+    "versionCode": 1,
+    "versionName": "2.1",
+    "lang": "en",
+    "nsfw": true,
+    "api": 2,
+    "file": "en.comix.js",
+    "sha256": "6f3e2c2ced09b209291232ad4ab111039a08c94615bd32e7a8133665aacc8bc3",
+    "icon": "icon/en.comix.png",
+    "sources": [
+      {
+        "name": "Comix",
+        "lang": "en",
+        "id": "7537715367149829912",
+        "baseUrl": "https://comix.to"
+      }
+    ]
+  },
+  {
+    "name": "Mangahere",
+    "pkg": "en.mangahere",
+    "versionCode": 1,
+    "versionName": "2.1",
+    "lang": "en",
+    "nsfw": false,
+    "api": 2,
+    "file": "en.mangahere.js",
+    "sha256": "387cb6f626ae866b6be28bed4f7689a7e638affaf20c40cbb0af1a90046fbfc3",
+    "icon": "icon/en.mangahere.png",
+    "sources": [
+      {
+        "name": "Mangahere",
+        "lang": "en",
+        "id": "2",
+        "baseUrl": "https://www.mangahere.cc"
+      }
+    ]
+  },
+  {
+    "name": "Read Comics Online",
+    "pkg": "en.readcomicsonline",
+    "versionCode": 1,
+    "versionName": "2.1",
+    "lang": "en",
+    "nsfw": false,
+    "api": 2,
+    "file": "en.readcomicsonline.js",
+    "sha256": "0957781dbc58374ef43b758d5933d674fcfb94f64c1f7a4fed4a0b3b196bd6b5",
+    "icon": "icon/en.readcomicsonline.png",
+    "sources": [
+      {
+        "name": "Read Comics Online",
+        "lang": "en",
+        "id": "7185601298150078890",
+        "baseUrl": "https://readcomicsonline.ru"
+      }
+    ]
+  },
+  {
+    "name": "Weeb Central",
+    "pkg": "en.weebcentral",
+    "versionCode": 1,
+    "versionName": "2.1",
+    "lang": "en",
+    "nsfw": true,
+    "api": 2,
+    "file": "en.weebcentral.js",
+    "sha256": "e2a5681f9dd9ed70f484110dc083d1f246939abc010e51b78b13160be32eba54",
+    "icon": "icon/en.weebcentral.png",
+    "sources": [
+      {
+        "name": "Weeb Central",
+        "lang": "en",
+        "id": "2131019126180322627",
+        "baseUrl": "https://weebcentral.com"
+      }
+    ]
+  }
+]
