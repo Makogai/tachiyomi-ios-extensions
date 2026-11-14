@@ -1,5 +1,5 @@
-// The parts of keiyoushi's `MarkdownDescription.Builder` (core/.../utils/Markdown.kt @ d9420cd1)
-// that Kagane uses: markdown, rating, field, links and altTitles.
+// Port of keiyoushi's MarkdownDescription.Builder (core/.../utils/Markdown.kt) @ d9420cd1, which the SDK
+// does not have: the parts Kagane uses (markdown, rating, field, links and altTitles).
 
 const MARKDOWN_INDENT = /^[ \t]+/gm;
 const MARKDOWN_INLINE = /[\\*_[\]<]/g;
