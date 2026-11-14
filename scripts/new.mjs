@@ -1,5 +1,6 @@
-// Creates a new extension: src/<lang>/<pkg>/ with extension.json, index.ts (standalone or on a
-// theme), fixtures/, tests.json and, when upstream has one, icon.png.
+// Creates a new extension: src/<lang>/<pkg>/ with extension.json, the source (one index.ts on a
+// theme, or the standard layout for a standalone source: index.ts, api.ts, parse.ts, dto.ts,
+// filters.ts, settings.ts), fixtures/, tests.json and, when upstream has one, icon.png.
 //
 //   npm run new                                     asks for everything
 //   npm run new -- --upstream src/en/mangasushi     reads name, lang, baseUrl, theme, id and icon
@@ -16,6 +17,7 @@ import { parseArgs } from "node:util";
 import { findExtensions, srcDir, themesDir } from "./lib/extensions.mjs";
 import { latestCommit, localCheckout, parseGradle, readUpstreamFile } from "./lib/upstream.mjs";
 import { generateId } from "./source-id.mjs";
+import { standaloneFiles, TODO_MARKER } from "./lib/template.mjs";
 
 const { values: flags } = parseArgs({
   options: {
@@ -126,10 +128,11 @@ const langsConst = multiLangs
   : "";
 const sourcesList = multiLangs ? `LANGS.map((lang) => new ${className}(lang))` : `[new ${className}()]`;
 
-let indexTs;
+// Theme ports are one index.ts; standalone ports get the standard layout (scripts/lib/template.mjs).
+let files;
 if (theme) {
   const info = themeInfo(theme);
-  indexTs = `${header}
+  files = { "index.ts": `${header}
 import { defineExtension } from "@sdk";
 import { ${info.baseClass} } from "@sdk/themes/${theme}";
 
@@ -140,69 +143,12 @@ ${sourceFields}
 }
 
 export default defineExtension(${sourcesList});
-`;
+`,
+  };
 } else {
-  indexTs = `${header}
-import {
-  defineExtension,
-  type Element,
-  Fetch,
-  type FilterList,
-  KeiSource,
-  MangasPage,
-  type Page,
-  type SChapter,
-  SManga,
-  SMangaUpdate,
-} from "@sdk";
-${langsConst}
-class ${className} extends KeiSource {
-${sourceFields}
-
-  // Popular
-
-  async getPopularManga(page: number): Promise<MangasPage> {
-    const document = (await this.client.get(\`\${this.baseUrl}/popular?page=\${page}\`, Fetch.DOCUMENT)).asJsoup();
-    const mangas = document.select("div.manga-card").map((element) => this.mangaFromElement(element));
-    return new MangasPage([...mangas], document.selectFirst("a.next") !== null);
-  }
-
-  private mangaFromElement(element: Element): SManga {
-    const manga = SManga.create();
-    const link = element.expectFirst("a");
-    manga.setUrlWithoutDomain(link.absUrl("href"));
-    manga.title = link.text();
-    manga.thumbnail_url = element.selectFirst("img")?.absUrl("src") ?? null;
-    return manga;
-  }
-
-  // Latest
-
-  async getLatestUpdates(_page: number): Promise<MangasPage> {
-    throw new Error("TODO: port getLatestUpdates");
-  }
-
-  // Search
-
-  async getSearchMangaList(_page: number, _query: string, _filters: FilterList): Promise<MangasPage> {
-    throw new Error("TODO: port getSearchMangaList");
-  }
-
-  // Details and chapters
-
-  async fetchMangaUpdate(_manga: SManga, _chapters: SChapter[], _fetchDetails: boolean, _fetchChapters: boolean): Promise<SMangaUpdate> {
-    throw new Error("TODO: port fetchMangaUpdate");
-  }
-
-  // Pages
-
-  async getPageList(_chapter: SChapter): Promise<Page[]> {
-    throw new Error("TODO: port getPageList");
-  }
-}
-
-export default defineExtension(${sourcesList});
-`;
+  // Role-less first line: "Port of src/en/x @ abc12345" or "My Site (original source)".
+  const headerText = upstreamPath ? `Port of ${upstreamPath} @ ${commit ?? "<commit>"}` : `${name} (original source, not a keiyoushi port)`;
+  files = standaloneFiles({ header: headerText, className, sourceFields, langsConst, sourcesList });
 }
 
 const extensionJson = {
@@ -225,7 +171,7 @@ function create(file, content) {
   else writeFileSync(path.join(dir, file), content);
 }
 writeFileSync(path.join(dir, "extension.json"), JSON.stringify(extensionJson, null, 2) + "\n");
-create("index.ts", indexTs);
+for (const [file, content] of Object.entries(files)) create(file, content);
 create("tests.json", JSON.stringify(testsJson, null, 2) + "\n");
 if (readdirSync(path.join(dir, "fixtures")).length === 0) writeFileSync(path.join(dir, "fixtures/.gitkeep"), "");
 
@@ -243,7 +189,7 @@ ${started ? "Filled in" : "Created"} ${relative}/  (${pkg})${kept.length ? `\n  
   icon        ${icon ? "icon.png from upstream" : "MISSING: add a 192×192 icon.png"}
 
 Next:
-  1. Port the overrides in ${relative}/index.ts${theme ? "" : " (the template has placeholder selectors)"}.
+  1. ${theme ? `Port the overrides in ${relative}/index.ts.` : `Fill in every ${TODO_MARKER} in ${relative}/ (api.ts, parse.ts, filters.ts; see docs/ADDING-A-SOURCE.md#writing-a-custom-source).`}
   2. Try it live:      npm run debug -- ${pkg} popular 1
   3. Save fixtures:    npm run debug -- ${pkg} popular 1 --save     (or npm run fixture -- ${pkg} <url>)
   4. Write cases in tests.json, then: npm run test:ext ${pkg}
