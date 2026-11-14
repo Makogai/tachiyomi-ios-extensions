@@ -1,4 +1,5 @@
-// Checks the repository before publishing: extension.json schema, required files, tests.json,
+// Checks the repository before publishing: extension.json schema, required files, file headers,
+// the standalone layout, tests.json (including cases that would never run or check anything),
 // unique packages and source IDs, and that every changed extension bumps its versionCode against
 // the published index (the apps only update when versionCode grows).
 //
@@ -12,7 +13,8 @@ import path from "node:path";
 import { parseArgs } from "node:util";
 import { build } from "./lib/build.mjs";
 import { OPERATORS, TEST_CALLS } from "./lib/expect.mjs";
-import { distDir, findExtensions, readJSON, root, themesDir } from "./lib/extensions.mjs";
+import { distDir, findExtensions, readJSON, root, themeOf, themesDir } from "./lib/extensions.mjs";
+import { TODO_MARKER } from "./lib/template.mjs";
 
 const { values: options } = parseArgs({
   options: {
@@ -30,6 +32,12 @@ const warn = (where, message) => warnings.push(`${where}: ${message}`);
 const PNG = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 const LANG = /^(all|[a-z]{2,3}(-[A-Za-z0-9]{2,8})*)$/;
 const EXTENSION_KEYS = new Set(["name", "lang", "versionCode", "nsfw", "upstream"]);
+const TESTS_KEYS = new Set(["routes", "cases", "live"]);
+const CASE_KEYS = new Set(["name", "call", "args", "expect", "source"]);
+/** A standalone index.ts above this should be split (docs/ADDING-A-SOURCE.md#the-layout). */
+const SINGLE_FILE_LINES = 200;
+/** index.ts should show the source's flow on a screen or so; above this the logic belongs in the other files. */
+const INDEX_MAX_LINES = 400;
 
 // extension.json
 
@@ -71,6 +79,79 @@ function checkFiles(extension) {
   if (!existsSync(path.join(extension.dir, "tests.json"))) error(extension.pkg, "tests.json is missing (npm run new creates one)");
 }
 
+// Source files: headers, the standalone layout, leftovers
+
+/** Every .ts file of the extension (not fixtures), relative to its folder. */
+function sourceFiles(extension) {
+  return readdirSync(extension.dir).filter((name) => name.endsWith(".ts") && statSync(path.join(extension.dir, name)).isFile());
+}
+
+const lineCount = (text) => text.split("\n").length - (text.endsWith("\n") ? 1 : 0);
+
+function checkSources(extension, meta) {
+  const files = sourceFiles(extension);
+  const texts = new Map(files.map((file) => [file, readFileSync(path.join(extension.dir, file), "utf8")]));
+
+  // Headers: a reviewer diffing against keiyoushi needs to know which file and commit each port
+  // came from, and the commit must follow extension.json when the port is updated.
+  const commit = meta?.upstream?.commit;
+  for (const [file, text] of texts) {
+    const where = `${extension.pkg}/${file}`;
+    const first = text.split("\n", 1)[0];
+    if (!first.startsWith("// ")) {
+      error(where, meta?.upstream ? `must start with a one-line header naming the upstream file and commit, such as "// Port of ${meta.upstream.path}/.../X.kt @ ${commit}."` : `must start with a one-line "// " header saying what the file is`);
+      continue;
+    }
+    if (!meta?.upstream || typeof commit !== "string") continue;
+    const named = /@ ([0-9a-f]{7,40})\b/.exec(first)?.[1];
+    if (!/\b(src|lib-multisrc|lib|core|common)\/\S+/.test(first) || !named) {
+      error(where, `the first line must name the upstream path and commit, such as "// Port of ${meta.upstream.path}/.../X.kt @ ${commit}."`);
+    } else if (!named.startsWith(commit) && !commit.startsWith(named)) {
+      error(where, `the header names upstream commit ${named}, but extension.json says ${commit}; update the header when you update the port`);
+    }
+  }
+
+  // Placeholders `npm run new` leaves for the contributor.
+  for (const [file, text] of texts) {
+    const lines = text.split("\n").flatMap((line, index) => (line.includes(TODO_MARKER) ? [index + 1] : []));
+    if (lines.length) error(`${extension.pkg}/${file}`, `${TODO_MARKER} placeholders from the template are left on line ${lines.join(", ")}`);
+  }
+
+  // Files nothing imports are never bundled (and so never run).
+  const reached = new Set();
+  const visit = (file) => {
+    if (reached.has(file) || !texts.has(file)) return;
+    reached.add(file);
+    for (const match of texts.get(file).matchAll(/(?:from|import)\s*\(?\s*["']\.\/([\w.-]+?)(?:\.ts|\.js)?["']/g)) visit(`${match[1]}.ts`);
+  };
+  visit("index.ts");
+  for (const file of files) {
+    if (!reached.has(file)) warn(`${extension.pkg}/${file}`, "not imported from index.ts (directly or through another file), so it is not in the bundle");
+  }
+
+  // Unit tests only run when named <anything>.test.mjs.
+  for (const name of readdirSync(extension.dir)) {
+    if (/\.(test|spec)\.(js|cjs|ts|mts)$|\.spec\.mjs$/.test(name)) {
+      error(`${extension.pkg}/${name}`, "never runs: npm test only runs src/**/*.test.mjs files");
+    }
+  }
+
+  // The standalone layout (docs/ADDING-A-SOURCE.md#the-layout). Warnings: a reviewer's hint, not a rule.
+  if (!texts.has("index.ts") || themeOf(extension)) return;
+  const indexLines = lineCount(texts.get("index.ts"));
+  if (indexLines <= SINGLE_FILE_LINES) return;
+  const hints = [];
+  if (indexLines > INDEX_MAX_LINES) hints.push(`over ${INDEX_MAX_LINES} lines`);
+  const missing = ["api.ts", "parse.ts"].filter((file) => !texts.has(file));
+  if (missing.length) hints.push(`no ${missing.join(" or ")}`);
+  if (/new (ListPreference|MultiSelectListPreference|EditTextPreference|SwitchPreferenceCompat)\(/.test(texts.get("index.ts")) && !texts.has("settings.ts")) {
+    hints.push("settings built inline instead of in settings.ts");
+  }
+  if (hints.length) {
+    warn(`${extension.pkg}/index.ts`, `${indexLines} lines: ${hints.join(", ")}; split it into the standard layout (docs/ADDING-A-SOURCE.md#the-layout)`);
+  }
+}
+
 // tests.json
 
 function checkExpect(where, expect) {
@@ -96,6 +177,10 @@ function checkTests(extension) {
     error(where, `not valid JSON (${cause.message})`);
     return;
   }
+  // A misspelt key ("case", "tests") is silently ignored by both test runners: its cases never run.
+  for (const key of Object.keys(spec)) {
+    if (!TESTS_KEYS.has(key)) error(where, `unknown key "${key}": only ${[...TESTS_KEYS].join(", ")} are read, so anything under it never runs`);
+  }
   for (const route of spec.routes ?? []) {
     if (typeof route.url !== "string" || !/^https?:\/\//.test(route.url)) error(where, `route URL ${JSON.stringify(route.url)} is not absolute`);
     if (route.match !== undefined && route.match !== "prefix") error(where, `route match must be "prefix" or absent, not ${JSON.stringify(route.match)}`);
@@ -112,6 +197,16 @@ function checkTests(extension) {
       names.add(testCase.name);
       if (!TEST_CALLS.includes(testCase.call)) error(label, `unknown call ${testCase.call} (the app knows ${TEST_CALLS.join(", ")})`);
       if (testCase.args !== undefined && !Array.isArray(testCase.args)) error(label, `"args" must be an array`);
+      for (const key of Object.keys(testCase)) {
+        if (!CASE_KEYS.has(key)) error(label, `unknown key "${key}" (a case has ${[...CASE_KEYS].join(", ")}); the runners ignore it`);
+      }
+      if (testCase.source !== undefined && !(Number.isInteger(testCase.source) && testCase.source >= 0)) error(label, `"source" must be a source index (0, 1, …)`);
+      // A case without expectations passes whatever the source returns.
+      if (testCase.expect && typeof testCase.expect === "object" && Object.keys(testCase.expect).length === 0) error(label, `"expect" is empty, so the case checks nothing`);
+      if (testCase.expect === undefined) {
+        error(label, `no "expect", so the case checks nothing`);
+        continue;
+      }
       // The apps' conformance tests search with the default filters; filter states in args[2]
       // would only apply in Node, so the case would pass here and hit an unrouted URL there.
       if (testCase.call === "search" && Array.isArray(testCase.args) && testCase.args.length > 2) {
@@ -221,8 +316,9 @@ function checkAgainstPublished(index, published) {
 
 const extensions = findExtensions();
 for (const extension of extensions) {
-  checkExtensionJson(extension);
+  const meta = checkExtensionJson(extension);
   checkFiles(extension);
+  checkSources(extension, meta);
   checkTests(extension);
   scanForPrivateData(extension);
 }
