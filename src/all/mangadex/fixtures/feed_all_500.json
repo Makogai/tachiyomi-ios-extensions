@@ -1,0 +1,366 @@
+{
+ "result": "ok",
+ "response": "collection",
+ "data": [
+  {
+   "id": "ce7c49ba-46b8-4f71-82ef-97bae307c895",
+   "type": "chapter",
+   "attributes": {
+    "volume": "7",
+    "chapter": "65",
+    "title": "Hối hận",
+    "translatedLanguage": "vi",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2023-05-27T08:32:51+00:00",
+    "readableAt": "2023-05-27T08:32:51+00:00",
+    "createdAt": "2023-05-27T08:32:50+00:00",
+    "updatedAt": "2023-05-28T09:43:27+00:00",
+    "version": 4,
+    "pages": 18
+   },
+   "relationships": [
+    {
+     "id": "305b8326-5e7d-4777-a0d2-4d13f4c1387c",
+     "type": "scanlation_group",
+     "attributes": {
+      "name": "Eklove",
+      "altNames": [],
+      "locked": false,
+      "website": "https://www.facebook.com/eklov3",
+      "ircServer": null,
+      "ircChannel": null,
+      "discord": null,
+      "contactEmail": null,
+      "description": "",
+      "twitter": null,
+      "mangaUpdates": null,
+      "focusedLanguages": [],
+      "official": false,
+      "verified": false,
+      "inactive": false,
+      "publishDelay": null,
+      "exLicensed": false,
+      "createdAt": "2023-05-27T07:17:30+00:00",
+      "updatedAt": "2023-05-27T07:17:30+00:00",
+      "version": 1
+     }
+    },
+    {
+     "id": "3ca30ce1-2946-48d7-8f2b-e2f13c84051a",
+     "type": "scanlation_group",
+     "attributes": {
+      "name": "BFANG Team",
+      "altNames": [],
+      "locked": false,
+      "website": "https://www.facebook.com/Bfangteam",
+      "ircServer": null,
+      "ircChannel": null,
+      "discord": "uZ8aNXk",
+      "contactEmail": null,
+      "description": "Kế nghiệp AFANG Team",
+      "twitter": null,
+      "mangaUpdates": null,
+      "focusedLanguages": [
+       "vi"
+      ],
+      "official": false,
+      "verified": false,
+      "inactive": false,
+      "publishDelay": null,
+      "exLicensed": false,
+      "createdAt": "2023-05-27T07:13:19+00:00",
+      "updatedAt": "2024-10-05T19:17:08+00:00",
+      "version": 4
+     }
+    },
+    {
+     "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000021",
+     "type": "user",
+     "attributes": {
+      "username": "Uploader 21",
+      "roles": [],
+      "version": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "8904eaf7-5846-41dd-aeeb-bb7d1568fffb",
+   "type": "chapter",
+   "attributes": {
+    "volume": "7",
+    "chapter": "64",
+    "title": "Gatilho",
+    "translatedLanguage": "pt-br",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2021-12-23T21:22:19+00:00",
+    "readableAt": "2021-12-23T21:22:19+00:00",
+    "createdAt": "2021-12-23T21:22:18+00:00",
+    "updatedAt": "2022-04-02T18:08:07+00:00",
+    "version": 4,
+    "pages": 19
+   },
+   "relationships": [
+    {
+     "id": "73872b0e-0d1a-45f6-95f6-23ee5ef774e2",
+     "type": "scanlation_group",
+     "attributes": {
+      "name": "Senryuu Scans",
+      "altNames": [],
+      "locked": true,
+      "website": "",
+      "ircServer": "",
+      "ircChannel": null,
+      "discord": "CJFjR7u",
+      "contactEmail": "senryuuscans@gmail.com",
+      "description": "",
+      "twitter": "https://twitter.com/SenryuuS",
+      "mangaUpdates": null,
+      "focusedLanguages": [
+       "pt-br"
+      ],
+      "official": false,
+      "verified": false,
+      "inactive": false,
+      "publishDelay": null,
+      "exLicensed": false,
+      "createdAt": "2021-04-19T21:45:59+00:00",
+      "updatedAt": "2025-05-10T14:21:30+00:00",
+      "version": 9
+     }
+    },
+    {
+     "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000022",
+     "type": "user",
+     "attributes": {
+      "username": "Uploader 22",
+      "roles": [],
+      "version": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "7746fbb0-3af2-419b-b4f9-3cd9f707e353",
+   "type": "chapter",
+   "attributes": {
+    "volume": "7",
+    "chapter": "64",
+    "title": "Trigger",
+    "translatedLanguage": "en",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2021-12-04T16:10:25+00:00",
+    "readableAt": "2021-12-04T16:10:25+00:00",
+    "createdAt": "2021-12-04T16:10:25+00:00",
+    "updatedAt": "2022-02-25T08:37:01+00:00",
+    "version": 8,
+    "pages": 19
+   },
+   "relationships": [
+    {
+     "id": "9f74403c-bd6e-43c7-85f8-2d1de98d4f0f",
+     "type": "scanlation_group",
+     "attributes": {
+      "name": "Ai's fanclub",
+      "altNames": [],
+      "locked": true,
+      "website": null,
+      "ircServer": null,
+      "ircChannel": null,
+      "discord": "JhYnaY8",
+      "contactEmail": null,
+      "description": "You can come discuss Oshi no Ko over at <https://discord.gg/JhYnaY8>",
+      "twitter": null,
+      "mangaUpdates": null,
+      "focusedLanguages": [
+       "en"
+      ],
+      "official": false,
+      "verified": false,
+      "inactive": false,
+      "publishDelay": null,
+      "exLicensed": false,
+      "createdAt": "2021-04-19T21:45:59+00:00",
+      "updatedAt": "2022-05-25T19:20:24+00:00",
+      "version": 4
+     }
+    },
+    {
+     "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000017",
+     "type": "user",
+     "attributes": {
+      "username": "Uploader 17",
+      "roles": [],
+      "version": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "d37297a3-daa9-4de9-8224-ad2a428e79c8",
+   "type": "chapter",
+   "attributes": {
+    "volume": "7",
+    "chapter": "64",
+    "title": "Kích động",
+    "translatedLanguage": "vi",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2023-05-27T08:32:35+00:00",
+    "readableAt": "2023-05-27T08:32:35+00:00",
+    "createdAt": "2023-05-27T08:32:35+00:00",
+    "updatedAt": "2023-05-28T09:43:27+00:00",
+    "version": 4,
+    "pages": 19
+   },
+   "relationships": [
+    {
+     "id": "305b8326-5e7d-4777-a0d2-4d13f4c1387c",
+     "type": "scanlation_group",
+     "attributes": {
+      "name": "Eklove",
+      "altNames": [],
+      "locked": false,
+      "website": "https://www.facebook.com/eklov3",
+      "ircServer": null,
+      "ircChannel": null,
+      "discord": null,
+      "contactEmail": null,
+      "description": "",
+      "twitter": null,
+      "mangaUpdates": null,
+      "focusedLanguages": [],
+      "official": false,
+      "verified": false,
+      "inactive": false,
+      "publishDelay": null,
+      "exLicensed": false,
+      "createdAt": "2023-05-27T07:17:30+00:00",
+      "updatedAt": "2023-05-27T07:17:30+00:00",
+      "version": 1
+     }
+    },
+    {
+     "id": "3ca30ce1-2946-48d7-8f2b-e2f13c84051a",
+     "type": "scanlation_group",
+     "attributes": {
+      "name": "BFANG Team",
+      "altNames": [],
+      "locked": false,
+      "website": "https://www.facebook.com/Bfangteam",
+      "ircServer": null,
+      "ircChannel": null,
+      "discord": "uZ8aNXk",
+      "contactEmail": null,
+      "description": "Kế nghiệp AFANG Team",
+      "twitter": null,
+      "mangaUpdates": null,
+      "focusedLanguages": [
+       "vi"
+      ],
+      "official": false,
+      "verified": false,
+      "inactive": false,
+      "publishDelay": null,
+      "exLicensed": false,
+      "createdAt": "2023-05-27T07:13:19+00:00",
+      "updatedAt": "2024-10-05T19:17:08+00:00",
+      "version": 4
+     }
+    },
+    {
+     "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000021",
+     "type": "user",
+     "attributes": {
+      "username": "Uploader 21",
+      "roles": [],
+      "version": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "c6fbb63a-1a54-4f29-9116-9fedcc3fe8ba",
+   "type": "chapter",
+   "attributes": {
+    "volume": "7",
+    "chapter": "64",
+    "title": null,
+    "translatedLanguage": "es-la",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2024-10-06T05:34:11+00:00",
+    "readableAt": "2024-10-06T05:34:11+00:00",
+    "createdAt": "2024-10-06T05:34:11+00:00",
+    "updatedAt": "2024-10-06T05:34:27+00:00",
+    "version": 3,
+    "pages": 23
+   },
+   "relationships": [
+    {
+     "id": "8d0599de-b5bf-469c-a99c-5765c6d4f1e9",
+     "type": "scanlation_group",
+     "attributes": {
+      "name": "Bakaguya Scanlation.",
+      "altNames": [],
+      "locked": false,
+      "website": null,
+      "ircServer": null,
+      "ircChannel": null,
+      "discord": "sp8hKXR",
+      "contactEmail": null,
+      "description": "Traducción de Kaguya desde scans CN.",
+      "twitter": null,
+      "mangaUpdates": null,
+      "focusedLanguages": [
+       "es-la"
+      ],
+      "official": false,
+      "verified": false,
+      "inactive": false,
+      "publishDelay": null,
+      "exLicensed": false,
+      "createdAt": "2021-04-19T21:45:59+00:00",
+      "updatedAt": "2024-11-15T01:46:12+00:00",
+      "version": 4
+     }
+    },
+    {
+     "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000023",
+     "type": "user",
+     "attributes": {
+      "username": "Uploader 23",
+      "roles": [],
+      "version": 1
+     }
+    }
+   ]
+  }
+ ],
+ "limit": 500,
+ "offset": 500,
+ "total": 877
+}

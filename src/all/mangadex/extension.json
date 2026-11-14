@@ -1,0 +1,10 @@
+{
+  "name": "MangaDex",
+  "lang": "all",
+  "versionCode": 1,
+  "nsfw": true,
+  "upstream": {
+    "path": "src/all/mangadex",
+    "commit": "d9420cd1"
+  }
+}

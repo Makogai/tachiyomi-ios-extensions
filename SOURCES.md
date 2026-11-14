@@ -28,7 +28,7 @@ Port the changes, bump `versionCode` (`npm run bump -- <ext>`), and update the c
 |---|---|---|---|---|---|
 | Mangahere | `en.mangahere` | `src/en/mangahere` | — | `d9420cd1` | ported, fixture + live tests |
 | Weeb Central | `en.weebcentral` | `src/en/weebcentral` | — | `d9420cd1` | ported, fixture + live tests |
-| MangaDex | `all.mangadex` | `src/all/mangadex` | `lib:i18n` | `d9420cd1` | fixtures collected, not ported yet |
+| MangaDex | `all.mangadex` | `src/all/mangadex` | `lib:i18n` | `d9420cd1` | ported (62 languages, source IDs equal upstream's), fixture + live tests, unit tests for filters, settings and the MD@Home refresh; no login, no MD@Home reports (upstream has none) |
 | Read Comics Online | `en.readcomicsonline` | `src/en/readcomicsonline` | `lib-multisrc/mmrcms` (`sdk/themes/mmrcms`) | `d9420cd1` | ported, no fixtures (site behind a Cloudflare check; a 2026 web archive copy has an older layout); live test in the app only |
 | Comick (Unoriginal) | `all.comicklive` | `src/all/comicklive` | — | `d9420cd1` | ported, fixture + live tests |
 | Atsumaru | `en.atsumaru` | `src/en/atsumaru` | — | `d9420cd1` | ported, fixture + live tests |

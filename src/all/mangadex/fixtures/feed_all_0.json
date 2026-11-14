@@ -1,0 +1,285 @@
+{
+ "result": "ok",
+ "response": "collection",
+ "data": [
+  {
+   "id": "0e0f7a79-e43c-4f57-8b09-ef9f0d82b4cc",
+   "type": "chapter",
+   "attributes": {
+    "volume": "16",
+    "chapter": "166.5",
+    "title": "16. Cilt Ekstra Final Bölümü",
+    "translatedLanguage": "tr",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2024-12-24T17:31:41+00:00",
+    "readableAt": "2024-12-24T17:31:41+00:00",
+    "createdAt": "2024-12-24T17:22:01+00:00",
+    "updatedAt": "2024-12-24T17:31:41+00:00",
+    "version": 3,
+    "pages": 23
+   },
+   "relationships": [
+    {
+     "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000020",
+     "type": "user",
+     "attributes": {
+      "username": "Uploader 20",
+      "roles": [],
+      "version": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "3cbdca2f-fb85-4b3d-957d-543d97cf0974",
+   "type": "chapter",
+   "attributes": {
+    "volume": "16",
+    "chapter": "166.5",
+    "title": "Bonus",
+    "translatedLanguage": "fr",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2025-08-03T14:56:27+00:00",
+    "readableAt": "2025-08-03T14:56:27+00:00",
+    "createdAt": "2025-08-03T14:56:26+00:00",
+    "updatedAt": "2026-03-28T17:40:28+00:00",
+    "version": 4,
+    "pages": 19
+   },
+   "relationships": [
+    {
+     "id": "4bd5fd9a-ee2f-40ae-8551-28e49be30cd2",
+     "type": "scanlation_group",
+     "attributes": {
+      "name": "Blue Solo",
+      "altNames": [],
+      "locked": true,
+      "website": "https://www.bluesolo.org/",
+      "ircServer": null,
+      "ircChannel": null,
+      "discord": "XN3zX9f",
+      "contactEmail": "bluesoloscans@gmail.com",
+      "description": "**Le scantrad à la française.** \n\n**Projets en cours**\n[Oshi no Ko](https://mangadex.org/title/46835/oshi-no-ko)\n[Sousou no Frieren](https://mangadex.org/title/b0b721ff-c388-4486-aa0f-c2b0bb321512/sousou-no-frieren)\n[Nezumi no Hatsukoi](https://mangadex.org/title/ca33a142-58fb-4fee-88b9-36ef87f02c77/nezumi-no-hatsukoi) \n[Maria no Danzai](https://mangadex.org/title/3ad8d2f2-1afe-43da-a88b-0a790c64939e/maria-no-danzai)\n[Mujina In To The Deep](https://mangadex.org/title/03438804-f9b7-4748-be58-d120d5ffb8e6/mujina-in-to-the-deep)\n[Super Ball Girls](https://mangadex.org/title/5813825a-b729-4ce4-8dfd-54c3391f8d19/super-ball-girls)\n[Madan no Ichi](https://mangadex.org/title/dea77c2d-dbaa-434a-b0af-0c116642434c/ichi-the-witch)\n[Galaxias](https://mangadex.org/title/ac783473-e74c-4ed4-b3d7-89e50b171b5f/galaxias)\n\n**Dans l'optique d'étendre nos activités et d'augmenter notre rythme de parution, nous recrutons activement à tous les postes, en particulier :** \n- un ou plusieurs traducteurs japonais \n- des éditeurs **[URGENT]** \n- des correcteurs **[URGENT]**\n\n**Pour discuter des mangas traduits, suivre l'évolution de nos projets ou rejoindre l'équipe, ça se passe sur notre serveur Discord :** <https://discord.gg/XN3zX9f>",
+      "twitter": "https://twitter.com/BlueSoloScans",
+      "mangaUpdates": null,
+      "focusedLanguages": [
+       "fr"
+      ],
+      "official": false,
+      "verified": false,
+      "inactive": false,
+      "publishDelay": null,
+      "exLicensed": false,
+      "createdAt": "2021-04-19T21:45:59+00:00",
+      "updatedAt": "2025-06-23T19:10:36+00:00",
+      "version": 43
+     }
+    },
+    {
+     "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000016",
+     "type": "user",
+     "attributes": {
+      "username": "Uploader 16",
+      "roles": [],
+      "version": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "41a685db-2f88-44cf-81bc-d4a6a4608034",
+   "type": "chapter",
+   "attributes": {
+    "volume": "16",
+    "chapter": "166.5",
+    "title": "Volume 16 Extras",
+    "translatedLanguage": "en",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2024-12-23T07:40:48+00:00",
+    "readableAt": "2024-12-23T07:40:48+00:00",
+    "createdAt": "2024-12-23T07:40:47+00:00",
+    "updatedAt": "2024-12-23T07:41:09+00:00",
+    "version": 3,
+    "pages": 23
+   },
+   "relationships": [
+    {
+     "id": "9f74403c-bd6e-43c7-85f8-2d1de98d4f0f",
+     "type": "scanlation_group",
+     "attributes": {
+      "name": "Ai's fanclub",
+      "altNames": [],
+      "locked": true,
+      "website": null,
+      "ircServer": null,
+      "ircChannel": null,
+      "discord": "JhYnaY8",
+      "contactEmail": null,
+      "description": "You can come discuss Oshi no Ko over at <https://discord.gg/JhYnaY8>",
+      "twitter": null,
+      "mangaUpdates": null,
+      "focusedLanguages": [
+       "en"
+      ],
+      "official": false,
+      "verified": false,
+      "inactive": false,
+      "publishDelay": null,
+      "exLicensed": false,
+      "createdAt": "2021-04-19T21:45:59+00:00",
+      "updatedAt": "2022-05-25T19:20:24+00:00",
+      "version": 4
+     }
+    },
+    {
+     "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000017",
+     "type": "user",
+     "attributes": {
+      "username": "Uploader 17",
+      "roles": [],
+      "version": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "f8dfc28b-c134-4c64-9619-814cd31599dc",
+   "type": "chapter",
+   "attributes": {
+    "volume": "16",
+    "chapter": "166.5",
+    "title": "Phụ Chương",
+    "translatedLanguage": "vi",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2024-12-19T13:39:54+00:00",
+    "readableAt": "2024-12-19T13:39:54+00:00",
+    "createdAt": "2024-12-19T13:39:54+00:00",
+    "updatedAt": "2024-12-19T13:40:24+00:00",
+    "version": 3,
+    "pages": 16
+   },
+   "relationships": [
+    {
+     "id": "18c1663f-dd10-4fbf-9091-34b82fc6b1e2",
+     "type": "scanlation_group",
+     "attributes": {
+      "name": "ONKVN",
+      "altNames": [],
+      "locked": false,
+      "website": null,
+      "ircServer": null,
+      "ircChannel": null,
+      "discord": null,
+      "contactEmail": null,
+      "description": "Oshi no Ko Vietnamese TL.",
+      "twitter": null,
+      "mangaUpdates": null,
+      "focusedLanguages": [],
+      "official": false,
+      "verified": false,
+      "inactive": false,
+      "publishDelay": null,
+      "exLicensed": false,
+      "createdAt": "2024-09-20T10:58:29+00:00",
+      "updatedAt": "2024-09-20T10:58:29+00:00",
+      "version": 1
+     }
+    },
+    {
+     "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000018",
+     "type": "user",
+     "attributes": {
+      "username": "Uploader 18",
+      "roles": [],
+      "version": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "f04ed354-a533-44ed-82ca-95fdefc6deb4",
+   "type": "chapter",
+   "attributes": {
+    "volume": "16",
+    "chapter": "166.5",
+    "title": "Extras",
+    "translatedLanguage": "es-la",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2024-12-26T06:38:42+00:00",
+    "readableAt": "2024-12-26T06:38:42+00:00",
+    "createdAt": "2024-12-26T06:38:42+00:00",
+    "updatedAt": "2024-12-26T06:49:52+00:00",
+    "version": 4,
+    "pages": 19
+   },
+   "relationships": [
+    {
+     "id": "8153eaf0-6cc9-4068-ad49-2577ba498aba",
+     "type": "scanlation_group",
+     "attributes": {
+      "name": "ENCHILADAS NO SEKAI",
+      "altNames": [],
+      "locked": false,
+      "website": null,
+      "ircServer": null,
+      "ircChannel": null,
+      "discord": null,
+      "contactEmail": null,
+      "description": "Grupo de traducción de mangas al español, formado por un grupo de amigos de twiter",
+      "twitter": null,
+      "mangaUpdates": null,
+      "focusedLanguages": [
+       "es-la",
+       "en"
+      ],
+      "official": false,
+      "verified": false,
+      "inactive": false,
+      "publishDelay": null,
+      "exLicensed": false,
+      "createdAt": "2024-07-06T02:30:42+00:00",
+      "updatedAt": "2026-01-03T01:15:01+00:00",
+      "version": 4
+     }
+    },
+    {
+     "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000019",
+     "type": "user",
+     "attributes": {
+      "username": "Uploader 19",
+      "roles": [],
+      "version": 1
+     }
+    }
+   ]
+  }
+ ],
+ "limit": 500,
+ "offset": 0,
+ "total": 877
+}

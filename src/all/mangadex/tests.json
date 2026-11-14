@@ -1,0 +1,347 @@
+{
+  "routes": [
+    {
+      "url": "https://api.mangadex.org/manga?order%5BfollowedCount%5D=desc&hasAvailableChapters=true&availableTranslatedLanguage%5B%5D=en&limit=20&offset=0&includes%5B%5D=cover_art&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&createdAtSince=",
+      "file": "fixtures/popular.json",
+      "match": "prefix"
+    },
+    {
+      "url": "https://api.mangadex.org/chapter?offset=0&limit=100&translatedLanguage%5B%5D=en&order%5BpublishAt%5D=desc&includeFutureUpdates=0&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&excludedGroups%5B%5D=5fed0576-8b94-4f9a-b6a7-08eecd69800d&excludedGroups%5B%5D=06a9fecb-b608-4f19-b93c-7caab06b7f44&excludedGroups%5B%5D=8d8ecf83-8d42-4f8c-add8-60963f9f28d9&excludedGroups%5B%5D=caa63201-4a17-4b7f-95ff-ed884a2b7e60&excludedGroups%5B%5D=319c1b10-cbd0-4f55-a46e-c4ee17e65139&excludedGroups%5B%5D=4f1de6a2-f0c5-4ac5-bce5-02c7dbb67deb&includeFuturePublishAt=0&includeEmptyPages=0",
+      "file": "fixtures/latest_chapters.json"
+    },
+    {
+      "url": "https://api.mangadex.org/manga?includes%5B%5D=cover_art&limit=",
+      "file": "fixtures/latest_mangas.json",
+      "match": "prefix"
+    },
+    {
+      "url": "https://api.mangadex.org/manga?limit=20&offset=0&includes%5B%5D=cover_art&title=chainsaw&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&order%5Brelevance%5D=desc&includedTagsMode=AND&excludedTagsMode=OR",
+      "file": "fixtures/search_chainsaw.json"
+    },
+    {
+      "url": "https://api.mangadex.org/manga?ids%5B%5D=a77742b1-befd-49a4-bff5-1ad4e6b0ef7b&includes%5B%5D=cover_art&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&contentRating%5B%5D=pornographic",
+      "file": "fixtures/search_id.json"
+    },
+    {
+      "url": "https://api.mangadex.org/manga/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b?includes%5B%5D=cover_art&includes%5B%5D=author&includes%5B%5D=artist",
+      "file": "fixtures/manga.json"
+    },
+    {
+      "url": "https://api.mangadex.org/manga/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b/aggregate?translatedLanguage%5B%5D=en",
+      "file": "fixtures/aggregate_en.json"
+    },
+    {
+      "url": "https://api.mangadex.org/manga/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b/feed?includes%5B%5D=scanlation_group&includes%5B%5D=user&limit=500&offset=0&order%5Bvolume%5D=desc&order%5Bchapter%5D=desc&includeFuturePublishAt=0&translatedLanguage%5B%5D=en&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&contentRating%5B%5D=pornographic&includeUnavailable=0",
+      "file": "fixtures/feed_en.json"
+    },
+    {
+      "url": "https://api.mangadex.org/at-home/server/77fc6e02-a381-411d-ace6-4c00deacadb4",
+      "file": "fixtures/athome.json"
+    },
+    {
+      "url": "https://api.mangadex.org/manga/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b/aggregate?translatedLanguage%5B%5D=es",
+      "file": "fixtures/aggregate_es.json"
+    },
+    {
+      "url": "https://api.mangadex.org/manga/296cbc31-af1a-4b5b-a34b-fee2b4cad542/feed?includes%5B%5D=scanlation_group&includes%5B%5D=user&limit=500&offset=0&order%5Bvolume%5D=desc&order%5Bchapter%5D=desc&includeFuturePublishAt=0&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&contentRating%5B%5D=pornographic&includeUnavailable=0",
+      "file": "fixtures/feed_all_0.json"
+    },
+    {
+      "url": "https://api.mangadex.org/manga/296cbc31-af1a-4b5b-a34b-fee2b4cad542/feed?includes%5B%5D=scanlation_group&includes%5B%5D=user&limit=500&offset=500&order%5Bvolume%5D=desc&order%5Bchapter%5D=desc&includeFuturePublishAt=0&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&contentRating%5B%5D=pornographic&includeUnavailable=0",
+      "file": "fixtures/feed_all_500.json"
+    }
+  ],
+  "cases": [
+    {
+      "name": "popular (en): most followed new titles",
+      "source": 18,
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 6,
+        "hasNextPage": true,
+        "mangas.0.url": "/manga/99e912e1-ca9d-4019-8fe8-349bf814b75e",
+        "mangas.0.title": "Why Did I, An Older Women Guy, Fall In Love With The Teeny You?",
+        "mangas.0.thumbnail_url": "https://uploads.mangadex.org/covers/99e912e1-ca9d-4019-8fe8-349bf814b75e/38deac17-3daf-436a-9b3a-08afe572835d.jpg",
+        "mangas.1.title": "An Alchemist Who Started Working as a Handyman at an Inn Ends Up Living with the Inn’s Lovely Girls"
+      }
+    },
+    {
+      "name": "latest (en): chapter feed, then its manga in feed order",
+      "source": 18,
+      "call": "latest",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.0.title": "Please Tell Me! Galko-chan",
+        "mangas.0.url": "/manga/7a2f2f6b-a6a6-4149-879b-3fc2f6916549",
+        "mangas.1.title": "Steps of Sunshine and Rainbows",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "search (en): title with the default filters",
+      "source": 18,
+      "call": "search",
+      "args": [
+        1,
+        "chainsaw"
+      ],
+      "expect": {
+        "mangas.length": 6,
+        "mangas.0.title": "Saitama Chainsaw Girl",
+        "mangas.1.title": "Chainsaw Man (Official Colored)",
+        "hasNextPage": false
+      }
+    },
+    {
+      "name": "search (en): id:<uuid>",
+      "source": 18,
+      "call": "search",
+      "args": [
+        1,
+        "id:a77742b1-befd-49a4-bff5-1ad4e6b0ef7b"
+      ],
+      "expect": {
+        "mangas.length": 1,
+        "mangas.0.title": "Chainsaw Man",
+        "mangas.0.url": "/manga/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b",
+        "hasNextPage": false
+      }
+    },
+    {
+      "name": "search (en): a bare UUID",
+      "source": 18,
+      "call": "search",
+      "args": [
+        1,
+        "a77742b1-befd-49a4-bff5-1ad4e6b0ef7b"
+      ],
+      "expect": {
+        "mangas.length": 1,
+        "mangas.0.url": "/manga/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b"
+      }
+    },
+    {
+      "name": "search (en): a title page URL",
+      "source": 18,
+      "call": "search",
+      "args": [
+        1,
+        "https://mangadex.org/title/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b/chainsaw-man"
+      ],
+      "expect": {
+        "mangas.length": 1,
+        "mangas.0.title": "Chainsaw Man",
+        "mangas.0.url": "/manga/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b"
+      }
+    },
+    {
+      "name": "details (en): tags, demographic, rating, language, final chapter, status",
+      "source": 18,
+      "call": "details",
+      "args": [
+        {
+          "url": "/manga/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b",
+          "title": "Chainsaw Man"
+        }
+      ],
+      "expect": {
+        "title": "Chainsaw Man",
+        "author": "Fujimoto Tatsuki",
+        "artist": "Fujimoto Tatsuki",
+        "genre": "Gore, Award Winning, Action, Comedy, Horror, Demons, Monsters, Supernatural, Shounen, Content rating: Suggestive, Japanese",
+        "description": {
+          "contains": "Denji's life of poverty"
+        },
+        "status": 2,
+        "thumbnail_url": "https://uploads.mangadex.org/covers/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b/6e518bd1-5f60-446b-8832-bfe6bf74834b.jpg"
+      }
+    },
+    {
+      "name": "details (es): Spanish strings",
+      "source": 52,
+      "call": "details",
+      "args": [
+        {
+          "url": "/manga/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b",
+          "title": "Chainsaw Man"
+        }
+      ],
+      "expect": {
+        "title": "Chainsaw Man",
+        "genre": "Gore, Ganador de premio, Acción, Comedia, Horror, Demonios, Monstruos, Sobrenatural, Shounen, Clasificación: Sugestivo, Japanese",
+        "status": 2
+      }
+    },
+    {
+      "name": "chapters (en): skips external chapters, names groups",
+      "source": 18,
+      "call": "chapters",
+      "args": [
+        {
+          "url": "/manga/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b",
+          "title": "Chainsaw Man"
+        }
+      ],
+      "expect": {
+        "length": 8,
+        "0.url": "/chapter/77fc6e02-a381-411d-ace6-4c00deacadb4",
+        "0.name": "Vol.11 Ch.97 - Love, Love, Chainsaw.",
+        "0.scanlator": "Little Miss & Good Sir Scanlations",
+        "0.date_upload": 1607890739000,
+        "7.name": "Vol.11 Ch.90 - Super Power"
+      }
+    },
+    {
+      "name": "chapters (all): pages through the feed, language prefix, uploader fallback, joined groups",
+      "source": 0,
+      "call": "chapters",
+      "args": [
+        {
+          "url": "/manga/296cbc31-af1a-4b5b-a34b-fee2b4cad542",
+          "title": "【Oshi no Ko】"
+        }
+      ],
+      "expect": {
+        "length": 10,
+        "0.name": "Vol.16 Ch.166.5 - 16. Cilt Ekstra Final Bölümü",
+        "0.scanlator": "[tr] Uploaded by Uploader 20",
+        "2.scanlator": "[en] Ai's fanclub",
+        "5.url": "/chapter/ce7c49ba-46b8-4f71-82ef-97bae307c895",
+        "5.scanlator": "[vi] Eklove & BFANG Team",
+        "6.scanlator": "[pt-br] Senryuu Scans"
+      }
+    },
+    {
+      "name": "pages (en): MD@Home server and paths",
+      "source": 18,
+      "call": "pages",
+      "args": [
+        {
+          "url": "/chapter/77fc6e02-a381-411d-ace6-4c00deacadb4",
+          "name": "Ch.97"
+        }
+      ],
+      "expect": {
+        "length": 23,
+        "0.url": {
+          "contains": "https://cmdxd98sb0x3yprd.mangadex.network,https://api.mangadex.org/at-home/server/77fc6e02-a381-411d-ace6-4c00deacadb4,"
+        },
+        "0.imageUrl": "/data/554b6d5bcece279f439171f5a7d428c3/1-f617a51fc63f1bbfbaede21e310b3abdbedf78115fc1124b325a7e9152c8962f.png"
+      }
+    }
+  ],
+  "live": [
+    {
+      "name": "popular (en)",
+      "source": 18,
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        },
+        "mangas.0.thumbnail_url": {
+          "contains": "https://uploads.mangadex.org/covers/"
+        }
+      }
+    },
+    {
+      "name": "latest (en)",
+      "source": 18,
+      "call": "latest",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        }
+      }
+    },
+    {
+      "name": "search (en)",
+      "source": 18,
+      "call": "search",
+      "args": [
+        1,
+        "chainsaw man"
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        }
+      }
+    },
+    {
+      "name": "search by id (en)",
+      "source": 18,
+      "call": "search",
+      "args": [
+        1,
+        "id:a77742b1-befd-49a4-bff5-1ad4e6b0ef7b"
+      ],
+      "expect": {
+        "mangas.0.title": "Chainsaw Man"
+      }
+    },
+    {
+      "name": "details (en)",
+      "source": 18,
+      "call": "details",
+      "args": [
+        {
+          "url": "/manga/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b",
+          "title": "Chainsaw Man"
+        }
+      ],
+      "expect": {
+        "author": "Fujimoto Tatsuki",
+        "genre": {
+          "contains": "Action"
+        }
+      }
+    },
+    {
+      "name": "chapters (en)",
+      "source": 18,
+      "call": "chapters",
+      "args": [
+        {
+          "url": "/manga/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b",
+          "title": "Chainsaw Man"
+        }
+      ],
+      "expect": {
+        "length": {
+          "gt": 50
+        }
+      }
+    },
+    {
+      "name": "pages (en)",
+      "source": 18,
+      "call": "pages",
+      "args": [
+        {
+          "url": "/chapter/77fc6e02-a381-411d-ace6-4c00deacadb4",
+          "name": "Ch.97"
+        }
+      ],
+      "expect": {
+        "length": {
+          "gt": 10
+        },
+        "0.imageUrl": {
+          "contains": "/data/"
+        }
+      }
+    }
+  ]
+}

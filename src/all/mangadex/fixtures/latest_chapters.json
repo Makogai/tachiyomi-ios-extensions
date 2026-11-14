@@ -3,313 +3,381 @@
  "response": "collection",
  "data": [
   {
-   "id": "078b9eaa-d12b-4456-95b6-230e4eb4052e",
+   "id": "5485194e-7104-4ca5-8f3a-2f0ff1961281",
    "type": "chapter",
    "attributes": {
-    "volume": null,
-    "chapter": "16",
-    "title": "Staying cool",
-    "translatedLanguage": "en",
-    "externalUrl": null,
-    "isUnavailable": false,
-    "publishAt": "2026-11-10T19:47:48+00:00",
-    "readableAt": "2026-11-10T19:47:48+00:00",
-    "createdAt": "2026-11-10T19:47:48+00:00",
-    "updatedAt": "2026-11-10T19:47:55+00:00",
-    "version": 3,
-    "pages": 2
-   },
-   "relationships": [
-    {
-     "id": "ac0ba2a0-7683-4c32-bb50-c6976daa5a7b",
-     "type": "scanlation_group"
-    },
-    {
-     "id": "0ff067de-2abb-424c-ac6a-ec6463fbdaa7",
-     "type": "manga"
-    },
-    {
-     "id": "00fd2522-b075-458c-9e6e-b768d1610047",
-     "type": "user"
-    }
-   ]
-  },
-  {
-   "id": "a727bad9-ea26-4485-9701-32a1033efb1a",
-   "type": "chapter",
-   "attributes": {
-    "volume": null,
-    "chapter": "15",
-    "title": "Mondays",
-    "translatedLanguage": "en",
-    "externalUrl": null,
-    "isUnavailable": false,
-    "publishAt": "2026-11-10T19:39:30+00:00",
-    "readableAt": "2026-11-10T19:39:30+00:00",
-    "createdAt": "2026-11-10T19:39:30+00:00",
-    "updatedAt": "2026-11-10T19:39:32+00:00",
-    "version": 3,
-    "pages": 1
-   },
-   "relationships": [
-    {
-     "id": "ac0ba2a0-7683-4c32-bb50-c6976daa5a7b",
-     "type": "scanlation_group"
-    },
-    {
-     "id": "0ff067de-2abb-424c-ac6a-ec6463fbdaa7",
-     "type": "manga"
-    },
-    {
-     "id": "00fd2522-b075-458c-9e6e-b768d1610047",
-     "type": "user"
-    }
-   ]
-  },
-  {
-   "id": "45eeb778-4900-4cab-9252-33d323fa3c76",
-   "type": "chapter",
-   "attributes": {
-    "volume": "3",
-    "chapter": "23",
-    "title": "Damaged Goods",
-    "translatedLanguage": "en",
-    "externalUrl": null,
-    "isUnavailable": false,
-    "publishAt": "2026-11-10T19:35:03+00:00",
-    "readableAt": "2026-11-10T19:35:03+00:00",
-    "createdAt": "2026-11-10T19:35:02+00:00",
-    "updatedAt": "2026-11-10T19:36:12+00:00",
-    "version": 3,
-    "pages": 11
-   },
-   "relationships": [
-    {
-     "id": "42060735-a373-465a-a7a9-0fee5db73e3e",
-     "type": "manga"
-    },
-    {
-     "id": "98209555-d09e-483b-8c6c-b753b4943a5e",
-     "type": "user"
-    }
-   ]
-  },
-  {
-   "id": "a2200319-69c4-4437-b2ea-a08e37e01bd4",
-   "type": "chapter",
-   "attributes": {
-    "volume": null,
-    "chapter": "14",
-    "title": "Maneki neko",
-    "translatedLanguage": "en",
-    "externalUrl": null,
-    "isUnavailable": false,
-    "publishAt": "2026-11-10T19:34:45+00:00",
-    "readableAt": "2026-11-10T19:34:45+00:00",
-    "createdAt": "2026-11-10T19:34:45+00:00",
-    "updatedAt": "2026-11-10T19:34:48+00:00",
-    "version": 3,
-    "pages": 1
-   },
-   "relationships": [
-    {
-     "id": "ac0ba2a0-7683-4c32-bb50-c6976daa5a7b",
-     "type": "scanlation_group"
-    },
-    {
-     "id": "0ff067de-2abb-424c-ac6a-ec6463fbdaa7",
-     "type": "manga"
-    },
-    {
-     "id": "00fd2522-b075-458c-9e6e-b768d1610047",
-     "type": "user"
-    }
-   ]
-  },
-  {
-   "id": "6376b8ec-7d4c-4b12-93db-072272138034",
-   "type": "chapter",
-   "attributes": {
-    "volume": null,
-    "chapter": "3",
-    "title": "W.S.A.",
-    "translatedLanguage": "en",
-    "externalUrl": null,
-    "isUnavailable": false,
-    "publishAt": "2026-11-10T19:31:56+00:00",
-    "readableAt": "2026-11-10T19:31:56+00:00",
-    "createdAt": "2026-11-10T19:31:55+00:00",
-    "updatedAt": "2026-11-10T19:32:24+00:00",
-    "version": 3,
-    "pages": 14
-   },
-   "relationships": [
-    {
-     "id": "382871e2-8b72-4381-8a92-52d1dd53f231",
-     "type": "manga"
-    },
-    {
-     "id": "9668bbff-48f9-4d64-9d07-f38385a50c91",
-     "type": "user"
-    }
-   ]
-  },
-  {
-   "id": "024110db-bd5e-4786-99b5-182da80166ce",
-   "type": "chapter",
-   "attributes": {
-    "volume": null,
-    "chapter": "1",
+    "volume": "6",
+    "chapter": "111.5",
     "title": null,
     "translatedLanguage": "en",
     "externalUrl": null,
     "isUnavailable": false,
-    "publishAt": "2026-11-10T19:23:38+00:00",
-    "readableAt": "2026-11-10T19:23:38+00:00",
-    "createdAt": "2026-11-10T19:23:38+00:00",
-    "updatedAt": "2026-11-10T19:23:55+00:00",
+    "publishAt": "2026-11-14T17:47:37+00:00",
+    "readableAt": "2026-11-14T17:47:37+00:00",
+    "createdAt": "2026-11-14T17:47:36+00:00",
+    "updatedAt": "2026-11-14T17:48:08+00:00",
     "version": 3,
-    "pages": 50
+    "pages": 7
    },
    "relationships": [
     {
-     "id": "71321300-d76c-4a0f-81a9-84918fc08f06",
+     "id": "3b3f9e37-cdb1-43a0-a7a4-ea8ebf0ed1a8",
      "type": "scanlation_group"
     },
     {
-     "id": "8172c21a-ec76-4088-bf88-b7ee0dd33702",
+     "id": "7a2f2f6b-a6a6-4149-879b-3fc2f6916549",
      "type": "manga"
     },
     {
-     "id": "cbc9ad2e-5c73-4ebb-8449-cc588d28246e",
+     "id": "00000000-0000-4000-8000-000000000001",
      "type": "user"
     }
    ]
   },
   {
-   "id": "9a2a595c-c00e-4adb-847b-0a436b5bd1a0",
+   "id": "a1672a2c-ff5b-4823-9f22-771765578a44",
    "type": "chapter",
    "attributes": {
     "volume": null,
-    "chapter": "13",
-    "title": "Raining",
+    "chapter": null,
+    "title": null,
     "translatedLanguage": "en",
     "externalUrl": null,
     "isUnavailable": false,
-    "publishAt": "2026-11-10T19:22:21+00:00",
-    "readableAt": "2026-11-10T19:22:21+00:00",
-    "createdAt": "2026-11-10T19:22:21+00:00",
-    "updatedAt": "2026-11-10T19:22:25+00:00",
+    "publishAt": "2026-11-14T17:40:56+00:00",
+    "readableAt": "2026-11-14T17:40:56+00:00",
+    "createdAt": "2026-11-14T17:40:56+00:00",
+    "updatedAt": "2026-11-14T17:48:36+00:00",
     "version": 3,
-    "pages": 6
+    "pages": 185
    },
    "relationships": [
     {
-     "id": "ac0ba2a0-7683-4c32-bb50-c6976daa5a7b",
+     "id": "c8325bd5-e1ee-4d92-867f-2b217b0b2332",
      "type": "scanlation_group"
     },
     {
-     "id": "0ff067de-2abb-424c-ac6a-ec6463fbdaa7",
+     "id": "811a754c-83b1-4980-9763-95e503f53cb3",
      "type": "manga"
     },
     {
-     "id": "00fd2522-b075-458c-9e6e-b768d1610047",
+     "id": "00000000-0000-4000-8000-000000000002",
      "type": "user"
     }
    ]
   },
   {
-   "id": "4b621fad-3a2a-4208-ba01-2ed512310963",
+   "id": "bc5b692e-5292-41ba-965c-b59f729a053c",
    "type": "chapter",
    "attributes": {
     "volume": null,
-    "chapter": "1471",
-    "title": "Some Proof",
+    "chapter": "12",
+    "title": null,
     "translatedLanguage": "en",
     "externalUrl": null,
     "isUnavailable": false,
-    "publishAt": "2026-11-10T19:21:27+00:00",
-    "readableAt": "2026-11-10T19:21:27+00:00",
-    "createdAt": "2026-11-10T19:21:27+00:00",
-    "updatedAt": "2026-11-10T19:21:42+00:00",
+    "publishAt": "2026-11-14T17:27:07+00:00",
+    "readableAt": "2026-11-14T17:27:07+00:00",
+    "createdAt": "2026-11-14T17:27:07+00:00",
+    "updatedAt": "2026-11-14T17:27:20+00:00",
+    "version": 3,
+    "pages": 34
+   },
+   "relationships": [
+    {
+     "id": "151f8626-0ccd-4625-86f0-4421017ce04d",
+     "type": "scanlation_group"
+    },
+    {
+     "id": "f89a1c2c-64fc-474c-b631-b7305450fd4a",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000003",
+     "type": "user"
+    }
+   ]
+  },
+  {
+   "id": "46905a61-dc18-4670-85e9-09628a82975a",
+   "type": "chapter",
+   "attributes": {
+    "volume": null,
+    "chapter": "23.1",
+    "title": "Wake-Up Prank: Bonus Chapter",
+    "translatedLanguage": "en",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2026-11-14T17:23:42+00:00",
+    "readableAt": "2026-11-14T17:23:42+00:00",
+    "createdAt": "2026-11-14T17:23:41+00:00",
+    "updatedAt": "2026-11-14T17:23:59+00:00",
+    "version": 3,
+    "pages": 5
+   },
+   "relationships": [
+    {
+     "id": "69567ec2-be6c-44ef-a390-2b2d6dd83ee6",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000004",
+     "type": "user"
+    }
+   ]
+  },
+  {
+   "id": "b6b51554-590d-4b83-87ef-5d0a60c79406",
+   "type": "chapter",
+   "attributes": {
+    "volume": "1",
+    "chapter": "39",
+    "title": "This bug doesn't settle down",
+    "translatedLanguage": "en",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2026-11-14T17:16:28+00:00",
+    "readableAt": "2026-11-14T17:16:28+00:00",
+    "createdAt": "2026-11-14T17:16:28+00:00",
+    "updatedAt": "2026-11-14T17:17:13+00:00",
     "version": 3,
     "pages": 4
    },
    "relationships": [
     {
-     "id": "7fb1766f-51a7-44cc-a4e1-bd569a59b363",
+     "id": "78b7a20e-be8a-4d65-af93-b861871b566b",
      "type": "scanlation_group"
     },
     {
-     "id": "366dcef2-11ac-4ec0-9d75-967638f211a7",
+     "id": "d7e6e960-35aa-4748-9d0a-249c552ed505",
      "type": "manga"
     },
     {
-     "id": "641932fb-751e-4fac-9793-3f711173fd6b",
+     "id": "00000000-0000-4000-8000-000000000005",
      "type": "user"
     }
    ]
   },
   {
-   "id": "fe7196a7-81bd-43ea-8df3-126b4b7c7975",
+   "id": "7d31f1f0-74f2-4a26-b26f-a23f011e56d1",
    "type": "chapter",
    "attributes": {
-    "volume": "3",
-    "chapter": "18.5",
-    "title": null,
+    "volume": "20",
+    "chapter": "151",
+    "title": "A Domitor's Mindset",
     "translatedLanguage": "en",
     "externalUrl": null,
     "isUnavailable": false,
-    "publishAt": "2026-11-10T18:50:17+00:00",
-    "readableAt": "2026-11-10T18:50:17+00:00",
-    "createdAt": "2026-11-10T18:50:16+00:00",
-    "updatedAt": "2026-11-10T18:50:22+00:00",
+    "publishAt": "2026-11-14T17:11:13+00:00",
+    "readableAt": "2026-11-14T17:11:13+00:00",
+    "createdAt": "2026-11-14T17:11:13+00:00",
+    "updatedAt": "2026-11-14T17:11:31+00:00",
     "version": 3,
-    "pages": 2
+    "pages": 21
    },
    "relationships": [
     {
-     "id": "fe83a92d-5de4-4a6b-bf03-91622aa0602b",
+     "id": "48443c3a-c7f2-4cc4-a30c-cd434f22b453",
      "type": "scanlation_group"
     },
     {
-     "id": "7f179f8e-f169-43bc-acc3-61f0a9e93c83",
+     "id": "8de2456c-95ef-4958-8f27-af7a4cc275b7",
      "type": "manga"
     },
     {
-     "id": "4ff1d641-60c4-485e-b316-0c8db52a3137",
+     "id": "00000000-0000-4000-8000-000000000006",
      "type": "user"
     }
    ]
   },
   {
-   "id": "78daa124-73fb-4780-ac9e-c0d5a7cd6b93",
+   "id": "5637d6e8-017a-4010-a426-c131503db9a6",
    "type": "chapter",
    "attributes": {
-    "volume": "3",
-    "chapter": "18",
+    "volume": "10",
+    "chapter": "43",
+    "title": "Trending God, Part 5",
+    "translatedLanguage": "en",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2026-11-14T17:04:31+00:00",
+    "readableAt": "2026-11-14T17:04:31+00:00",
+    "createdAt": "2026-11-14T17:04:30+00:00",
+    "updatedAt": "2026-11-14T17:04:45+00:00",
+    "version": 3,
+    "pages": 19
+   },
+   "relationships": [
+    {
+     "id": "6c9424fc-f012-4ea2-a8b3-4b4739ceefdb",
+     "type": "scanlation_group"
+    },
+    {
+     "id": "16a16845-90d1-4895-b2b8-4895624588c7",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000007",
+     "type": "user"
+    }
+   ]
+  },
+  {
+   "id": "d593b6a7-96ef-4bea-b05d-953e61cee004",
+   "type": "chapter",
+   "attributes": {
+    "volume": null,
+    "chapter": "19.2",
     "title": null,
     "translatedLanguage": "en",
     "externalUrl": null,
     "isUnavailable": false,
-    "publishAt": "2026-11-10T18:49:09+00:00",
-    "readableAt": "2026-11-10T18:49:09+00:00",
-    "createdAt": "2026-11-10T18:49:09+00:00",
-    "updatedAt": "2026-11-10T18:49:46+00:00",
+    "publishAt": "2026-11-14T17:02:02+00:00",
+    "readableAt": "2026-11-14T17:02:02+00:00",
+    "createdAt": "2026-11-14T17:02:02+00:00",
+    "updatedAt": "2026-11-14T17:02:22+00:00",
     "version": 3,
-    "pages": 39
+    "pages": 15
    },
    "relationships": [
     {
-     "id": "fe83a92d-5de4-4a6b-bf03-91622aa0602b",
+     "id": "6121e674-16cf-4d46-893a-f5fe4aac4a05",
      "type": "scanlation_group"
     },
     {
-     "id": "7f179f8e-f169-43bc-acc3-61f0a9e93c83",
+     "id": "e1dab458-caeb-49c3-acb5-78f06fe392b7",
      "type": "manga"
     },
     {
-     "id": "4ff1d641-60c4-485e-b316-0c8db52a3137",
+     "id": "00000000-0000-4000-8000-000000000008",
+     "type": "user"
+    }
+   ]
+  },
+  {
+   "id": "25ebf41d-38f8-4cb4-ad12-530fc3be2539",
+   "type": "chapter",
+   "attributes": {
+    "volume": null,
+    "chapter": "62",
+    "title": null,
+    "translatedLanguage": "en",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2026-11-14T16:58:48+00:00",
+    "readableAt": "2026-11-14T16:58:48+00:00",
+    "createdAt": "2026-11-14T16:58:40+00:00",
+    "updatedAt": "2026-11-14T16:59:06+00:00",
+    "version": 3,
+    "pages": 19
+   },
+   "relationships": [
+    {
+     "id": "3af6c542-ebe4-43ff-8016-ed6866fb5020",
+     "type": "scanlation_group"
+    },
+    {
+     "id": "3f161fa4-ddee-4d40-8fbb-9e2f3cce2287",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000009",
+     "type": "user"
+    }
+   ]
+  },
+  {
+   "id": "1bba23b3-b334-43ea-b0a0-6a652244f258",
+   "type": "chapter",
+   "attributes": {
+    "volume": null,
+    "chapter": "6",
+    "title": null,
+    "translatedLanguage": "en",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2026-11-14T16:53:07+00:00",
+    "readableAt": "2026-11-14T16:53:07+00:00",
+    "createdAt": "2026-11-14T16:53:06+00:00",
+    "updatedAt": "2026-11-14T16:55:04+00:00",
+    "version": 3,
+    "pages": 33
+   },
+   "relationships": [
+    {
+     "id": "5d02ef99-2628-43b3-9a75-f55d22ff0fc9",
+     "type": "scanlation_group"
+    },
+    {
+     "id": "2e667660-eeea-45fa-adb1-809a2af98cba",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000010",
+     "type": "user"
+    }
+   ]
+  },
+  {
+   "id": "c4d32e5e-fbf0-471a-b0ff-216b0ef17d1e",
+   "type": "chapter",
+   "attributes": {
+    "volume": "1",
+    "chapter": "9",
+    "title": null,
+    "translatedLanguage": "en",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2026-11-14T16:47:48+00:00",
+    "readableAt": "2026-11-14T16:47:48+00:00",
+    "createdAt": "2026-11-14T16:47:47+00:00",
+    "updatedAt": "2026-11-14T16:57:45+00:00",
+    "version": 4,
+    "pages": 19
+   },
+   "relationships": [
+    {
+     "id": "24b8387f-e9df-4b39-b97f-5d929f8663e3",
+     "type": "scanlation_group"
+    },
+    {
+     "id": "4486538a-7106-499b-88dd-48b72aee61b7",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000011",
+     "type": "user"
+    }
+   ]
+  },
+  {
+   "id": "f6d4607f-4cae-4c3e-8b6f-9d2fbfd4fe14",
+   "type": "chapter",
+   "attributes": {
+    "volume": null,
+    "chapter": "4.2",
+    "title": null,
+    "translatedLanguage": "en",
+    "externalUrl": null,
+    "isUnavailable": false,
+    "publishAt": "2026-11-14T16:47:02+00:00",
+    "readableAt": "2026-11-14T16:47:02+00:00",
+    "createdAt": "2026-11-14T16:47:01+00:00",
+    "updatedAt": "2026-11-14T16:47:34+00:00",
+    "version": 3,
+    "pages": 14
+   },
+   "relationships": [
+    {
+     "id": "1563e1d1-d46a-46b9-a660-ab4768f7982e",
+     "type": "scanlation_group"
+    },
+    {
+     "id": "8870f9d6-d4f9-4f23-b9e2-410aa2b8bdb6",
+     "type": "manga"
+    },
+    {
+     "id": "00000000-0000-4000-8000-000000000012",
      "type": "user"
     }
    ]
@@ -317,5 +385,5 @@
  ],
  "limit": 100,
  "offset": 0,
- "total": 772021
+ "total": 760594
 }
