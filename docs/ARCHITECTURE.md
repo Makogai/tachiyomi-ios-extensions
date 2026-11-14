@@ -18,7 +18,7 @@ src/<lang>/<name>/index.ts ──► esbuild ──► dist/<pkg>.js ──► C
 | Runtime | `sdk/src/runtime.ts` | `defineExtension([...])`: the `__extension.default` object the app calls (`describe`, `invoke`, `rateLimitFor`, `cookiesFor`). Turns errors into "Source (EN) method failed: …" and logs them through the host. |
 | SDK | `sdk/src/*.ts` | The Kotlin API in TypeScript: `KeiSource`, models (`SManga`, `SChapter`, `Page`), filters, preferences, `HttpClient`/`Fetch`/`FormBody`, OkHttp's `HttpUrl`, Jsoup-style `Element`, Kotlin string helpers, dates, `Intl`, crypto, the filter-data cache, common settings. Import everything from `"@sdk"`. |
 | Themes | `sdk/themes/<theme>/` | Ports of keiyoushi's `lib-multisrc` (Madara, MangaThemesia, MMRCMS). A site on a theme is a subclass with a few overrides. Import from `"@sdk/themes/<theme>"`. Each theme has a `theme.json` (base class, upstream path and the commit it was ported from). |
-| Extensions | `src/<lang>/<name>/` | One port each: `extension.json`, `index.ts` (plus any `filters.ts`, `dto.ts` …), `icon.png`, `fixtures/`, `tests.json`. |
+| Extensions | `src/<lang>/<name>/` | One port each: `extension.json`, `index.ts` (plus any `filters.ts`, `dto.ts` …), `icon.png`, `fixtures/`, `tests.json`, and optionally a Node unit test `<name>.test.mjs`. |
 | Tooling | `scripts/` | Build, Node harness, validation, scaffolding, debugging, maintenance. Plain Node ESM, no build step. |
 
 ### SDK files

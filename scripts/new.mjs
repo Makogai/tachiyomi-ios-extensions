@@ -36,7 +36,10 @@ const { values: flags } = parseArgs({
 const themes = readdirSync(themesDir).filter((dir) => existsSync(path.join(themesDir, dir, "theme.json")));
 const themeInfo = (theme) => JSON.parse(readFileSync(path.join(themesDir, theme, "theme.json"), "utf8"));
 
-// Answers come from the terminal, or, when stdin is piped, one per line in order.
+// Answers come from the terminal, or, when stdin is piped, one per line in order. With --upstream
+// and no terminal (scripts, agents, CI), upstream's values are used without asking, since reading
+// a stdin that never closes would hang.
+if (flags.upstream && !process.stdin.isTTY) flags.yes = true;
 const piped = !flags.yes && !process.stdin.isTTY ? (await new Response(process.stdin).text()).split("\n") : null;
 const rl = flags.yes || piped ? null : createInterface({ input: process.stdin, output: process.stdout });
 async function ask(question, fallback) {
@@ -61,14 +64,15 @@ if (upstreamPath) {
   const gradle = (await readUpstreamFile(`${upstreamPath}/build.gradle.kts`)) ?? (await readUpstreamFile(`${upstreamPath}/build.gradle`));
   if (!gradle) fail(`No build.gradle(.kts) at ${upstreamPath} (looked in ${localCheckout() ?? "GitHub"}).`);
   upstream = parseGradle(gradle);
-  if (upstream.sources.length > 1) console.log(`Upstream declares ${upstream.sources.length} sources; the template has the first. Add the rest to defineExtension([...]).`);
+  if (upstream.sources.length > 1) console.log(`Upstream declares ${upstream.sources.length} sources (${upstream.sources.map((source) => source.lang).join(", ")}); the template makes one per language.`);
 }
 const firstSource = upstream?.sources[0] ?? {};
+const multiLangs = upstream && upstream.sources.length > 1 && upstream.sources.every((source) => source.lang && !source.id && !source.name) ? upstream.sources.map((source) => source.lang) : null;
 
 // 2. The answers.
 const name = flags.name ?? (await ask("Source name", firstSource.name ?? upstream?.name ?? undefined));
 if (!name) fail("A name is required (--name).");
-const lang = flags.lang ?? (await ask("Language (en, all, pt-BR, …)", firstSource.lang ?? upstreamPath?.split("/")[1] ?? "en"));
+const lang = flags.lang ?? (multiLangs ? "all" : await ask("Language (en, all, pt-BR, …)", firstSource.lang ?? upstreamPath?.split("/")[1] ?? "en"));
 const baseUrl = (flags["base-url"] ?? (await ask("Base URL", firstSource.baseUrl ?? undefined))).replace(/\/+$/, "");
 if (!/^https?:\/\/[^/]+$/.test(baseUrl)) fail(`Base URL must look like https://example.com, not '${baseUrl}'.`);
 let theme = flags.theme ?? upstream?.theme ?? (await ask(`Theme (${themes.join(", ")}, or none)`, "none"));
@@ -96,9 +100,12 @@ if (upstreamPath && !commit) {
 rl?.close();
 
 const dir = path.join(srcDir, langDir, pkgName);
-if (existsSync(dir)) fail(`${path.relative(process.cwd(), dir)} already exists.`);
+// A folder started earlier (fixtures, translations) but without extension.json is filled in;
+// files already there are kept.
+const started = existsSync(dir) && !existsSync(path.join(dir, "extension.json"));
+if (existsSync(dir) && !started) fail(`${path.relative(process.cwd(), dir)} already exists.`);
 if (findExtensions().some((extension) => extension.pkg === pkg)) fail(`${pkg} already exists.`);
-const id = fixedId ?? generateId(name, lang, versionId);
+const id = fixedId ?? generateId(name, multiLangs?.[0] ?? lang, versionId);
 
 // 3. Files.
 const className = name.replace(/[^A-Za-z0-9]+(.)?/g, (_, next) => (next ?? "").toUpperCase()).replace(/^[a-z]/, (c) => c.toUpperCase()).replace(/^(\d)/, "S$1");
@@ -106,7 +113,18 @@ const header = upstreamPath
   ? `// Port of ${upstreamPath} @ ${commit ?? "<commit>"}${theme ? ` (theme: sdk/themes/${theme})` : ""}. Method names follow the original.`
   : `// ${name}${theme ? ` on sdk/themes/${theme}` : ""}.`;
 const idLines = [fixedId ? `  override readonly id = "${fixedId}";` : null, versionId !== 1 ? `  override readonly versionId = ${versionId};` : null].filter(Boolean);
-const sourceFields = [`  readonly name = ${JSON.stringify(name)};`, `  readonly lang = ${JSON.stringify(lang)};`, `  readonly baseUrl = ${JSON.stringify(baseUrl)};`, ...idLines].join("\n");
+const sourceFields = [
+  `  readonly name = ${JSON.stringify(name)};`,
+  ...(multiLangs ? [] : [`  readonly lang = ${JSON.stringify(lang)};`]),
+  `  readonly baseUrl = ${JSON.stringify(baseUrl)};`,
+  ...idLines,
+  ...(multiLangs ? ["", "  constructor(readonly lang: string) {", "    super();", "  }"] : []),
+].join("\n");
+// One source per upstream language: each ID comes from "<name>/<lang>/<versionId>", as upstream's.
+const langsConst = multiLangs
+  ? `\n// Upstream's languages, in its order. Each is part of that source's ID: never rename one.\nconst LANGS = [\n${multiLangs.map((l) => `  ${JSON.stringify(l)},`).join("\n")}\n];\n`
+  : "";
+const sourcesList = multiLangs ? `LANGS.map((lang) => new ${className}(lang))` : `[new ${className}()]`;
 
 let indexTs;
 if (theme) {
@@ -115,12 +133,13 @@ if (theme) {
 import { defineExtension } from "@sdk";
 import { ${info.baseClass} } from "@sdk/themes/${theme}";
 
+${langsConst}
 // ${info.hint}
 class ${className} extends ${info.baseClass} {
 ${sourceFields}
 }
 
-export default defineExtension([new ${className}()]);
+export default defineExtension(${sourcesList});
 `;
 } else {
   indexTs = `${header}
@@ -136,7 +155,7 @@ import {
   SManga,
   SMangaUpdate,
 } from "@sdk";
-
+${langsConst}
 class ${className} extends KeiSource {
 ${sourceFields}
 
@@ -182,7 +201,7 @@ ${sourceFields}
   }
 }
 
-export default defineExtension([new ${className}()]);
+export default defineExtension(${sourcesList});
 `;
 }
 
@@ -200,21 +219,26 @@ const testsJson = {
 };
 
 mkdirSync(path.join(dir, "fixtures"), { recursive: true });
+const kept = [];
+function create(file, content) {
+  if (existsSync(path.join(dir, file))) kept.push(file);
+  else writeFileSync(path.join(dir, file), content);
+}
 writeFileSync(path.join(dir, "extension.json"), JSON.stringify(extensionJson, null, 2) + "\n");
-writeFileSync(path.join(dir, "index.ts"), indexTs);
-writeFileSync(path.join(dir, "tests.json"), JSON.stringify(testsJson, null, 2) + "\n");
-writeFileSync(path.join(dir, "fixtures/.gitkeep"), "");
+create("index.ts", indexTs);
+create("tests.json", JSON.stringify(testsJson, null, 2) + "\n");
+if (readdirSync(path.join(dir, "fixtures")).length === 0) writeFileSync(path.join(dir, "fixtures/.gitkeep"), "");
 
 // Icon: the source's own, else its theme's (keiyoushi ships multisrc icons with the theme).
 let icon = null;
 if (upstreamPath) icon = await readUpstreamFile(`${upstreamPath}/res/mipmap-xxxhdpi/ic_launcher.png`, { binary: true });
 if (!icon && theme) icon = await readUpstreamFile(`${themeInfo(theme).upstream}/res/mipmap-xxxhdpi/ic_launcher.png`, { binary: true });
-if (icon) writeFileSync(path.join(dir, "icon.png"), icon);
+if (icon) create("icon.png", icon);
 
 const relative = path.relative(process.cwd(), dir);
 console.log(`
-Created ${relative}/  (${pkg})
-  source ID   ${id}${fixedId ? " (fixed, from upstream)" : ` (generated from "${name.toLowerCase()}/${lang}/${versionId}")`}
+${started ? "Filled in" : "Created"} ${relative}/  (${pkg})${kept.length ? `\n  kept        ${kept.join(", ")} (already there)` : ""}
+  source ID   ${id}${fixedId ? " (fixed, from upstream)" : ` (generated from "${name.toLowerCase()}/${multiLangs?.[0] ?? lang}/${versionId}")`}${multiLangs ? `\n  sources     ${multiLangs.length}, one per language; IDs from "${name.toLowerCase()}/<lang>/${versionId}" (npm run build lists them)` : ""}
   theme       ${theme ?? "none (standalone)"}
   icon        ${icon ? "icon.png from upstream" : "MISSING: add a 192×192 icon.png"}
 

@@ -88,7 +88,13 @@ npm run new -- --name "My Site" --lang en --base-url https://mysite.com --theme 
 
 It creates `src/<lang>/<name>/` with `extension.json`, an `index.ts` template (theme subclass or
 a standalone skeleton), `fixtures/`, a `tests.json` skeleton and upstream's `icon.png`, and prints
-the source ID it will get. The ID is Kotlin's `generateId("<name>/<lang>/<versionId>")`, so it
+the source ID it will get. With `--upstream` and no terminal (a script or an agent), it takes
+upstream's values without asking. A folder started earlier without `extension.json` (only
+fixtures, say) is filled in; files already there are kept.
+
+When upstream declares one source per language (`listOf("en", "es", …).forEach { source { lang = it } }`,
+as `src/all/mangadex` does), the template is an `all` extension with upstream's `LANGS` list and one
+source per language, so every ID matches upstream's. The ID is Kotlin's `generateId("<name>/<lang>/<versionId>")`, so it
 matches the Android extension and library entries carry over; if upstream sets `id = …L`, pass
 `--id` (the template then has `override readonly id = "…"`).
 
@@ -277,7 +283,8 @@ export default defineExtension([
 ]);
 ```
 
-`all.mangafire` and `all.kagane` are full examples. The same works with a theme class.
+`all.mangafire`, `all.kagane` and `all.mangadex` (62 languages, IDs checked against keiyoushi's
+published index) are full examples. The same works with a theme class.
 
 ### Rate limits, headers, cookies
 
@@ -306,7 +313,9 @@ override getImageRequest(page: Page): ImageRequest {
 ```
 
 If pages only know their image after another request, return pages with `url` and implement
-`getImageUrl(page)`.
+`getImageUrl(page)`. `getImageRequest` may also be `async` when it must refresh something first
+(`all.mangadex` asks for a new MD@Home server once a page's is five minutes old); keep it free of
+network work otherwise, since the apps call it for every image.
 
 ### Scrambled images (image interceptors)
 
@@ -357,6 +366,7 @@ npm run debug -- mangasushi details /manga/lonely-attack-on-the-different-world/
 npm run debug -- mangasushi chapters https://mangasushi.org/manga/lonely-attack-on-the-different-world/
 npm run debug -- mangasushi pages /manga/lonely-attack-on-the-different-world/chapter-338/
 npm run debug -- mangasushi filters
+npm run debug -- mangadex details /manga/<uuid> --source 18   # a source of a multi-source extension
 ```
 
 It builds the extension, runs one call through the same host contract as the app, and prints
@@ -379,7 +389,12 @@ npm run fixture -- mangasushi https://site.com/wp-admin/admin-ajax.php --post "a
 
 - Routes match on the URL only (not the method or POST body). Sites that answer several calls on
   one URL (Madara's `admin-ajax.php`) get one fixture; test one of those calls.
-- `--save` keeps an existing fixture for a URL; `--refresh` overwrites it.
+- `--save` keeps an existing fixture for a URL; `--refresh` overwrites it. With `--source <n>` the
+  case gets `"source": n` and the language in its name.
+- URLs that change by themselves (today's date, a list of IDs from another response) need
+  `"match": "prefix"` routes: cut the URL before the changing part.
+- Big JSON answers can be cut down to a few entries (keep `total`, `limit`, `offset`) as long as
+  the cases still mean something; say so in the case names.
 - Rename fixtures to something readable (`popular.html`, `series.html`) and update `tests.json`.
 - The repository is public: no account pages, tokens, cookies or personal data in fixtures.
   `npm run validate` rejects local paths and tokens it can recognise.
@@ -416,7 +431,7 @@ npm run fixture -- mangasushi https://site.com/wp-admin/admin-ajax.php --post "a
 | `call` | `args` | Result |
 |---|---|---|
 | `popular`, `latest` | `[page]` | `{mangas: [...], hasNextPage}` |
-| `search` | `[page, query]` (default filters) | same |
+| `search` | `[page, query]` (default filters; the apps' tests take no filter states, and `validate` refuses a third argument) | same |
 | `details` | `[{url, title}]` | the manga, merged as the app merges |
 | `chapters` | `[{url, title}]` | `[chapter, …]` |
 | `mangaUpdate` | `[{url, title}]` | `{manga, chapters}` |
@@ -431,12 +446,17 @@ the machine's time zone). Field names are upstream's (`thumbnail_url`, `date_upl
 UTC midnight (Madara), compare the number itself. Add `"source": 1` to a case to call another
 source of a multi-source extension. `live` cases run only in the app with `LIVE_TESTS=1`.
 
+What a case cannot express (filter states, settings, source IDs, timing) goes in a unit test next
+to the source, `src/<lang>/<name>/<name>.test.mjs` (`node:test`, run by `npm run test:unit` and
+`npm test`). It loads the built bundle with the Node host, stored settings and canned answers;
+`src/all/mangadex/mangadex.test.mjs` is the example. These run in Node only.
+
 ## 9. Run the tests
 
 ```sh
 npm run test:ext mangasushi                       # one extension (builds it first)
 npm run test:ext mangasushi -- --case popular -v  # one case, with requests and selectors
-npm test                                          # SDK unit tests + every extension's cases
+npm test                                          # SDK and extension unit tests + every extension's cases
 npm run live -- mangasushi                        # popular → details → chapters → pages on the real site
 npm run check                                     # typecheck, all tests, validation (what CI runs)
 ```
@@ -454,7 +474,9 @@ swift test --package-path Packages/MangaKit --filter ExtensionConformanceTests
 - New extension: `versionCode` 1. Every change that alters the built script, including SDK or
   theme changes it picks up, needs a higher `versionCode`, or the apps never see it.
   `npm run validate` compares the build with the published index and names what needs a bump;
-  `npm run bump -- --changed` (or `npm run bump -- <ext>`) does it.
+  `npm run bump -- --changed` (or `npm run bump -- <ext>`) does it. The bundles are not minified
+  and keep comments, so even a comment added in `sdk/` or a theme changes every script built from
+  it; put explanations for SDK internals in these docs instead.
 - Add a row to `SOURCES.md` (validate checks it).
 - Publish: commit, push to `main`. CI runs the checks and, on `main`, publishes `dist/` to the
   `repo` branch. The apps read `repo/index.json` and offer the update.
@@ -538,7 +560,8 @@ review the generated case in `tests.json`, and run `npm run test:ext <ext>`.
 | `npm run debug -- <ext> <call> [args]` | Run one call live (or `--fixtures`), show requests, selectors, result; `--save` makes it a test |
 | `npm run fixture -- <ext> <url> [name]` | Save one response into fixtures/ and route it |
 | `npm run test:ext <ext>` | Run one extension's fixture cases |
-| `npm test` | SDK unit tests and every extension's fixture cases |
+| `npm run test:unit` | Extensions' own unit tests (`src/**/*.test.mjs`) |
+| `npm test` | SDK unit tests, extension unit tests and every extension's fixture cases |
 | `npm run live -- <ext>` | Smoke test against the real site |
 | `npm run validate` | Schema, files, tests.json, IDs, SOURCES.md, versionCode bumps |
 | `npm run check` | typecheck + test + validate (CI) |

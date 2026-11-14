@@ -112,6 +112,11 @@ function checkTests(extension) {
       names.add(testCase.name);
       if (!TEST_CALLS.includes(testCase.call)) error(label, `unknown call ${testCase.call} (the app knows ${TEST_CALLS.join(", ")})`);
       if (testCase.args !== undefined && !Array.isArray(testCase.args)) error(label, `"args" must be an array`);
+      // The apps' conformance tests search with the default filters; filter states in args[2]
+      // would only apply in Node, so the case would pass here and hit an unrouted URL there.
+      if (testCase.call === "search" && Array.isArray(testCase.args) && testCase.args.length > 2) {
+        error(label, "search takes [page, query]: the apps' conformance tests ignore filter states, so test filtered URLs in a unit test");
+      }
       checkExpect(label, testCase.expect);
     }
   }

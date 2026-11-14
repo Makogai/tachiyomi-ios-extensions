@@ -66,15 +66,21 @@ export function parseGradle(text) {
     return value === undefined ? null : Number(value);
   };
   const sources = [];
-  for (const block of text.matchAll(/source\s*\{([^}]*)\}/g)) {
-    const body = block[1];
-    sources.push({
-      lang: /lang\s*=\s*"([^"]*)"/.exec(body)?.[1] ?? null,
-      baseUrl: /baseUrl\s*=\s*"([^"]*)"/.exec(body)?.[1] ?? null,
-      name: /name\s*=\s*"([^"]*)"/.exec(body)?.[1] ?? null,
-      id: /\bid\s*=\s*(\d+)L?/.exec(body)?.[1] ?? null,
-    });
+  const sourceFrom = (body, lang) => ({
+    lang: lang ?? /lang\s*=\s*"([^"]*)"/.exec(body)?.[1] ?? null,
+    baseUrl: /baseUrl\s*=\s*"([^"]*)"/.exec(body)?.[1] ?? null,
+    name: /name\s*=\s*"([^"]*)"/.exec(body)?.[1] ?? null,
+    id: /\bid\s*=\s*(\d+)L?/.exec(body)?.[1] ?? null,
+  });
+  // `listOf("en", "es", …).forEach { source { lang = it … } }`: one source per listed language.
+  let rest = text;
+  for (const loop of text.matchAll(/listOf\(([^)]*)\)\s*\.forEach\s*\{\s*(?:(\w+)\s*->\s*)?source\s*\{([^}]*)\}/g)) {
+    const variable = loop[2] ?? "it";
+    if (!new RegExp(`lang\\s*=\\s*${variable}\\b`).test(loop[3])) continue;
+    for (const [, lang] of loop[1].matchAll(/"([^"]*)"/g)) sources.push(sourceFrom(loop[3], lang));
+    rest = rest.replace(loop[0], "");
   }
+  for (const block of rest.matchAll(/source\s*\{([^}]*)\}/g)) sources.push(sourceFrom(block[1]));
   const warning = /contentWarning\s*=\s*ContentWarning\.(\w+)/.exec(text)?.[1] ?? null;
   return {
     name: string("name") ?? string("extName"),

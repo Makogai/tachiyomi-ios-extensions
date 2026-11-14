@@ -128,7 +128,7 @@ export abstract class KeiSource {
     throw new Error("getImageUrl not implemented");
   }
 
-  getImageRequest(page: Page): ImageRequest {
+  getImageRequest(page: Page): ImageRequest | Promise<ImageRequest> {
     if (!page.imageUrl) throw new Error(`Page ${page.index + 1} has no image URL`);
     return { url: page.imageUrl, headers: this.headers };
   }

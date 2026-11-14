@@ -219,8 +219,8 @@ if (options.save) {
   }
   console.log(`\nSaved ${saved.length} fixture(s): ${saved.join(", ")}`);
   if (result !== undefined) {
-    const name = `${call} ${rest.join(" ")}`.trim();
-    addCase(extension, { name, call, args, expect: suggestExpectations(call, result) });
+    const name = `${call} ${rest.join(" ")}`.trim() + (sourceIndex !== 0 ? ` (${source.lang})` : "");
+    addCase(extension, { name, ...(sourceIndex !== 0 ? { source: sourceIndex } : {}), call, args, expect: suggestExpectations(call, result) });
     console.log(`Added case "${name}" to tests.json with first expectations: review them, then npm run test:ext ${extension.pkg}`);
   }
   console.log("Check the saved files for anything personal (account names, tokens) before committing.");

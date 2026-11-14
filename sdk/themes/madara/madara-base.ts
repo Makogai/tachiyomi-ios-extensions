@@ -466,7 +466,7 @@ export abstract class MadaraBase extends KeiSource {
   }
 
   override getImageRequest(page: Page): ImageRequest {
-    const request = super.getImageRequest(page);
+    const request = super.getImageRequest(page) as ImageRequest; // the base is synchronous
     return { ...request, headers: { ...request.headers, Referer: page.url } };
   }
 
