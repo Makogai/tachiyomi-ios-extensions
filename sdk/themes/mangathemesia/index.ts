@@ -6,3 +6,4 @@
 //     readonly baseUrl = "https://asterscans.com";
 //   }
 export * from "./mangathemesia";
+export * from "./paid-chapters";
