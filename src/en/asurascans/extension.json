@@ -1,7 +1,7 @@
 {
   "name": "Asura Scans",
   "lang": "en",
-  "versionCode": 2,
+  "versionCode": 3,
   "nsfw": false,
   "upstream": { "path": "src/en/asurascans", "commit": "d9420cd1" }
 }
