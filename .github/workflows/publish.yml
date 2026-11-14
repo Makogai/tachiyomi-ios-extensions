@@ -1,9 +1,13 @@
-# Checks every push and pull request; on main, publishes dist/ to the `repo` branch, which the
-# apps read from:
+# Checks every push and pull request (forks included); on main, publishes dist/ to the `repo`
+# branch, which the apps read from:
 #   https://raw.githubusercontent.com/Makogai/tachiyomi-ios-extensions/repo/index.json
 #
 # `npm run validate` compares the build with the published index, so a changed extension whose
 # versionCode was not bumped fails here instead of silently not reaching the apps.
+#
+# The check job only reads the repository: pull requests (including ones from forks) run with a
+# read-only token and no secrets. Only the publish job can write, and it runs only for pushes to
+# main in this repository, after the checks pass.
 name: Publish
 
 on:
@@ -13,17 +17,21 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: publish-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  publish:
+  check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-node@v5
         with:
@@ -31,14 +39,31 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npm run typecheck
-      # SDK unit tests, then every extension's tests.json against its fixtures (Node harness).
-      - run: npm test
-      # extension.json schema, required files, unique IDs, versionCode bumps; builds dist/.
-      - run: npm run validate
+      # Typecheck, SDK and extension unit tests, every extension's tests.json against its
+      # fixtures (Node harness), then validation: extension.json schema, headers, layout, unique
+      # IDs, versionCode bumps. Builds dist/.
+      - run: npm run check
+
+      - uses: actions/upload-artifact@v4
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && github.repository == 'Makogai/tachiyomi-ios-extensions'
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
+  publish:
+    needs: check
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && github.repository == 'Makogai/tachiyomi-ios-extensions'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
 
       - name: Publish dist/ to the repo branch
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: |
           cd dist
           git init -q -b repo
