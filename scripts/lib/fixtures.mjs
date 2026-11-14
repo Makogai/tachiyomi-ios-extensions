@@ -36,7 +36,8 @@ const slug = (text) =>
 export function nameFromUrl(url) {
   const parsed = new URL(url);
   const segments = parsed.pathname.split("/").filter(Boolean);
-  return slug(segments.at(-1) ?? parsed.hostname);
+  const query = [...parsed.searchParams.values()].filter((value) => value && !/^\d+$/.test(value)).slice(0, 2);
+  return slug([segments.at(-1) ?? parsed.hostname, ...query].join("_"));
 }
 
 /**

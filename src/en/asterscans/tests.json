@@ -1,0 +1,130 @@
+{
+  "routes": [
+    {
+      "url": "https://asterscans.com/manga/?page=1&order=popular",
+      "file": "fixtures/popular.html"
+    },
+    {
+      "url": "https://asterscans.com/manga/?page=1&order=update",
+      "file": "fixtures/latest.html"
+    },
+    {
+      "url": "https://asterscans.com/manga/?title=the&page=1&status=&type=&order=",
+      "file": "fixtures/search.html"
+    },
+    {
+      "url": "https://asterscans.com/manga/obsession/",
+      "file": "fixtures/series.html"
+    },
+    {
+      "url": "https://asterscans.com/obsession-chapter-17/",
+      "file": "fixtures/chapter.html"
+    }
+  ],
+  "cases": [
+    {
+      "name": "popular orders the /manga/ listing by popular (MangaThemesia)",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 20,
+        "mangas.0.title": "My husband hid the child",
+        "mangas.0.url": "/manga/my-husband-hid-the-child/",
+        "mangas.0.thumbnail_url": {
+          "contains": "asterscans.com/wp-content/uploads/2026/09/"
+        },
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "latest orders by update",
+      "call": "latest",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 20,
+        "mangas.0.url": "/manga/the-squirrel-will-raise-the-baby-tiger/",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "search adds title and the default filters",
+      "call": "search",
+      "args": [
+        1,
+        "the"
+      ],
+      "expect": {
+        "mangas.length": 11,
+        "mangas.0.title": "I Think I Poked the Sleeping Lion",
+        "hasNextPage": false
+      }
+    },
+    {
+      "name": "details and chapters come from the series page",
+      "call": "mangaUpdate",
+      "args": [
+        {
+          "url": "/manga/obsession/",
+          "title": "Obsession"
+        }
+      ],
+      "expect": {
+        "manga.title": "Obsession",
+        "manga.author": "Hamster",
+        "manga.artist": "Hamster",
+        "manga.status": 1,
+        "manga.genre": {
+          "contains": "Drama, Modern"
+        },
+        "manga.description": {
+          "contains": "Childhood friends Yuhan and Suah"
+        },
+        "manga.thumbnail_url": {
+          "contains": "wp-content/uploads/2026/08/pn.png"
+        },
+        "chapters.length": 17,
+        "chapters.0.name": "Chapter 17",
+        "chapters.0.url": "/obsession-chapter-17/",
+        "chapters.0.date_upload": {
+          "localDate": "2026-11-13"
+        },
+        "chapters.16.url": "/obsession-chapter-1/",
+        "chapters.16.date_upload": {
+          "localDate": "2026-08-28"
+        }
+      }
+    },
+    {
+      "name": "pages are the reader images",
+      "call": "pages",
+      "args": [
+        {
+          "url": "/obsession-chapter-17/",
+          "name": "Chapter 17"
+        }
+      ],
+      "expect": {
+        "length": 5,
+        "0.imageUrl": "https://asterscans.com/wp-content/uploads/2026/11/01.jpg"
+      }
+    }
+  ],
+  "live": [
+    {
+      "name": "popular",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        }
+      }
+    }
+  ]
+}
