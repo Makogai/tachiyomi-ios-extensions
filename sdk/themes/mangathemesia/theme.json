@@ -1,0 +1,6 @@
+{
+  "baseClass": "MangaThemesia",
+  "upstream": "lib-multisrc/mangathemesia",
+  "commit": "d9420cd1",
+  "hint": "Common overrides: mangaUrlDirectory, datePattern, hasProjectPage, pageSelector, seriesDescriptionSelector."
+}

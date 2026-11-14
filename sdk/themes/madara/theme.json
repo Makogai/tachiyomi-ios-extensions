@@ -1,0 +1,7 @@
+{
+  "baseClass": "Madara",
+  "alternatives": ["MadaraNoAjax"],
+  "upstream": "lib-multisrc/madara",
+  "commit": "d9420cd1",
+  "hint": "Common overrides: chapterMode (ChapterMode.MangaAjax, AdminAjax, …), mangaSubString, chapterDateFormat, selectors such as mangaDetailsSelectorDescription."
+}

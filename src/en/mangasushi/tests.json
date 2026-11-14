@@ -1,0 +1,54 @@
+{
+  "routes": [
+    { "url": "https://mangasushi.org/wp-admin/admin-ajax.php", "file": "fixtures/archive.html" },
+    { "url": "https://mangasushi.org/manga/lonely-attack-on-the-different-world/", "file": "fixtures/manga.html" },
+    { "url": "https://mangasushi.org/manga/lonely-attack-on-the-different-world/ajax/chapters/", "file": "fixtures/chapters.html" },
+    { "url": "https://mangasushi.org/manga/lonely-attack-on-the-different-world/chapter-338/", "file": "fixtures/chapter.html" }
+  ],
+  "cases": [
+    {
+      "name": "popular parses the admin-ajax archive (Madara)",
+      "call": "popular",
+      "args": [1],
+      "expect": {
+        "mangas.length": 25,
+        "mangas.0.title": "Lonely Attack on the Different World",
+        "mangas.0.url": "/manga/lonely-attack-on-the-different-world/",
+        "mangas.0.thumbnail_url": { "contains": "/wp-content/uploads/2022/01/LONELY" },
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "details from the manga page, chapters from ajax/chapters/ (ChapterMode.MangaAjax)",
+      "call": "mangaUpdate",
+      "args": [{ "url": "/manga/lonely-attack-on-the-different-world/", "title": "Lonely Attack on the Different World" }],
+      "expect": {
+        "manga.title": "Lonely Attack on the Different World",
+        "manga.author": "Goji Shoji",
+        "manga.status": 1,
+        "manga.genre": { "contains": "Fantasy" },
+        "manga.artist": "Bibi",
+        "manga.description": { "contains": "Alternative Names: Hitoribocchi no Isekai Kouryaku" },
+        "chapters.length": 340,
+        "chapters.0.name": "Chapter 338",
+        "chapters.0.url": "/manga/lonely-attack-on-the-different-world/chapter-338/",
+        "chapters.0.date_upload": 1793664000000,
+        "chapters.339.name": "Chapter 1",
+        "chapters.339.date_upload": 1642291200000
+      }
+    },
+    {
+      "name": "pages come from the chapter's page-break images",
+      "call": "pages",
+      "args": [{ "url": "/manga/lonely-attack-on-the-different-world/chapter-338/", "name": "Chapter 338" }],
+      "expect": {
+        "length": 16,
+        "0.url": "https://mangasushi.org/manga/lonely-attack-on-the-different-world/chapter-338/",
+        "0.imageUrl": "https://mangasushi.org/wp-content/uploads/WP-manga/data/manga_61e3cd69761e1/00acedd8cd9327000c5e4f3292bc069a/00.jpg"
+      }
+    }
+  ],
+  "live": [
+    { "name": "popular", "call": "popular", "args": [1], "expect": { "mangas.length": { "gt": 0 } } }
+  ]
+}

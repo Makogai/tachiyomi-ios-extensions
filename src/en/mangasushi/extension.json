@@ -1,0 +1,10 @@
+{
+  "name": "Mangasushi",
+  "lang": "en",
+  "versionCode": 1,
+  "nsfw": false,
+  "upstream": {
+    "path": "src/en/mangasushi",
+    "commit": "d9420cd1"
+  }
+}

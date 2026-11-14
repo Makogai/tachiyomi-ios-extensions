@@ -1,4 +1,4 @@
-// Port of src/en/readcomicsonline/.../ReadComicsOnline.kt @ d9420cd1 (theme: mmrcms, see mmrcms.ts).
+// Port of src/en/readcomicsonline/.../ReadComicsOnline.kt @ d9420cd1 (theme: sdk/themes/mmrcms).
 import {
   defineExtension,
   type Document,
@@ -11,8 +11,7 @@ import {
   SManga,
   toHttpUrl,
 } from "@sdk";
-import { isUriFilter } from "./filters";
-import { MMRCMS } from "./mmrcms";
+import { isUriFilter, MMRCMS } from "@sdk/themes/mmrcms";
 
 class ReadComicsOnline extends MMRCMS {
   readonly name = "Read Comics Online";

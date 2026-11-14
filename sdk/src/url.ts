@@ -218,6 +218,13 @@ export class HttpUrlBuilder {
     return this;
   }
 
+  /** Replaces the path segment at `index`. */
+  setPathSegment(index: number, segment: string): this {
+    if (index < 0 || index >= this.segments.length) throw new RangeError(`No path segment ${index} in /${this.segments.join("/")}`);
+    this.segments[index] = canonicalize(segment, PATH_SEGMENT_ENCODE_SET);
+    return this;
+  }
+
   private pushSegment(encoded: string): this {
     if (this.segments.length === 1 && this.segments[0] === "") {
       this.segments[0] = encoded;

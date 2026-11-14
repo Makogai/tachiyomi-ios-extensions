@@ -1,0 +1,6 @@
+{
+  "baseClass": "MMRCMS",
+  "upstream": "lib-multisrc/mmrcms",
+  "commit": "d9420cd1",
+  "hint": "Common overrides: itemPath, dateFormat, fetchFilterOptions, supportsAdvancedSearch, detailsTitleSelector."
+}

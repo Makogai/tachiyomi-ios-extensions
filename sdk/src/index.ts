@@ -8,6 +8,7 @@ export * from "./crypto.js";
 export * from "./filterCache.js";
 export * from "./filters.js";
 export * from "./html.js";
+export * from "./i18n.js";
 export * from "./http.js";
 export * from "./models.js";
 export * from "./preferences.js";
