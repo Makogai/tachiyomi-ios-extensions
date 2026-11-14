@@ -13,6 +13,7 @@ conformance tests are the final check (step 9).
 - [8. Write tests.json](#8-write-testsjson)
 - [9. Run the tests](#9-run-the-tests)
 - [10. Version, SOURCES.md, publishing](#10-version-sourcesmd-publishing)
+- [Writing a custom source](#writing-a-custom-source) (the standalone layout, walked through with Weeb Central)
 - [Updating an existing source](#updating-an-existing-source)
 - [Debugging a broken source](#debugging-a-broken-source)
 - [Troubleshooting](#troubleshooting)
@@ -78,6 +79,10 @@ If the theme is not ported yet, either port it into `sdk/themes/<theme>/` (copy 
 `sdk/themes/madara`: `index.ts`, `theme.json`, `intl.ts` from `assets/i18n`) or port the site
 standalone, folding in the theme code it uses.
 
+Everything else is a **standalone** (custom) source: its own class on `KeiSource`, split into a
+few files with fixed roles. [Writing a custom source](#writing-a-custom-source) explains the
+layout and walks through it.
+
 ## 3. Create it: `npm run new`
 
 ```sh
@@ -86,8 +91,9 @@ npm run new                                     # asks for everything
 npm run new -- --name "My Site" --lang en --base-url https://mysite.com --theme none --yes
 ```
 
-It creates `src/<lang>/<name>/` with `extension.json`, an `index.ts` template (theme subclass or
-a standalone skeleton), `fixtures/`, a `tests.json` skeleton and upstream's `icon.png`, and prints
+It creates `src/<lang>/<name>/` with `extension.json`, the source (a theme subclass in `index.ts`,
+or for a standalone source the [standard layout](#the-layout) with placeholder code to fill in),
+`fixtures/`, a `tests.json` skeleton and upstream's `icon.png`, and prints
 the source ID it will get. With `--upstream` and no terminal (a script or an agent), it takes
 upstream's values without asking. A folder started earlier without `extension.json` (only
 fixtures, say) is filled in; files already there are kept.
@@ -446,10 +452,17 @@ the machine's time zone). Field names are upstream's (`thumbnail_url`, `date_upl
 UTC midnight (Madara), compare the number itself. Add `"source": 1` to a case to call another
 source of a multi-source extension. `live` cases run only in the app with `LIVE_TESTS=1`.
 
+Both runners silently skip what they do not know, so `npm run validate` fails on the usual slips:
+a top-level key other than `routes`, `cases`, `live` (`"case"`, `"tests"`: those cases never run),
+an unknown key in a case (`"expects"`, `"sorce"`), and a case with no or an empty `expect` (it
+passes whatever the source returns).
+
 What a case cannot express (filter states, settings, source IDs, timing) goes in a unit test next
 to the source, `src/<lang>/<name>/<name>.test.mjs` (`node:test`, run by `npm run test:unit` and
 `npm test`). It loads the built bundle with the Node host, stored settings and canned answers;
 `src/all/mangadex/mangadex.test.mjs` is the example. These run in Node only.
+The file name must end in `.test.mjs`; `validate` fails on `.test.js`, `.spec.mjs` and the like,
+which no runner picks up.
 
 ## 9. Run the tests
 
@@ -481,6 +494,188 @@ swift test --package-path Packages/MangaKit --filter ExtensionConformanceTests
 - Publish: commit, push to `main`. CI runs the checks and, on `main`, publishes `dist/` to the
   `repo` branch. The apps read `repo/index.json` and offer the update.
 
+## Writing a custom source
+
+A custom (standalone) source is any source without a ported theme: a port of a keiyoushi source
+written for one site, or an original source (see [CONTRIBUTING.md](../CONTRIBUTING.md) for when
+those are accepted). Every custom source uses the same layout, so a reviewer, or you in six
+months, knows where to look.
+
+### The layout
+
+| File | Holds | Why it is separate |
+|---|---|---|
+| `index.ts` | Only the source class: `name`, `lang`, `baseUrl`, client setup, and one method per call the app makes (`getPopularManga` … `getPageList`, `getFilterList`, `setupPreferenceScreen`). Each method fetches and delegates. | The flow of the whole source fits on a screen or two. Reviewers read this first, and it keeps upstream's method names, so `npm run upstream` diffs line up with the Kotlin class. |
+| `api.ts` | Request building: one pure function per URL (or body) the source sends, such as `searchUrl(baseUrl, page, query, filters)`. No fetching. | When a site changes its URLs, this is the only file that changes, and the URLs can be read without the parsing around them. |
+| `parse.ts` | Responses to models: `Document` or DTO → `SManga`, `SChapter`, `Page`, `MangasPage`. Pure functions; settings they depend on are passed in as arguments. | When a site changes its markup, this is the only file that changes, and the functions can be checked against a saved fixture. |
+| `dto.ts` | Response types, one interface per JSON response (upstream's `@Serializable` classes). Types only. | JSON APIs only; an HTML site has no `dto.ts`. |
+| `filters.ts` | Filter classes and the function that builds the list. | Filters are long, declarative and change on their own. |
+| `settings.ts` | Preference keys and defaults, `setupPreferenceScreen(screen)`, and one getter per setting taking `SharedPreferences` (upstream's `SharedPreferences.x()` extensions). | Keys must never change (users' settings are stored under them), so they live in one place. |
+| extras | Anything with a clear job of its own: `descrambler.ts` (image tile moves), `webview.ts` (page scripts), `markdown.ts`, `tokens.ts`, `intl.ts`, `constants.ts`. | Keeps the files above to their one role. |
+
+Rules that go with it:
+
+- **Every `.ts` file starts with a one-line header** naming the upstream file and commit it came
+  from: `// Port of src/en/weebcentral/.../WeebCentral.kt @ d9420cd1: <what this file holds>.`
+  Original sources name the site instead: `// My Site (original source, not a keiyoushi port): …`.
+  `npm run validate` fails on a missing header or one whose commit differs from `extension.json`.
+- **Keep upstream's names** for methods and functions (`getMangaDetails`, `parseStatus`,
+  `chapterListParse`), even when a function moves from the class into `parse.ts`.
+- **Small sources may stay in one `index.ts`** while it is under 200 lines. Above that, use the
+  layout. `npm run validate` warns when a standalone `index.ts` is over 200 lines without
+  `api.ts` and `parse.ts`, builds its settings inline, or is over 400 lines.
+- `src/en/weebcentral` (HTML), `src/en/asurascans` (JSON API + Astro props, `descrambler.ts`),
+  `src/en/comix` (WebView, `webview.ts`), `src/all/kagane` and `src/all/mangadex` (several
+  languages, settings, tokens) are finished examples.
+
+### The template
+
+```sh
+npm run new -- --upstream src/en/weebcentral       # a keiyoushi port
+npm run new -- --name "My Site" --lang en --base-url https://mysite.com --theme none --yes
+```
+
+For a standalone source this writes `index.ts`, `api.ts`, `parse.ts`, `dto.ts`, `filters.ts` and
+`settings.ts` with working placeholder code for an HTML site. Each method links to the section
+below that explains it. Every line you have to change is marked `TODO(new)`, and
+`npm run validate` fails while one is left. Delete `dto.ts` for an HTML site, and `filters.ts` or
+the settings if the site has none (return `[]`, leave `setupPreferenceScreen` empty).
+
+The rest of this section walks through the template with Weeb Central
+(`src/en/weebcentral`, upstream `WeebCentral.kt`) as the worked example.
+
+### Popular and latest
+
+`getPopularManga(page)` and `getLatestUpdates(page)` return a `MangasPage`: the entries and
+whether there is a next page. The template fetches `popularMangaUrl(...)` from `api.ts` and hands
+the `Document` to `searchMangaParse` in `parse.ts`.
+
+Weeb Central has no separate popular page: popular and latest are its search, sorted. So upstream
+(and the port) call search with a sort filter:
+
+```ts
+// index.ts
+getPopularManga(page: number): Promise<MangasPage> {
+  return this.getSearchMangaList(page, "", defaultFilterList(new SortFilter("Popularity")));
+}
+```
+
+A site without a latest list sets `override readonly supportsLatest = false` and still
+implements `getLatestUpdates` (throw an error). Entries store paths, not full URLs:
+`manga.setUrlWithoutDomain(link.absUrl("href"))`, so a domain move does not break libraries.
+
+### Search
+
+`getSearchMangaList(page, query, filters)` gets the filter list with the user's states. Build the
+URL in `api.ts`; let each filter add its own parameters (`UriFilter.addToUri`), as upstream does:
+
+```ts
+// api.ts
+export function searchUrl(baseUrl: string, page: number, query: string, filters: FilterList): HttpUrl {
+  const builder = toHttpUrl(`${baseUrl}/search/data`).newBuilder();
+  builder.addQueryParameter("text", query.replace(excludedSearchCharacters, " ").trim());
+  for (const filter of filters) {
+    if (isUriFilter(filter)) filter.addToUri(builder);
+  }
+  builder.addQueryParameter("limit", String(FETCH_LIMIT));
+  builder.addQueryParameter("offset", String((page - 1) * FETCH_LIMIT));
+  builder.addQueryParameter("display_mode", "Full Display");
+  return builder.build();
+}
+
+// index.ts
+async getSearchMangaList(page: number, query: string, filters: FilterList): Promise<MangasPage> {
+  const filterList = filters.length > 0 ? filters : this.getFilterList();
+  const document = (await this.client.get(searchUrl(this.baseUrl, page, query, filterList), Fetch.DOCUMENT)).asJsoup();
+  return searchMangaParse(document);
+}
+```
+
+`searchMangaParse` in `parse.ts` turns the result page into a `MangasPage`. Pasted links
+(`getMangaByUrl`) are covered in [Opening a manga from a URL](#opening-a-manga-from-a-url-deep-links).
+
+### Details and chapters
+
+The app asks for both through `fetchMangaUpdate(manga, chapters, fetchDetails, fetchChapters)`,
+returning `SMangaUpdate`. The template runs the two requests in parallel and returns what it was
+given for the part not asked for:
+
+```ts
+// index.ts
+const [updatedManga, updatedChapters] = await Promise.all([
+  fetchDetails ? this.getMangaDetails(manga) : Promise.resolve(manga),
+  fetchChapters ? this.getChapterList(manga) : Promise.resolve(chapters),
+]);
+return new SMangaUpdate(updatedManga, updatedChapters);
+
+private async getMangaDetails(manga: SManga): Promise<SManga> {
+  const document = (await this.client.get(this.baseUrl + manga.url, Fetch.DOCUMENT)).asJsoup();
+  return mangaDetailsParse(document, settings.cleanTitle(this.preferences));
+}
+```
+
+Note the setting: `parse.ts` does not read preferences; the class reads `settings.cleanTitle(...)`
+and passes the value in, so the parser stays a plain function of its input. Weeb Central's full
+chapter list has its own URL (`chapterListUrl` in `api.ts`); `chapterListParse` returns chapters
+newest first, as the app expects. Set `date_upload` (milliseconds; `parseDate`, `parseIsoDate`)
+and, when the name does not carry a plain number, `chapter_number`.
+
+If the site needs one page for both, fetch it once and parse both from the same `Document`
+(Asura Scans does this from Astro props).
+
+### Pages
+
+`getPageList(chapter)` returns `Page`s with `imageUrl` set, or with only `url` and an
+`getImageUrl(page)` override when each image needs another request.
+
+```ts
+// api.ts
+export function pageListUrl(baseUrl: string, chapterUrl: string): string { … /images?reading_style=long_strip … }
+// parse.ts
+export function pageListParse(document: Document): Page[] {
+  return document.select("section[x-data~=scroll] > img").map((element, index) => new Page(index, "", element.attr("abs:src")));
+}
+```
+
+Image headers: [Image requests](#image-requests). Scrambled images: put the tile logic in
+`descrambler.ts` ([Scrambled images](#scrambled-images-image-interceptors)).
+
+### Filters and settings
+
+Filters go in `filters.ts`: the classes, `isUriFilter`, and one function that returns the list in
+a stable order (Weeb Central: `defaultFilterList(sortFilter)`). The class's `getFilterList()`
+just returns it. The kinds and helpers are in [Filters](#filters).
+
+Settings go in `settings.ts`: keys, `setupPreferenceScreen(screen)` and getters; the class's
+`setupPreferenceScreen` delegates. The preference kinds are in [Settings](#settings-preferences).
+Never rename a key of a published source: users' values are stored under it.
+
+### JSON APIs (dto.ts)
+
+For a JSON API, declare each response in `dto.ts` and map it in `parse.ts`:
+
+```ts
+// dto.ts
+export interface MangaDto { slug: string; title: string; cover?: string | null }
+// index.ts
+const result = (await this.client.get(searchUrl(page, query, filters), Fetch.XHR)).parseAs<DataDto<MangaDto[]>>();
+return new MangasPage((result.data ?? []).map(toSManga), result.meta?.has_more ?? false);
+```
+
+Keep upstream's DTO and field names; the mappers upstream writes as `MangaDto.toSManga()` become
+functions in `parse.ts` with the same name (`toSManga(dto)`). `src/en/asurascans` is a full
+example (its mappers also return the site's random slug, which upstream keeps in `memo`).
+
+### Before opening a pull request
+
+```sh
+npm run debug -- <ext> popular 1 --save    # fixtures and a first case; repeat for search, details, chapters, pages
+npm run test:ext <ext>
+npm run check                              # typecheck, tests, validate (what CI runs)
+```
+
+The checklist reviewers use is in [CONTRIBUTING.md](../CONTRIBUTING.md#pull-request-checklist).
+
 ## Updating an existing source
 
 1. See what changed upstream:
@@ -500,7 +695,8 @@ swift test --package-path Packages/MangaKit --filter ExtensionConformanceTests
    npm run test:ext mangahere
    ```
 
-5. `npm run bump -- mangahere`, set `upstream.commit` in `extension.json` (and in `theme.json` for
+5. `npm run bump -- mangahere`, set `upstream.commit` in `extension.json` and in the first line of
+   every `.ts` file of the port (`npm run validate` checks they agree; and in `theme.json` for
    a theme), update the commit in `SOURCES.md`.
 6. `npm run check`, then the app's conformance tests, then push.
 
@@ -563,7 +759,7 @@ review the generated case in `tests.json`, and run `npm run test:ext <ext>`.
 | `npm run test:unit` | Extensions' own unit tests (`src/**/*.test.mjs`) |
 | `npm test` | SDK unit tests, extension unit tests and every extension's fixture cases |
 | `npm run live -- <ext>` | Smoke test against the real site |
-| `npm run validate` | Schema, files, tests.json, IDs, SOURCES.md, versionCode bumps |
+| `npm run validate` | Schema, files, headers, standalone layout (warnings), template leftovers, tests.json (including cases that never run), IDs, SOURCES.md, versionCode bumps |
 | `npm run check` | typecheck + test + validate (CI) |
 | `npm run status` | Table of extensions, versions, upstream commits, tests, fixture dates |
 | `npm run upstream [-- <ext>]` | Which ports are behind keiyoushi |

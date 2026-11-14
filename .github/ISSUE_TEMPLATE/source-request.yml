@@ -1,0 +1,61 @@
+name: Source request
+description: Ask for a source to be ported from keiyoushi or added as an original source.
+title: "[Request] <site name>"
+labels: ["source request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ports of keiyoushi sources come first. Original sources are accepted under the rules in CONTRIBUTING.md
+        (public site, no login, no protection bypassing). Requests do not guarantee a port; pull requests are welcome.
+  - type: input
+    id: name
+    attributes:
+      label: Site name
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Site URL
+      placeholder: https://example.com
+    validations:
+      required: true
+  - type: input
+    id: upstream
+    attributes:
+      label: keiyoushi path
+      description: The source's folder in keiyoushi/extensions-source, if it has one (e.g. src/en/mangahere). Leave empty for an original source.
+      placeholder: src/en/example
+  - type: input
+    id: language
+    attributes:
+      label: Language(s)
+      placeholder: en
+    validations:
+      required: true
+  - type: dropdown
+    id: nsfw
+    attributes:
+      label: Does the site host adult content?
+      options:
+        - "No"
+        - "Yes"
+        - Not sure
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: The site is not already in SOURCES.md.
+          required: true
+        - label: The site can be read without an account.
+          required: true
+        - label: I would like to open the pull request myself.
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Cloudflare challenges, scrambled images, anything unusual you noticed.

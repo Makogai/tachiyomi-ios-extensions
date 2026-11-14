@@ -29,13 +29,23 @@ sdk/themes/<theme>/    ports of keiyoushi's lib-multisrc themes: madara, mangath
 sdk/test/              unit tests for the SDK and the Node harness
 src/<lang>/<name>/     one extension
   extension.json       name, lang, versionCode, nsfw, upstream path and commit
-  index.ts             the port; `export default defineExtension([...])`
+  index.ts             the source class; `export default defineExtension([...])`
+  api.ts, parse.ts …   standalone sources only: requests, parsing, dto.ts, filters.ts, settings.ts
+                       (the layout: docs/ADDING-A-SOURCE.md#the-layout)
   icon.png             upstream's res/mipmap-xxxhdpi/ic_launcher.png (the theme's for multisrc ports)
   fixtures/            saved responses from the site
   tests.json           what the port should return for those fixtures
 scripts/               build, Node test harness, validation, scaffolding and debugging tools
 docs/                  ADDING-A-SOURCE.md (the guide) and ARCHITECTURE.md
+.github/               CI, the pull request template and issue forms
 ```
+
+## Contributing
+
+Ports of keiyoushi sources are welcome, and original sources within the rules. Read
+**[CONTRIBUTING.md](CONTRIBUTING.md)** first: what is accepted, licensing, content rules, the
+pull request checklist and how review works. A source that stopped working can be reported with
+the "Broken source" issue form.
 
 ## Developing
 
@@ -55,7 +65,7 @@ npm run upstream                          # which ports are behind keiyoushi
 ```
 
 **[docs/ADDING-A-SOURCE.md](docs/ADDING-A-SOURCE.md)** walks through porting a source (theme or
-standalone), the Kotlin → SDK cheatsheet, settings, filters, multi-language extensions, fixtures,
+standalone), writing a custom source in the standard layout, the Kotlin → SDK cheatsheet, settings, filters, multi-language extensions, fixtures,
 tests, updating a port from upstream and debugging a broken one.
 **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** describes the SDK layers, the host contract, the
 build and publish pipeline, themes and the Node harness (with its known differences from the app).

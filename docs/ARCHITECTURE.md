@@ -18,7 +18,7 @@ src/<lang>/<name>/index.ts ──► esbuild ──► dist/<pkg>.js ──► C
 | Runtime | `sdk/src/runtime.ts` | `defineExtension([...])`: the `__extension.default` object the app calls (`describe`, `invoke`, `rateLimitFor`, `cookiesFor`). Turns errors into "Source (EN) method failed: …" and logs them through the host. |
 | SDK | `sdk/src/*.ts` | The Kotlin API in TypeScript: `KeiSource`, models (`SManga`, `SChapter`, `Page`), filters, preferences, `HttpClient`/`Fetch`/`FormBody`, OkHttp's `HttpUrl`, Jsoup-style `Element`, Kotlin string helpers, dates, `Intl`, crypto, the filter-data cache, common settings. Import everything from `"@sdk"`. |
 | Themes | `sdk/themes/<theme>/` | Ports of keiyoushi's `lib-multisrc` (Madara, MangaThemesia, MMRCMS). A site on a theme is a subclass with a few overrides. Import from `"@sdk/themes/<theme>"`. Each theme has a `theme.json` (base class, upstream path and the commit it was ported from). |
-| Extensions | `src/<lang>/<name>/` | One port each: `extension.json`, `index.ts` (plus any `filters.ts`, `dto.ts` …), `icon.png`, `fixtures/`, `tests.json`, and optionally a Node unit test `<name>.test.mjs`. |
+| Extensions | `src/<lang>/<name>/` | One port each: `extension.json`, the source, `icon.png`, `fixtures/`, `tests.json`, and optionally a Node unit test `<name>.test.mjs`. A theme port is one `index.ts`; a standalone source uses the layout below. |
 | Tooling | `scripts/` | Build, Node harness, validation, scaffolding, debugging, maintenance. Plain Node ESM, no build step. |
 
 ### SDK files
@@ -90,11 +90,39 @@ changing its `lang` or `versionId` changes the ID and orphans every library entr
 3. Loads the bundle with a stub host to read each source's `describe()` (name, lang, baseUrl, id).
 4. Copies `icon.png` to `dist/icon/<pkg>.png`, hashes the script and writes `dist/index.json`.
 
-CI (`.github/workflows/publish.yml`) runs `typecheck`, `npm test` and `npm run validate` on every
-push and pull request. On `main` it force-pushes `dist/` to the `repo` branch. The apps fetch
+CI (`.github/workflows/publish.yml`) runs `npm run check` (typecheck, `npm test`, `npm run validate`)
+on every push and pull request, forks included, in a job with a read-only token and no secrets. A
+separate publish job, which alone may write, runs only for pushes to `main` of this repository
+after the checks pass, and force-pushes `dist/` to the `repo` branch. The apps fetch
 `repo/index.json`, offer an update when `versionCode` grows, and refuse a script whose SHA-256
 does not match. Because the build is reproducible, `validate` can tell exactly which extensions'
 scripts changed (including through SDK or theme changes) and requires their `versionCode` bump.
+
+## Standalone sources
+
+A source without a theme follows one layout, so every custom source reads the same way
+([ADDING-A-SOURCE.md](ADDING-A-SOURCE.md#the-layout) has the reasons and a walkthrough):
+
+```
+src/<lang>/<name>/
+  index.ts      the KeiSource subclass: client setup and one method per app call; fetches, delegates
+  api.ts        pure request building: URLs and bodies
+  parse.ts      pure response parsing: Document / DTO → SManga, SChapter, Page, MangasPage
+  dto.ts        JSON response types (JSON APIs only)
+  filters.ts    filter classes and the list
+  settings.ts   preference keys, setupPreferenceScreen, getters over SharedPreferences
+  <extra>.ts    one clear job each: descrambler.ts, webview.ts, markdown.ts, tokens.ts, intl.ts …
+```
+
+Data flows one way: `index.ts` asks `api.ts` for a URL, fetches it with `this.client`, and passes
+the response (and any setting values) to `parse.ts`. Only `index.ts` touches the network and
+`this.preferences`, which keeps `api.ts` and `parse.ts` plain functions of their arguments.
+Upstream's method names are kept wherever the code moved, and each file's first line names the
+upstream file and commit, so a port can be diffed against keiyoushi file by file. The bundle is
+one script either way: esbuild inlines the imports.
+
+`npm run new` generates the layout (`scripts/lib/template.mjs`); `npm run validate` checks the
+headers and warns when a standalone `index.ts` outgrows it.
 
 ## Themes
 

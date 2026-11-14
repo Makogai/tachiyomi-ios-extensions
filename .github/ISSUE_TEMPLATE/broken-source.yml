@@ -1,0 +1,68 @@
+name: Broken source
+description: A source returns errors, nothing, or wrong data.
+title: "[Broken] <extension>: <what fails>"
+labels: ["broken source"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. The output of `npm run debug` lets us see the failing request or selector without guessing.
+        Before posting, remove cookies, tokens or anything personal from it.
+  - type: input
+    id: extension
+    attributes:
+      label: Extension
+      description: Package name from SOURCES.md, e.g. en.weebcentral or all.mangadex (and the language for multi-language extensions).
+      placeholder: en.weebcentral
+    validations:
+      required: true
+  - type: dropdown
+    id: call
+    attributes:
+      label: What fails
+      multiple: true
+      options:
+        - Popular
+        - Latest
+        - Search
+        - Filters
+        - Manga details
+        - Chapter list
+        - Pages / images
+        - Settings
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: What happens
+      description: What you did, what you expected, and what you got (error message from the app, if any).
+    validations:
+      required: true
+  - type: textarea
+    id: debug
+    attributes:
+      label: npm run debug output
+      description: |
+        From a checkout of this repository (`npm ci` first), run the failing call, for example:
+        `npm run debug -- en.weebcentral details /series/01J76XYD7E91K8QP6CY0Y53900/Blue-Lock`
+        `npm run debug -- en.weebcentral search "blue lock"`
+        Paste the whole output. If you cannot run it, say so and give the manga or chapter URL instead.
+      render: text
+    validations:
+      required: true
+  - type: input
+    id: app
+    attributes:
+      label: App and version
+      description: iOS or Android app, its version, and the extension version shown in the app.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: The site works in a normal browser right now.
+          required: true
+        - label: I removed cookies, tokens and personal data from the output above.
+          required: true
