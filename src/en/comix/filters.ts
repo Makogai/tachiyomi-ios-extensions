@@ -1,4 +1,4 @@
-// Port of Filters.kt @ d9420cd1. Upstream's marker interfaces become `kind` flags.
+// Port of src/en/comix/.../Filters.kt @ d9420cd1. Upstream's marker interfaces become `kind` flags.
 import { CheckBox, type FilterList, Group, Header, type HttpUrlBuilder, Select, Separator, Sort, Text, TriState } from "@sdk";
 
 export interface UriFilter {

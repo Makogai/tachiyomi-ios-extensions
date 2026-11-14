@@ -1,4 +1,4 @@
-// Port of Descrambler.kt @ d9420cd1, grid part only. Upstream decodes the image and redraws the
+// Port of src/en/comix/.../Descrambler.kt @ d9420cd1, grid part only. Upstream decodes the image and redraws the
 // 5x5 tiles with a Canvas; here the same tile moves are returned for the app to draw
 // (`getImageTransform`). The byte-level XOR decoding (`x-enc-seed`) cannot be expressed as tile
 // moves and is not ported.
