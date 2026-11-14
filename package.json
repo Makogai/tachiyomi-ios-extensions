@@ -7,12 +7,20 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "typecheck": "tsc --noEmit -p .",
-    "test": "node --test \"sdk/test/**/*.test.mjs\"",
+    "test:sdk": "node --test \"sdk/test/**/*.test.mjs\"",
+    "test": "npm run test:sdk && node scripts/test.mjs",
+    "test:ext": "node scripts/test.mjs",
     "check": "npm run typecheck && npm test && npm run build"
   },
   "devDependencies": {
+    "@types/node": "26.6.6",
+    "css-select": "7.0.0",
+    "dom-serializer": "3.1.1",
+    "domhandler": "6.0.1",
+    "domutils": "4.0.2",
     "esbuild": "0.28.2",
-    "typescript": "7.0.2",
-    "@types/node": "26.6.6"
+    "parse5": "8.1.1",
+    "parse5-htmlparser2-tree-adapter": "8.0.2",
+    "typescript": "7.0.2"
   }
 }

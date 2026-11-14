@@ -12,7 +12,10 @@
     "isolatedModules": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "paths": { "@sdk": ["./sdk/src/index.ts"] }
+    "paths": {
+      "@sdk": ["./sdk/src/index.ts"],
+      "@sdk/themes/*": ["./sdk/themes/*/index.ts"]
+    }
   },
-  "include": ["sdk/src", "src"]
+  "include": ["sdk/src", "sdk/themes", "src"]
 }
