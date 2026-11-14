@@ -86,8 +86,14 @@ export class Response {
     return parseHtml(this.body, this.url);
   }
 
+  /** Parses the body as JSON. A failure names the URL and shows the start of the body. */
   parseAs<T>(): T {
-    return JSON.parse(this.body) as T;
+    try {
+      return JSON.parse(this.body) as T;
+    } catch (error) {
+      const preview = this.body.slice(0, 200).replace(/\s+/g, " ");
+      throw new Error(`JSON parse failed at ${this.url} (HTTP ${this.code}): ${(error as Error).message}; body starts: ${preview}`);
+    }
   }
 }
 
@@ -204,7 +210,8 @@ export class HttpClient {
     return new Promise((resolve, reject) => {
       host().http(JSON.stringify(payload), (error, json) => {
         if (error !== null || json === null) {
-          reject(new HttpError(error ?? "No response"));
+          // The host's message comes first: the app matches it to offer "Open in WebView".
+          reject(new HttpError(`${error ?? "No response"} (${method} ${target})`));
           return;
         }
         const response = JSON.parse(json) as ResponsePayload;

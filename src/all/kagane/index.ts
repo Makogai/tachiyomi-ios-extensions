@@ -3,6 +3,8 @@ import {
   type ClientBuilder,
   defineExtension,
   Fetch,
+  FILTER_FETCH_HINT,
+  FilterDataCache,
   type FilterList,
   Header,
   type HttpUrl,
@@ -40,7 +42,6 @@ import {
   toBooks,
   type TrackerDto,
 } from "./dto";
-import { FILTER_FETCH_HINT, FilterDataCache } from "./filterCache";
 import {
   ChapterCountFilter,
   compare,

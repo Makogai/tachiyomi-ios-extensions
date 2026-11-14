@@ -4,6 +4,8 @@ import {
   defineExtension,
   type Document,
   Fetch,
+  FILTER_FETCH_HINT,
+  FilterDataCache,
   type FilterList,
   Header,
   type HttpUrl,
@@ -51,7 +53,6 @@ import {
   StatusFilter,
   TypeFilter,
 } from "./filters";
-import { FILTER_FETCH_HINT, FilterDataCache } from "./filterCache";
 
 const PER_PAGE_LIMIT = 20;
 const OLD_FORMAT_MANGA_REGEX = /^\/manga\/(\d+-)?([^/]+)\/?$/;

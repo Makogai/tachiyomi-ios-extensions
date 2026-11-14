@@ -1,4 +1,5 @@
 import { applyFilterStates, type FilterJSON } from "./filters.js";
+import { host } from "./host.js";
 import { Page, SChapter, SManga } from "./models.js";
 import { PreferenceScreen } from "./preferences.js";
 import { KeiSource as KeiSourceBase, type KeiSource } from "./source.js";
@@ -52,6 +53,17 @@ function describeError(error: unknown): string {
   return String(error);
 }
 
+/** "Mangahere (EN) getPageList failed: …", also sent to the app's log. */
+function failure(source: KeiSource, method: string, error: unknown): string {
+  const message = `${source.toString()} ${method} failed: ${describeError(error)}`;
+  try {
+    host().log("error", message);
+  } catch {
+    // No host log (build-time describe).
+  }
+  return message;
+}
+
 export function defineExtension(sources: KeiSource[]): ExtensionExports {
   sources.forEach((source, index) => {
     source.index = index;
@@ -91,7 +103,7 @@ export function defineExtension(sources: KeiSource[]): ExtensionExports {
         .then(() => call(source, JSON.parse(argumentsJSON) as unknown[]))
         .then(
           (result) => callback(null, JSON.stringify(result ?? null)),
-          (error: unknown) => callback(describeError(error), null),
+          (error: unknown) => callback(failure(source, method, error), null),
         );
     },
     rateLimitFor(index, url) {

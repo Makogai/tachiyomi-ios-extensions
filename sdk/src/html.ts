@@ -17,6 +17,16 @@ export class Element {
     return found ? new Element(found) : null;
   }
 
+  /**
+   * The first match, or an error naming the selector and page. Mirrors Jsoup's `expectFirst`;
+   * use it where upstream writes `selectFirst(css)!!`, so a layout change says what broke.
+   */
+  expectFirst(css: string): Element {
+    const found = this.selectFirst(css);
+    if (!found) throw new SelectorError(css, this.native.location());
+    return found;
+  }
+
   /** Normalised text of the element and its children. */
   text(): string {
     return this.native.text();
@@ -100,6 +110,17 @@ export class Element {
   }
 }
 
+/** Thrown by `expectFirst` when a selector matches nothing, usually because the site changed. */
+export class SelectorError extends Error {
+  constructor(
+    readonly selector: string,
+    readonly location: string,
+  ) {
+    super(`Selector '${selector}' matched 0 nodes on ${location || "the parsed HTML"}`);
+    this.name = "SelectorError";
+  }
+}
+
 /** A parsed page. `location()` is the URL it was loaded from, as in Jsoup. */
 export class Document extends Element {
   location(): string {
@@ -140,6 +161,13 @@ export class Elements extends Array<Element> {
 
   eachText(): string[] {
     return this.map((element) => element.text()).filter((text) => text.length > 0);
+  }
+
+  /** The first element, or an error naming the selector that found nothing. */
+  expectFirst(css = "(selection)"): Element {
+    const found = this[0];
+    if (!found) throw new SelectorError(css, "");
+    return found;
   }
 
   first(): Element | null {

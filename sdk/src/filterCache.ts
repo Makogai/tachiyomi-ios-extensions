@@ -2,7 +2,8 @@
 // `getFilterList(data)`), which the SDK does not have: `getFilterList()` builds the filters from
 // the stored data and, when there is none or it is older than three days, fetches it in the
 // background for the next call. The data is kept in the source's settings.
-import { type KeiSource, log } from "@sdk";
+import { log } from "./utils.js";
+import type { KeiSource } from "./source.js";
 
 const FILTER_DATA = "filter_data";
 const MAX_AGE_MS = 3 * 24 * 60 * 60 * 1000;

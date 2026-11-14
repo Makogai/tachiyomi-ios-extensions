@@ -165,3 +165,61 @@ export function applyFilterStates(filters: FilterList, json: FilterJSON[]): Filt
   });
   return filters;
 }
+
+// Value-carrying filters. Upstream re-declares these in almost every source and theme
+// (`UriPartFilter`, `SelectFilter(vals: Array<Pair<String, String>>)`, `Genre(name, value)`);
+// they live here once. Subclass them to tell filters apart with `instanceof`.
+
+/** A select over `[label, value]` pairs; `selectedValue()` is the chosen value. */
+export class ValueSelect extends Select<string> {
+  constructor(
+    name: string,
+    readonly options: [label: string, value: string][],
+    defaultValue?: string,
+  ) {
+    super(
+      name,
+      options.map(([label]) => label),
+      Math.max(0, options.findIndex(([, value]) => value === defaultValue)),
+    );
+  }
+
+  selectedValue(): string {
+    return this.options[this.state]?.[1] ?? "";
+  }
+}
+
+/** A checkbox with the value it stands for, such as a genre slug. */
+export class ValueCheckBox extends CheckBox {
+  constructor(
+    name: string,
+    readonly value: string,
+    state = false,
+  ) {
+    super(name, state);
+  }
+}
+
+/** A tri-state with the value it stands for, such as a genre ID. */
+export class ValueTriState extends TriState {
+  constructor(
+    name: string,
+    readonly value: string,
+    state = TriState.STATE_IGNORE,
+  ) {
+    super(name, state);
+  }
+}
+
+/** Checked values of a group of `ValueCheckBox`es. */
+export function checkedValues(group: Group<ValueCheckBox>): string[] {
+  return group.state.filter((box) => box.state).map((box) => box.value);
+}
+
+/** keiyoushi's `filters.firstInstanceOrNull<T>()`. */
+export function firstInstanceOrNull<T extends Filter<unknown>>(
+  filters: FilterList,
+  type: abstract new (...args: never[]) => T,
+): T | null {
+  return (filters.find((filter) => filter instanceof type) as T | undefined) ?? null;
+}
