@@ -1,0 +1,136 @@
+{
+  "routes": [
+    {
+      "url": "https://manhuaplus.com/wp-admin/admin-ajax.php",
+      "file": "fixtures/archive.html"
+    },
+    {
+      "url": "https://manhuaplus.com/manga/",
+      "file": "fixtures/genres.html"
+    },
+    {
+      "url": "https://manhuaplus.com/manga/martial-peak/",
+      "file": "fixtures/series.html"
+    },
+    {
+      "url": "https://manhuaplus.com/manga/martial-peak/chapter-3862/",
+      "file": "fixtures/chapter.html"
+    }
+  ],
+  "cases": [
+    {
+      "name": "popular parses the admin-ajax.php archive (Madara)",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 25,
+        "mangas.0.title": "Martial Peak",
+        "mangas.0.url": "/manga/martial-peak/",
+        "mangas.0.thumbnail_url": {
+          "contains": "/wp-content/uploads/2020/07/thumbbbbb-175x238.jpg"
+        },
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "latest posts to the same admin-ajax.php (one fixture for the archive calls)",
+      "call": "latest",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 25,
+        "mangas.0.title": "Martial Peak",
+        "mangas.0.url": "/manga/martial-peak/",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "search posts to the same admin-ajax.php (one fixture for the archive calls)",
+      "call": "search",
+      "args": [
+        1,
+        "martial"
+      ],
+      "expect": {
+        "mangas.length": 25,
+        "mangas.0.title": "Martial Peak",
+        "mangas.0.url": "/manga/martial-peak/",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "details come from the series page",
+      "call": "details",
+      "args": [
+        {
+          "url": "/manga/martial-peak/",
+          "title": "Martial Peak"
+        }
+      ],
+      "expect": {
+        "title": "Martial Peak",
+        "author": "Momo (Ii)",
+        "artist": "Pikapi",
+        "status": 1,
+        "genre": {
+          "contains": "Action"
+        },
+        "description": {
+          "contains": "The journey to the martial peak is a lon"
+        },
+        "thumbnail_url": {
+          "contains": "/wp-content/uploads/2020/07/thumbbbbb-193x278.jpg"
+        }
+      }
+    },
+    {
+      "name": "chapters come from the series page; fixture cut to 23 rows",
+      "call": "chapters",
+      "args": [
+        {
+          "url": "/manga/martial-peak/",
+          "title": "Martial Peak"
+        }
+      ],
+      "expect": {
+        "length": 23,
+        "0.name": "Chapter 3862",
+        "0.url": "/manga/martial-peak/chapter-3862/",
+        "0.date_upload": 1766361600000,
+        "22.name": "CHapter 3860"
+      }
+    },
+    {
+      "name": "pages are the chapter's reader images",
+      "call": "pages",
+      "args": [
+        {
+          "url": "/manga/martial-peak/chapter-3862/",
+          "name": "Chapter 3862"
+        }
+      ],
+      "expect": {
+        "length": 12,
+        "0.imageUrl": "https://cdn.manhuaplus.com/2025/12/22/RFBlEg.jpg",
+        "11.imageUrl": "https://cdn.manhuaplus.com/2025/12/22/RFBAxk.jpg"
+      }
+    }
+  ],
+  "live": [
+    {
+      "name": "popular",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        }
+      }
+    }
+  ]
+}

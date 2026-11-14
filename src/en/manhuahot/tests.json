@@ -1,0 +1,135 @@
+{
+  "routes": [
+    {
+      "url": "https://manhuahot.com/wp-admin/admin-ajax.php",
+      "file": "fixtures/archive.html"
+    },
+    {
+      "url": "https://manhuahot.com/manga/deliverance-of-the-counterattack06/",
+      "file": "fixtures/series.html"
+    },
+    {
+      "url": "https://manhuahot.com/manga/deliverance-of-the-counterattack06/chap-412/",
+      "file": "fixtures/chapter.html"
+    },
+    {
+      "url": "https://manhuahot.com/manga/",
+      "file": "fixtures/genres.html"
+    }
+  ],
+  "cases": [
+    {
+      "name": "popular parses the admin-ajax.php archive (Madara)",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 25,
+        "mangas.0.title": "Transmigrated into the Golden Goose of the Alpha Big Boss",
+        "mangas.0.url": "/manga/transmigrated-into-the-golden-goose-of-the-alpha-big-boss-9/",
+        "mangas.0.thumbnail_url": {
+          "contains": "/wp-content/uploads/2025/05/Transmigrated-into-the-Golden-Goose-of-the-Alpha-Big-Boss-175x238.jpg%20175w"
+        },
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "latest posts to the same admin-ajax.php (one fixture for the archive calls)",
+      "call": "latest",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 25,
+        "mangas.0.title": "Transmigrated into the Golden Goose of the Alpha Big Boss",
+        "mangas.0.url": "/manga/transmigrated-into-the-golden-goose-of-the-alpha-big-boss-9/",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "search posts to the same admin-ajax.php (one fixture for the archive calls)",
+      "call": "search",
+      "args": [
+        1,
+        "love"
+      ],
+      "expect": {
+        "mangas.length": 25,
+        "mangas.0.title": "Transmigrated into the Golden Goose of the Alpha Big Boss",
+        "mangas.0.url": "/manga/transmigrated-into-the-golden-goose-of-the-alpha-big-boss-9/",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "details come from the series page",
+      "call": "details",
+      "args": [
+        {
+          "url": "/manga/deliverance-of-the-counterattack06/",
+          "title": "Deliverance of the Counterattack"
+        }
+      ],
+      "expect": {
+        "title": "Deliverance of the Counterattack",
+        "author": "Haier, Popeye 2000 released.",
+        "status": 1,
+        "genre": {
+          "contains": "BL"
+        },
+        "description": {
+          "contains": "Having a two-faced bitch as a love rival"
+        },
+        "thumbnail_url": {
+          "contains": "/wp-content/uploads/2021/06/55892346._SX318_-193x278.jpg%20193w"
+        }
+      }
+    },
+    {
+      "name": "chapters come from the series page; fixture cut to 23 rows",
+      "call": "chapters",
+      "args": [
+        {
+          "url": "/manga/deliverance-of-the-counterattack06/",
+          "title": "Deliverance of the Counterattack"
+        }
+      ],
+      "expect": {
+        "length": 23,
+        "0.name": "Chap 412",
+        "0.url": "/manga/deliverance-of-the-counterattack06/chap-412/",
+        "0.date_upload": 1711584000000,
+        "22.name": "Chap 0"
+      }
+    },
+    {
+      "name": "pages are the chapter's reader images",
+      "call": "pages",
+      "args": [
+        {
+          "url": "/manga/deliverance-of-the-counterattack06/chap-412/",
+          "name": "Chap 412"
+        }
+      ],
+      "expect": {
+        "length": 8,
+        "0.imageUrl": "https://cdn.manhuahot.com/manga_60d84a6e6ccfe/765ad2723719a76ac4272cd9c69887e4/0.jpeg",
+        "7.imageUrl": "https://cdn.manhuahot.com/manga_60d84a6e6ccfe/765ad2723719a76ac4272cd9c69887e4/7.jpeg"
+      }
+    }
+  ],
+  "live": [
+    {
+      "name": "popular",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        }
+      }
+    }
+  ]
+}

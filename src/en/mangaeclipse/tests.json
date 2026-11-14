@@ -1,0 +1,136 @@
+{
+  "routes": [
+    {
+      "url": "https://mangaeclipse.com/wp-admin/admin-ajax.php",
+      "file": "fixtures/archive.html"
+    },
+    {
+      "url": "https://mangaeclipse.com/manga/",
+      "file": "fixtures/genres.html"
+    },
+    {
+      "url": "https://mangaeclipse.com/manga/great-heaven-sovereign/",
+      "file": "fixtures/series.html"
+    },
+    {
+      "url": "https://mangaeclipse.com/manga/great-heaven-sovereign/chapter-56/",
+      "file": "fixtures/chapter.html"
+    }
+  ],
+  "cases": [
+    {
+      "name": "popular parses the admin-ajax.php archive (Madara)",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 17,
+        "mangas.0.title": "I Desire To Be Carefree",
+        "mangas.0.url": "/manga/i-desire-to-be-carefree/",
+        "mangas.0.thumbnail_url": {
+          "contains": "/wp-content/uploads/2022/02/COUVER-175x238.jpg"
+        },
+        "hasNextPage": false
+      }
+    },
+    {
+      "name": "latest posts to the same admin-ajax.php (one fixture for the archive calls)",
+      "call": "latest",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 17,
+        "mangas.0.title": "I Desire To Be Carefree",
+        "mangas.0.url": "/manga/i-desire-to-be-carefree/",
+        "hasNextPage": false
+      }
+    },
+    {
+      "name": "search posts to the same admin-ajax.php (one fixture for the archive calls)",
+      "call": "search",
+      "args": [
+        1,
+        "sovereign"
+      ],
+      "expect": {
+        "mangas.length": 17,
+        "mangas.0.title": "I Desire To Be Carefree",
+        "mangas.0.url": "/manga/i-desire-to-be-carefree/",
+        "hasNextPage": false
+      }
+    },
+    {
+      "name": "details come from the series page",
+      "call": "details",
+      "args": [
+        {
+          "url": "/manga/great-heaven-sovereign/",
+          "title": "Great Heaven Sovereign"
+        }
+      ],
+      "expect": {
+        "title": "Great Heaven Sovereign",
+        "author": "Evergreen",
+        "artist": "EVERGREEN",
+        "status": 1,
+        "genre": {
+          "contains": "Action"
+        },
+        "description": {
+          "contains": "Great Heaven Sovereign Read Online Now"
+        },
+        "thumbnail_url": {
+          "contains": "/wp-content/uploads/2022/02/Musings-of-a-foreigner-in-Japan-by-Taylor-Alonso-1-193x278.png"
+        }
+      }
+    },
+    {
+      "name": "chapters come from the series page; fixture cut to 23 rows",
+      "call": "chapters",
+      "args": [
+        {
+          "url": "/manga/great-heaven-sovereign/",
+          "title": "Great Heaven Sovereign"
+        }
+      ],
+      "expect": {
+        "length": 23,
+        "0.name": "Chapter 56",
+        "0.url": "/manga/great-heaven-sovereign/chapter-56/",
+        "0.date_upload": 1651968000000,
+        "22.name": "Chapter 1"
+      }
+    },
+    {
+      "name": "pages are the chapter's reader images",
+      "call": "pages",
+      "args": [
+        {
+          "url": "/manga/great-heaven-sovereign/chapter-56/",
+          "name": "Chapter 56"
+        }
+      ],
+      "expect": {
+        "length": 29,
+        "0.imageUrl": "https://mangaeclipse.com/wp-content/uploads/WP-manga/data/manga_621787800d345/a966364bfdda57324726637e67e755a3/00.jpg",
+        "28.imageUrl": "https://mangaeclipse.com/wp-content/uploads/WP-manga/data/manga_621787800d345/a966364bfdda57324726637e67e755a3/100.jpg"
+      }
+    }
+  ],
+  "live": [
+    {
+      "name": "popular",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        }
+      }
+    }
+  ]
+}

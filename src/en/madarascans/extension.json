@@ -1,0 +1,10 @@
+{
+  "name": "Madara Scans",
+  "lang": "en",
+  "versionCode": 1,
+  "nsfw": false,
+  "upstream": {
+    "path": "src/en/madarascans",
+    "commit": "d9420cd1"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "ManhuaHot",
+  "lang": "en",
+  "versionCode": 1,
+  "nsfw": false,
+  "upstream": {
+    "path": "src/en/manhuahot",
+    "commit": "d9420cd1"
+  }
+}

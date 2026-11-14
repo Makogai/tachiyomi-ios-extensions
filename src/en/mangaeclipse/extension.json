@@ -1,0 +1,10 @@
+{
+  "name": "Manga Eclipse",
+  "lang": "en",
+  "versionCode": 1,
+  "nsfw": false,
+  "upstream": {
+    "path": "src/en/mangaeclipse",
+    "commit": "d9420cd1"
+  }
+}

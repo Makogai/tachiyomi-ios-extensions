@@ -1,0 +1,142 @@
+{
+  "routes": [
+    {
+      "url": "https://rackusreads.com/manga/?page=1&order=update",
+      "file": "fixtures/latest.html"
+    },
+    {
+      "url": "https://rackusreads.com/manga/?page=1&order=popular",
+      "file": "fixtures/popular.html"
+    },
+    {
+      "url": "https://rackusreads.com/manga/winning-shot/",
+      "file": "fixtures/series.html"
+    },
+    {
+      "url": "https://rackusreads.com/winning-shot-chapter-91/",
+      "file": "fixtures/chapter.html"
+    },
+    {
+      "url": "https://rackusreads.com/manga/?title=the&page=1&status=&type=&order=",
+      "file": "fixtures/search.html"
+    }
+  ],
+  "cases": [
+    {
+      "name": "popular orders the listing by popular (MangaThemesia)",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 29,
+        "mangas.0.title": "Winning Shot!",
+        "mangas.0.url": "/manga/winning-shot/",
+        "mangas.0.thumbnail_url": {
+          "contains": "/wp-content/uploads/2024/09/COVER-WS-S2-207x300.webp"
+        },
+        "hasNextPage": false
+      }
+    },
+    {
+      "name": "latest orders by update",
+      "call": "latest",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 29,
+        "mangas.0.title": "Ryuna",
+        "mangas.0.url": "/manga/ryuna/",
+        "hasNextPage": false
+      }
+    },
+    {
+      "name": "search adds the title and the default filters",
+      "call": "search",
+      "args": [
+        1,
+        "the"
+      ],
+      "expect": {
+        "mangas.length": 28,
+        "mangas.0.title": "A Streamer in the Past",
+        "mangas.0.url": "/manga/a-streamer-in-the-past/",
+        "hasNextPage": false
+      }
+    },
+    {
+      "name": "details come from the series page",
+      "call": "details",
+      "args": [
+        {
+          "url": "/manga/winning-shot/",
+          "title": "Winning Shot!"
+        }
+      ],
+      "expect": {
+        "title": "Winning Shot!",
+        "author": "Kang Kyeon",
+        "artist": "Si Ba Gyeon",
+        "status": 1,
+        "genre": {
+          "contains": "Drama"
+        },
+        "description": {
+          "contains": "Ahn Shiyun is a pitcher who doesn’t mind"
+        },
+        "thumbnail_url": {
+          "contains": "/wp-content/uploads/2024/09/COVER-WS-S2.webp"
+        }
+      }
+    },
+    {
+      "name": "chapters come from the series page; fixture cut to 24 rows",
+      "call": "chapters",
+      "args": [
+        {
+          "url": "/manga/winning-shot/",
+          "title": "Winning Shot!"
+        }
+      ],
+      "expect": {
+        "length": 24,
+        "0.name": "Chapter 91 - Suspended Game",
+        "0.url": "/winning-shot-chapter-91/",
+        "0.date_upload": {
+          "localDate": "2025-08-21"
+        },
+        "23.name": "Chapter 1 - Enchantment"
+      }
+    },
+    {
+      "name": "pages are the chapter's reader images",
+      "call": "pages",
+      "args": [
+        {
+          "url": "/winning-shot-chapter-91/",
+          "name": "Chapter 91 - Suspended Game"
+        }
+      ],
+      "expect": {
+        "length": 16,
+        "0.imageUrl": "https://rackusreads.com/wp-content/uploads/2025/08/00-WSs2-creds.webp",
+        "15.imageUrl": "https://rackusreads.com/wp-content/uploads/2025/08/Z-END-CREDITS-66.webp"
+      }
+    }
+  ],
+  "live": [
+    {
+      "name": "popular",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        }
+      }
+    }
+  ]
+}

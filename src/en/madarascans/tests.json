@@ -1,0 +1,142 @@
+{
+  "routes": [
+    {
+      "url": "https://madarascans.net/series/?page=1&order=update",
+      "file": "fixtures/latest.html"
+    },
+    {
+      "url": "https://madarascans.net/series/?page=1&order=popular",
+      "file": "fixtures/popular.html"
+    },
+    {
+      "url": "https://madarascans.net/series/the-academys-new-swordmaster/",
+      "file": "fixtures/series.html"
+    },
+    {
+      "url": "https://madarascans.net/i-became-a-swordsmanship-instructor-at-the-academy-chapter-50-end/",
+      "file": "fixtures/chapter.html"
+    },
+    {
+      "url": "https://madarascans.net/series/?title=the&page=1&status=&type=&order=",
+      "file": "fixtures/search.html"
+    }
+  ],
+  "cases": [
+    {
+      "name": "popular orders the listing by popular (MangaThemesia)",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 30,
+        "mangas.0.title": "I Became a Swordsmanship Instructor at the Academy",
+        "mangas.0.url": "/series/the-academys-new-swordmaster/",
+        "mangas.0.thumbnail_url": {
+          "contains": "/madarascans.net/wp-content/uploads/2025/07/2026-09-16-11-15-13-1789557313398.webp?resize=165,225"
+        },
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "latest orders by update",
+      "call": "latest",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 30,
+        "mangas.0.title": "Player of the Fallen Family",
+        "mangas.0.url": "/series/player-of-the-fallen-family/",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "search adds the title and the default filters",
+      "call": "search",
+      "args": [
+        1,
+        "the"
+      ],
+      "expect": {
+        "mangas.length": 30,
+        "mangas.0.title": "0th correctional officer",
+        "mangas.0.url": "/series/0th-correctional-officer/",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "details come from the series page",
+      "call": "details",
+      "args": [
+        {
+          "url": "/series/the-academys-new-swordmaster/",
+          "title": "I Became a Swordsmanship Instructor at the Academy"
+        }
+      ],
+      "expect": {
+        "title": "I Became a Swordsmanship Instructor at the Academy",
+        "author": "coldpig, leejin",
+        "artist": "Seong Eun Pyo",
+        "status": 2,
+        "genre": {
+          "contains": "Action"
+        },
+        "description": {
+          "contains": "The protagonist is reincarnated in the b"
+        },
+        "thumbnail_url": {
+          "contains": "/madarascans.net/wp-content/uploads/2025/07/2026-09-16-11-15-13-1789557313398.webp"
+        }
+      }
+    },
+    {
+      "name": "chapters come from the series page; fixture cut to 23 rows",
+      "call": "chapters",
+      "args": [
+        {
+          "url": "/series/the-academys-new-swordmaster/",
+          "title": "I Became a Swordsmanship Instructor at the Academy"
+        }
+      ],
+      "expect": {
+        "length": 23,
+        "0.name": "Chapter 50 END",
+        "0.url": "/i-became-a-swordsmanship-instructor-at-the-academy-chapter-50-end/",
+        "0.date_upload": {
+          "localDate": "2026-01-27"
+        },
+        "22.name": "Chapter 1"
+      }
+    },
+    {
+      "name": "pages are the chapter's reader images",
+      "call": "pages",
+      "args": [
+        {
+          "url": "/i-became-a-swordsmanship-instructor-at-the-academy-chapter-50-end/",
+          "name": "Chapter 50 END"
+        }
+      ],
+      "expect": {
+        "length": 24,
+        "0.imageUrl": "https://madarascans.net/wp-content/uploads/2026/01/01-1.jpeg",
+        "23.imageUrl": "https://madarascans.net/wp-content/uploads/2026/01/24.jpeg"
+      }
+    }
+  ],
+  "live": [
+    {
+      "name": "popular",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        }
+      }
+    }
+  ]
+}

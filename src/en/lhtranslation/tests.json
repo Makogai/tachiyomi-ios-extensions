@@ -1,0 +1,140 @@
+{
+  "routes": [
+    {
+      "url": "https://lhtranslation.net/wp-admin/admin-ajax.php",
+      "file": "fixtures/archive.html"
+    },
+    {
+      "url": "https://lhtranslation.net/manga/",
+      "file": "fixtures/genres.html"
+    },
+    {
+      "url": "https://lhtranslation.net/manga/maou-ni-natta-node-dungeon-tsukutte-jingai-musume-to-honobono-suru/",
+      "file": "fixtures/series.html"
+    },
+    {
+      "url": "https://lhtranslation.net/manga/maou-ni-natta-node-dungeon-tsukutte-jingai-musume-to-honobono-suru/ajax/chapters/",
+      "file": "fixtures/chapters.html"
+    },
+    {
+      "url": "https://lhtranslation.net/manga/maou-ni-natta-node-dungeon-tsukutte-jingai-musume-to-honobono-suru/chapter-92/",
+      "file": "fixtures/chapter.html"
+    }
+  ],
+  "cases": [
+    {
+      "name": "popular parses the admin-ajax.php archive (Madara)",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 25,
+        "mangas.0.title": "The Galactic Navy Officer Becomes an Adventurer",
+        "mangas.0.url": "/manga/the-galactic-navy-officer-becomes-an-adventurer/",
+        "mangas.0.thumbnail_url": {
+          "contains": "/wp-content/uploads/2023/01/kou-175x238.jpg"
+        },
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "latest posts to the same admin-ajax.php (one fixture for the archive calls)",
+      "call": "latest",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": 25,
+        "mangas.0.title": "The Galactic Navy Officer Becomes an Adventurer",
+        "mangas.0.url": "/manga/the-galactic-navy-officer-becomes-an-adventurer/",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "search posts to the same admin-ajax.php (one fixture for the archive calls)",
+      "call": "search",
+      "args": [
+        1,
+        "isekai"
+      ],
+      "expect": {
+        "mangas.length": 25,
+        "mangas.0.title": "The Galactic Navy Officer Becomes an Adventurer",
+        "mangas.0.url": "/manga/the-galactic-navy-officer-becomes-an-adventurer/",
+        "hasNextPage": true
+      }
+    },
+    {
+      "name": "details come from the series page",
+      "call": "details",
+      "args": [
+        {
+          "url": "/manga/maou-ni-natta-node-dungeon-tsukutte-jingai-musume-to-honobono-suru/",
+          "title": "Maou ni Natta node, Dungeon Tsukutte Jingai Musume to Honobono suru"
+        }
+      ],
+      "expect": {
+        "title": "Maou ni Natta node, Dungeon Tsukutte Jingai Musume to Honobono suru",
+        "author": "Ryuuyuu",
+        "artist": "Ryuuyuu",
+        "status": 1,
+        "genre": {
+          "contains": "Action"
+        },
+        "description": {
+          "contains": "Before I realized, I had become the guar"
+        },
+        "thumbnail_url": {
+          "contains": "/wp-content/uploads/2021/08/maou-ni-natte-node-dungeon-tsukutte-jingai-musume-to-honobono-suru.jpg"
+        }
+      }
+    },
+    {
+      "name": "chapters come from the ajax/chapters/ answer (ChapterMode.MangaAjax); fixture cut to 23 rows",
+      "call": "chapters",
+      "args": [
+        {
+          "url": "/manga/maou-ni-natta-node-dungeon-tsukutte-jingai-musume-to-honobono-suru/",
+          "title": "Maou ni Natta node, Dungeon Tsukutte Jingai Musume to Honobono suru"
+        }
+      ],
+      "expect": {
+        "length": 23,
+        "0.name": "Chapter 92",
+        "0.url": "/manga/maou-ni-natta-node-dungeon-tsukutte-jingai-musume-to-honobono-suru/chapter-92/",
+        "0.date_upload": 1788220800000,
+        "22.name": "Chapter 1.1"
+      }
+    },
+    {
+      "name": "pages are the chapter's reader images",
+      "call": "pages",
+      "args": [
+        {
+          "url": "/manga/maou-ni-natta-node-dungeon-tsukutte-jingai-musume-to-honobono-suru/chapter-92/",
+          "name": "Chapter 92"
+        }
+      ],
+      "expect": {
+        "length": 20,
+        "0.imageUrl": "https://lhtranslation.net/wp-content/uploads/WP-manga/data/manga_61227c4232f30/645cd14b8010e25c5cfda5be831f6f2f/00.jpg",
+        "19.imageUrl": "https://lhtranslation.net/wp-content/uploads/WP-manga/data/manga_61227c4232f30/645cd14b8010e25c5cfda5be831f6f2f/19.jpg"
+      }
+    }
+  ],
+  "live": [
+    {
+      "name": "popular",
+      "call": "popular",
+      "args": [
+        1
+      ],
+      "expect": {
+        "mangas.length": {
+          "gt": 0
+        }
+      }
+    }
+  ]
+}
