@@ -1,4 +1,4 @@
-// The body of upstream assets/solver.html @ d9420cd1 (MangaFire challenge solver, OpenCV.js), unchanged.
+// The body of src/all/mangafire/assets/solver.html @ d9420cd1 (MangaFire challenge solver, OpenCV.js), unchanged.
 // It reads `cv` (OpenCV.js) and `bridge.postMessage("true"|"false")`, and fetches the relative
 // `generate` and `verify` endpoints, so it must run on a page under https://mangafire.to/@waf/.
 export const OPENCV_URL = "https://docs.opencv.org/5.0/opencv.js";

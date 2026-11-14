@@ -1,4 +1,4 @@
-// Port of VrfSigner.kt @ d9420cd1. The interceptor becomes `signUrl`, applied to every request
+// Port of src/all/mangafire/.../VrfSigner.kt @ d9420cd1. The interceptor becomes `signUrl`, applied to every request
 // whose path starts with /api/ (the SDK has no interceptors).
 import { type HttpUrl, toHttpUrl } from "@sdk";
 

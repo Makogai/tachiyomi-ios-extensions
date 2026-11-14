@@ -1,4 +1,4 @@
-// Port of Filters.kt @ d9420cd1.
+// Port of src/all/mangafire/.../Filters.kt @ d9420cd1.
 import { CheckBox, Group, type HttpUrlBuilder, Select, Text, TriState } from "@sdk";
 
 export interface UriFilter {

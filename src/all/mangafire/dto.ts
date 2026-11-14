@@ -1,4 +1,4 @@
-// Port of Dto.kt @ d9420cd1.
+// Port of src/all/mangafire/.../Dto.kt @ d9420cd1.
 import { removeSuffix, SChapter, SManga } from "@sdk";
 
 export interface ApiResponse<T> {
