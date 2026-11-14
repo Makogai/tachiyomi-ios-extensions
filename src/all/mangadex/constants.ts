@@ -1,4 +1,4 @@
-// src/all/mangadex/.../MDConstants.kt and MangaDexIntl.kt @ d9420cd1.
+// Port of src/all/mangadex/.../MDConstants.kt and MangaDexIntl.kt @ d9420cd1: URLs, limits and preference keys.
 import type { Intl } from "@sdk";
 
 export const uuidRegex = /[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/;

@@ -1,4 +1,4 @@
-// src/all/mangadex/assets/i18n/messages_*.properties @ d9420cd1, standing in for lib:i18n.
+// Port of src/all/mangadex/assets/i18n/messages_*.properties @ d9420cd1, standing in for lib:i18n.
 // Upstream reads es for es-419 and pt_br for pt (MangaDexHelper.intl); see intlFor.
 import { Intl } from "@sdk";
 

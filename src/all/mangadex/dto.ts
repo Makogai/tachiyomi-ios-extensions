@@ -1,5 +1,6 @@
-// src/all/mangadex/.../dto/*.kt @ d9420cd1. Upstream decodes `relationships` polymorphically by
-// `type`; here every entity is one shape and helpers pick relationships by type.
+// Port of src/all/mangadex/.../dto/*.kt @ d9420cd1: the API's response shapes.
+// Upstream decodes `relationships` polymorphically by `type`; here every entity is one shape and
+// the helpers below pick relationships by type.
 
 export const CHAPTER = "chapter";
 export const MANGA = "manga";

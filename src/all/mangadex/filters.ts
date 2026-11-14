@@ -1,4 +1,4 @@
-// src/all/mangadex/.../MangaDexFilters.kt @ d9420cd1.
+// Port of src/all/mangadex/.../MangaDexFilters.kt @ d9420cd1.
 import { CheckBox, type FilterList, Group, type HttpUrlBuilder, type Intl, Select, type SharedPreferences, Sort, TriState } from "@sdk";
 import {
   ALL_LANGUAGES,

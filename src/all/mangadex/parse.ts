@@ -1,5 +1,6 @@
-// src/all/mangadex/.../MangaDexHelper.kt @ d9420cd1 (the parts that do not need the client).
-import { type Intl, parseIsoDate, SChapter, SManga } from "@sdk";
+// Port of src/all/mangadex/.../MangaDexHelper.kt and MangaDex.kt @ d9420cd1: API entities → SManga, SChapter and Page.
+// The parts of the helper that need the client (covers, at-home refresh) stay in index.ts.
+import { type Intl, Page, parseIsoDate, SChapter, SManga } from "@sdk";
 import {
   ALL_LANGUAGES,
   CDN_URL,
@@ -12,13 +13,18 @@ import {
 } from "./constants";
 import {
   type AggregateVolume,
+  type AtHomeDto,
   ARTIST,
   AUTHOR,
   type AuthorArtistAttributesDto,
   type ChapterDataDto,
+  type ChapterListDto,
   COVER_ART,
+  type CoverArtListDto,
+  firstRelationship,
   type CoverArtAttributesDto,
   localized,
+  MANGA,
   type MangaAttributesDto,
   type MangaDataDto,
   relationshipsOfType,
@@ -276,4 +282,42 @@ export function titleToSlug(title: string): string {
       const currentSlug = `${accumulator}-${element}`;
       return currentSlug.length > 100 ? accumulator : currentSlug;
     });
+}
+
+// Pieces of MangaDex.kt's parse functions
+
+/** The cover file named in a manga's relationships (needs `includes[]=cover_art`). */
+export function coverFileName(manga: MangaDataDto): string | null {
+  return firstRelationship<CoverArtAttributesDto>(manga, COVER_ART)?.attributes?.fileName ?? null;
+}
+
+/** The manga a chapter feed names, each once, in feed order (latestUpdatesParse). */
+export function mangaIdsOfFeed(chapterListDto: ChapterListDto): string[] {
+  return [...new Set((chapterListDto.data ?? []).flatMap((chapter) => relationshipsOfType(chapter, MANGA)).map((manga) => manga.id))];
+}
+
+/** Per manga, the file of the cover in its original language (the list is sorted by volume). */
+export function firstVolumeCoverFileNames(covers: NonNullable<CoverArtListDto["data"]>, mangaMap: Map<string, MangaAttributesDto>): Map<string, string> {
+  const byManga = new Map<string, NonNullable<CoverArtListDto["data"]>>();
+  for (const cover of covers) {
+    const mangaId = firstRelationship(cover, MANGA)?.id;
+    if (mangaId) byManga.set(mangaId, [...(byManga.get(mangaId) ?? []), cover]);
+  }
+  const result = new Map<string, string>();
+  for (const [mangaId, list] of byManga) {
+    const fileName = list.find((cover) => cover.attributes?.locale === mangaMap.get(mangaId)?.originalLanguage)?.attributes?.fileName;
+    if (fileName) result.set(mangaId, fileName);
+  }
+  return result;
+}
+
+/**
+ * The chapter's pages. Each page's url is `<server>,<at-home request URL>,<time>`, so
+ * getImageRequest can ask for a new server once the page's is too old (pages time out).
+ */
+export function pageListParse(atHomeDto: AtHomeDto, atHomeRequestUrl: string, useDataSaver: boolean, now: number): Page[] {
+  const host = atHomeDto.baseUrl;
+  const hash = atHomeDto.chapter.hash;
+  const pageSuffix = useDataSaver ? atHomeDto.chapter.dataSaver.map((file) => `/data-saver/${hash}/${file}`) : atHomeDto.chapter.data.map((file) => `/data/${hash}/${file}`);
+  return pageSuffix.map((imgUrl, index) => new Page(index, `${host},${atHomeRequestUrl},${now}`, imgUrl));
 }
