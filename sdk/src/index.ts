@@ -2,7 +2,8 @@
  * The tachiyomi-ios extension SDK. Import everything from "@sdk".
  *
  * The API mirrors the Kotlin source API and keiyoushi's `core` helpers, so a port reads like
- * the source it came from. See README.md for the porting table.
+ * the source it came from. See docs/ADDING-A-SOURCE.md for the porting cheatsheet and
+ * docs/ARCHITECTURE.md for the layers and the host contract.
  */
 export * from "./crypto.js";
 export * from "./filterCache.js";
