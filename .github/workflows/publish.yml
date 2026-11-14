@@ -1,18 +1,22 @@
-# Type-checks, tests and builds every extension, then publishes dist/ to the `repo` branch,
-# which the app reads from:
+# Checks every push and pull request; on main, publishes dist/ to the `repo` branch, which the
+# apps read from:
 #   https://raw.githubusercontent.com/Makogai/tachiyomi-ios-extensions/repo/index.json
+#
+# `npm run validate` compares the build with the published index, so a changed extension whose
+# versionCode was not bumped fails here instead of silently not reaching the apps.
 name: Publish
 
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: publish
+  group: publish-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -28,10 +32,13 @@ jobs:
 
       - run: npm ci
       - run: npm run typecheck
+      # SDK unit tests, then every extension's tests.json against its fixtures (Node harness).
       - run: npm test
-      - run: npm run build
+      # extension.json schema, required files, unique IDs, versionCode bumps; builds dist/.
+      - run: npm run validate
 
       - name: Publish dist/ to the repo branch
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: |
           cd dist
           git init -q -b repo
