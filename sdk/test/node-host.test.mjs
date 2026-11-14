@@ -57,3 +57,20 @@ test("expectations follow the app's semantics", () => {
   assert.deepEqual(checkExpectations(null, { "": null }), []);
   assert.equal(checkExpectations(result, { "mangas.0.status": { gte: 1 } }).length, 1);
 });
+
+test("abs: URLs with surrounding whitespace: empty from the host (as SwiftSoup), resolved by the SDK", async () => {
+  const page = hostElement(parseDocument(`<img data-src="\n\t https://cdn.example.org/1.jpg"><img data-src=" 2.jpg">`, "https://example.org/c/"));
+  assert.equal(page.selectFirst("img").absUrl("data-src"), "");
+  const { importTs } = await import("./sdk.mjs");
+  const { createHost } = await import("../../scripts/lib/host/fake-host.mjs");
+  globalThis.__host = createHost({ transport: async () => ({ status: 404, url: "", headers: {}, body: "" }) });
+  try {
+    const sdk = await importTs();
+    const document = sdk.parseHtml(`<img data-src="\n\t https://cdn.example.org/1.jpg"><img data-src=" 2.jpg">`, "https://example.org/c/");
+    const images = document.select("img");
+    assert.equal(images[0].attr("abs:data-src"), "https://cdn.example.org/1.jpg");
+    assert.equal(images[1].absUrl("data-src"), "https://example.org/c/2.jpg");
+  } finally {
+    delete globalThis.__host;
+  }
+});

@@ -1,4 +1,5 @@
 import { host, type HostElement } from "./host.js";
+import { HttpUrl } from "./url.js";
 
 /**
  * Jsoup-style HTML, backed by the app's SwiftSoup (a Swift port of Jsoup). Selectors are
@@ -50,6 +51,7 @@ export class Element {
 
   /** Attribute value, or "" when absent. `abs:` resolves URLs against the document location. */
   attr(name: string): string {
+    if (name.toLowerCase().startsWith("abs:")) return this.absUrl(name.slice(4));
     return this.native.attr(name);
   }
 
@@ -57,8 +59,19 @@ export class Element {
     return this.native.hasAttr(name);
   }
 
+  /**
+   * The attribute as an absolute URL, or "" when absent. Jsoup ignores surrounding whitespace
+   * (`data-src="\n  https://…"` is common); SwiftSoup's Foundation URLs do not, so the SDK
+   * retries with the trimmed value.
+   */
   absUrl(name: string): string {
-    return this.native.absUrl(name);
+    const resolved = this.native.absUrl(name);
+    if (resolved !== "") return resolved;
+    const raw = this.native.attr(name).replace(/[\t\n\r]/g, "").trim();
+    if (raw === "") return "";
+    const absolute = HttpUrl.parse(raw);
+    if (absolute) return absolute.toString();
+    return HttpUrl.parse(this.native.location())?.resolve(raw)?.toString() ?? "";
   }
 
   tagName(): string {

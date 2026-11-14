@@ -36,8 +36,11 @@ const { values: flags } = parseArgs({
 const themes = readdirSync(themesDir).filter((dir) => existsSync(path.join(themesDir, dir, "theme.json")));
 const themeInfo = (theme) => JSON.parse(readFileSync(path.join(themesDir, theme, "theme.json"), "utf8"));
 
-const rl = flags.yes ? null : createInterface({ input: process.stdin, output: process.stdout });
+// Answers come from the terminal, or, when stdin is piped, one per line in order.
+const piped = !flags.yes && !process.stdin.isTTY ? (await new Response(process.stdin).text()).split("\n") : null;
+const rl = flags.yes || piped ? null : createInterface({ input: process.stdin, output: process.stdout });
 async function ask(question, fallback) {
+  if (piped) return piped.shift()?.trim() || fallback || "";
   if (!rl) return fallback ?? "";
   const answer = (await rl.question(`${question}${fallback ? ` [${fallback}]` : ""}: `)).trim();
   return answer || fallback || "";
@@ -52,7 +55,7 @@ function fail(message) {
 // 1. What upstream says, when there is an upstream path.
 let upstream = null;
 let upstreamPath = flags.upstream?.replace(/^\/+|\/+$/g, "") ?? null;
-if (!upstreamPath && rl) upstreamPath = (await ask("keiyoushi path (e.g. src/en/mangasushi), empty for none", "")) || null;
+if (!upstreamPath && (rl || piped)) upstreamPath = (await ask("keiyoushi path (e.g. src/en/mangasushi), empty for none", "")) || null;
 if (upstreamPath && !upstreamPath.startsWith("src/")) upstreamPath = `src/${upstreamPath}`;
 if (upstreamPath) {
   const gradle = (await readUpstreamFile(`${upstreamPath}/build.gradle.kts`)) ?? (await readUpstreamFile(`${upstreamPath}/build.gradle`));

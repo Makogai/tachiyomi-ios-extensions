@@ -139,7 +139,7 @@ swift test --package-path Packages/MangaKit --filter ExtensionConformanceTests
 |---|---|---|
 | Class selectors | `.Foo` is case-sensitive | Jsoup matches classes case-insensitively |
 | `html()`, `outerHtml()` | Not pretty-printed | Pretty-printed (indentation and newlines) by default; avoid asserting on raw markup |
-| `abs:` URLs | WHATWG URL resolution | Foundation `URL(string:relativeTo:)`; both percent-encode spaces and non-ASCII, edge cases (odd schemes, `\`) can differ |
+| `abs:` URLs | WHATWG URL resolution; a value with surrounding whitespace gives "" as in the app | Foundation `URL(string:relativeTo:)` gives "" for surrounding whitespace (Jsoup trims it); the SDK's `absUrl`/`attr("abs:…")` retry with the trimmed value, so ports behave like upstream in both. Other edge cases (odd schemes, `\`) can differ |
 | `:matches()`, `[attr~=regex]` | JavaScript regex; a leading `(?i)` becomes the `i` flag | Java-style regex (NSRegularExpression); possessive quantifiers and some `\p{…}` classes differ |
 | `:matchText`, `[abs:attr]` in selectors | Not supported | Supported |
 | Malformed HTML | parse5's spec recovery | Jsoup's tree builder; usually identical, can differ on badly broken markup |

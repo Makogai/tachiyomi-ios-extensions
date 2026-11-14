@@ -55,8 +55,21 @@ function isDataText(node) {
   return node.type === "text" && DATA_TAGS.has(nameOf(node.parent));
 }
 
+// Parsed trees never change (the host contract has no mutation), so text is computed once per node;
+// `:contains` selectors otherwise recompute it for every candidate element.
+const textCache = new WeakMap();
+
 /** SwiftSoup's `text()`: normalised text of the node and its descendants, script/style excluded. */
 export function textOf(node) {
+  let text = textCache.get(node);
+  if (text === undefined) {
+    text = computeText(node);
+    textCache.set(node, text);
+  }
+  return text;
+}
+
+function computeText(node) {
   const state = { out: "", lastWasWhite: false };
   const visit = (current) => {
     if (current.type === "text") {
@@ -149,7 +162,10 @@ function rootOf(node) {
 
 /** Resolves `relative` against `base` like Jsoup's `StringUtil.resolve` (WHATWG URL rules here). */
 export function resolveUrl(base, relative) {
-  const cleaned = relative.replace(/[\t\n\r]/g, "").trim();
+  // SwiftSoup resolves with Foundation's URL(string:relativeTo:), which rejects surrounding
+  // whitespace (Jsoup trims it). Mirror the app; the SDK's absUrl retries with the trimmed value.
+  if (/^\s|\s$/.test(relative)) return "";
+  const cleaned = relative;
   try {
     return base ? new URL(cleaned, base).toString() : new URL(cleaned).toString();
   } catch {
