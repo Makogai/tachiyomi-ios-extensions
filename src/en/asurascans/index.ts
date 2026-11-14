@@ -1,21 +1,21 @@
 // Port of src/en/asurascans/.../AsuraScans.kt @ d9420cd1. Method names follow the original.
+//
+// The source's flow. URLs are built in api.ts, API JSON and Astro props are read in parse.ts
+// (shapes in dto.ts), scrambled pages are drawn by descrambler.ts.
 import {
   type ClientBuilder,
   defineExtension,
-  type Document,
   Fetch,
   FILTER_FETCH_HINT,
   FilterDataCache,
   type FilterList,
   Header,
   type HttpUrl,
-  type ImageTile,
   type ImageTransform,
   KeiSource,
   MangasPage,
-  Page,
+  type Page,
   type PreferenceScreen,
-  type Response,
   type SChapter,
   Separator,
   SManga,
@@ -23,49 +23,21 @@ import {
   seconds,
   substringAfter,
   substringBefore,
-  SwitchPreferenceCompat,
   toHttpUrl,
 } from "@sdk";
-import {
-  applyMangaUrl,
-  type AvailableGenres,
-  type ChapterListDto,
-  chapterDtoToSChapter,
-  type Creators,
-  type DataDto,
-  type FiltersDto,
-  isLocked,
-  type MangaDetailsDto,
-  type MangaDto,
-  type MangaUrlDto,
-  mangaDtoToSManga,
-  type PageData,
-  type PageDto,
-  type PageListDto,
-  toSMangaDetails,
-} from "./dto";
-import {
-  CreatorFilter,
-  GenresFilter,
-  isUriFilter,
-  MinChaptersFilter,
-  SortFilter,
-  StatusFilter,
-  TypeFilter,
-} from "./filters";
+import { browseUrl, creatorsUrl, getMangaSlug, searchUrl } from "./api";
+import { descrambleTransform } from "./descrambler";
+import type { AvailableGenres, ChapterListDto, Creators, DataDto, FiltersDto, MangaDetailsDto, MangaDto, MangaUrlDto, PageData, PageDto, PageListDto } from "./dto";
+import { CreatorFilter, GenresFilter, MinChaptersFilter, SortFilter, StatusFilter, TypeFilter } from "./filters";
+import { applyMangaUrl, chapterDtoToSChapter, extractAstroProp, isLocked, mangaDtoToSManga, pageListParse, toSMangaDetails } from "./parse";
+import * as settings from "./settings";
 
-const PER_PAGE_LIMIT = 20;
-const OLD_FORMAT_MANGA_REGEX = /^\/manga\/(\d+-)?([^/]+)\/?$/;
-const PREF_HIDE_PREMIUM_CHAPTERS = "pref_hide_premium_chapters";
-const SLUG_MAP = "slug_map_v2";
 const URL_RANDOM_PART = /-[a-z0-9]{8}$/;
 
 class AsuraScans extends KeiSource {
   readonly name = "Asura Scans";
   readonly lang = "en";
   readonly baseUrl = "https://asurascans.com";
-
-  private readonly apiUrl = "https://api.asurascans.com/api";
 
   /**
    * Stands in for upstream's `SManga.memo["slug"]`: series slug → the site's random slug
@@ -91,22 +63,11 @@ class AsuraScans extends KeiSource {
   // ============================== Search ===============================
 
   async getSearchMangaList(page: number, query: string, filters: FilterList): Promise<MangasPage> {
-    const url = toHttpUrl(`${this.apiUrl}/series`).newBuilder();
-    url.addQueryParameter("offset", String((page - 1) * PER_PAGE_LIMIT));
-    url.addQueryParameter("limit", String(PER_PAGE_LIMIT));
-    if (query.trim() !== "") {
-      url.addQueryParameter("search", query);
-    }
-
-    for (const filter of filters) {
-      if (isUriFilter(filter)) filter.addToUri(url);
-    }
-
-    const response = await this.client.get(url.build(), Fetch.XHR);
+    const response = await this.client.get(searchUrl(page, query, filters), Fetch.XHR);
     const result = response.parseAs<DataDto<MangaDto[]>>();
     const mangas = (result.data ?? []).map((dto) => {
       const { manga, slug } = mangaDtoToSManga(dto, this.baseUrl);
-      this.slugMemo.set(this.getMangaSlug(manga.url), slug);
+      this.slugMemo.set(getMangaSlug(manga.url), slug);
       return manga;
     });
     return new MangasPage(mangas, result.meta!.has_more ?? false);
@@ -129,19 +90,8 @@ class AsuraScans extends KeiSource {
   // ============================== Details ==============================
 
   override getMangaUrl(manga: SManga): string {
-    const slug = this.getMangaSlug(manga.url);
-    let randomSlug = this.slugMemo.get(slug);
-    if (randomSlug === undefined) {
-      let oldSlugMap: Record<string, unknown> = {};
-      try {
-        oldSlugMap = JSON.parse(this.preferences.getString(SLUG_MAP, "{}")) as Record<string, unknown>;
-      } catch {
-        // Not a map.
-      }
-      const old = oldSlugMap[slug];
-      randomSlug = typeof old === "string" ? old : slug;
-    }
-
+    const slug = getMangaSlug(manga.url);
+    const randomSlug = this.slugMemo.get(slug) ?? settings.storedRandomSlug(this.preferences, slug) ?? slug;
     return `${this.baseUrl}/comics/${randomSlug}`;
   }
 
@@ -161,16 +111,12 @@ class AsuraScans extends KeiSource {
 
     const document = response.asJsoup();
 
-    const updatedManga = toSMangaDetails(this.extractAstroProp<MangaDetailsDto>(document, "title", "description"));
-    const randomMangaSlug = applyMangaUrl(
-      this.extractAstroProp<MangaUrlDto>(document, "publicUrl"),
-      updatedManga,
-      this.baseUrl,
-    );
-    this.slugMemo.set(this.getMangaSlug(updatedManga.url), randomMangaSlug);
+    const updatedManga = toSMangaDetails(extractAstroProp<MangaDetailsDto>(document, "title", "description"));
+    const randomMangaSlug = applyMangaUrl(extractAstroProp<MangaUrlDto>(document, "publicUrl"), updatedManga, this.baseUrl);
+    this.slugMemo.set(getMangaSlug(updatedManga.url), randomMangaSlug);
 
-    const hidePremium = this.hidePremiumChapters();
-    const chapters = (this.extractAstroProp<ChapterListDto>(document, "chapters").chapters ?? [])
+    const hidePremium = settings.hidePremiumChapters(this.preferences);
+    const chapters = (extractAstroProp<ChapterListDto>(document, "chapters").chapters ?? [])
       .filter((chapter) => !(hidePremium && isLocked(chapter)))
       .map((chapter) => chapterDtoToSChapter(chapter));
 
@@ -192,13 +138,10 @@ class AsuraScans extends KeiSource {
   // =============================== Pages ===============================
 
   async getPageList(chapter: SChapter): Promise<Page[]> {
-    const url = this.getChapterUrl(chapter);
-
-    const response = await this.client.get(url, Fetch.DOCUMENT);
-    const document = response.asJsoup();
+    const document = (await this.client.get(this.getChapterUrl(chapter), Fetch.DOCUMENT)).asJsoup();
     let pages: PageDto[];
     try {
-      pages = this.extractAstroProp<PageListDto>(document, "pages").pages ?? [];
+      pages = extractAstroProp<PageListDto>(document, "pages").pages ?? [];
     } catch {
       pages = [];
     }
@@ -210,56 +153,17 @@ class AsuraScans extends KeiSource {
       return [];
     }
 
-    return pages.map((pageDto, index) => {
-      let pageUrl: string;
-      if (pageDto.tiles != null && pageDto.tiles.length > 0) {
-        const data: PageData = {
-          tiles: pageDto.tiles,
-          tileCols: pageDto.tile_cols ?? 4,
-          tileRows: pageDto.tile_rows ?? 5,
-        };
-        pageUrl = toHttpUrl(pageDto.url).newBuilder().fragment(JSON.stringify(data)).build().toString();
-      } else {
-        pageUrl = pageDto.url;
-      }
-
-      return new Page(index, "", pageUrl);
-    });
+    return pageListParse(pages);
   }
 
-  /**
-   * Upstream's `scrambledImageInterceptor`: the image URL's fragment carries the tile order;
-   * tile `w` of the download (row-major, `tileCols` × `tileRows` tiles of `width / tileCols` ×
-   * `height / tileRows`) is drawn at position `tiles[w]` of an output trimmed to whole tiles.
-   */
+  /** Upstream's `scrambledImageInterceptor`: the image URL's fragment carries the tile order. */
   override async getImageTransform(page: Page, width: number, height: number): Promise<ImageTransform | null> {
     const imageUrl = page.imageUrl ?? page.url;
     const fragment = toHttpUrl(imageUrl).fragment;
     if (fragment === null) return null;
     if (!fragment.startsWith("{")) return null;
 
-    const pageData = JSON.parse(fragment) as PageData;
-
-    const tileW = Math.trunc(width / pageData.tileCols);
-    const tileH = Math.trunc(height / pageData.tileRows);
-
-    const tiles: ImageTile[] = pageData.tiles.map((j, w) => {
-      const srcCol = w % pageData.tileCols;
-      const srcRow = Math.trunc(w / pageData.tileCols);
-      const dstCol = j % pageData.tileCols;
-      const dstRow = Math.trunc(j / pageData.tileCols);
-
-      return {
-        sx: srcCol * tileW,
-        sy: srcRow * tileH,
-        sw: tileW,
-        sh: tileH,
-        dx: dstCol * tileW,
-        dy: dstRow * tileH,
-      };
-    });
-
-    return { width: tileW * pageData.tileCols, height: tileH * pageData.tileRows, tiles };
+    return descrambleTransform(JSON.parse(fragment) as PageData, width, height);
   }
 
   // ============================== Filters ==============================
@@ -270,9 +174,9 @@ class AsuraScans extends KeiSource {
   private async fetchFilterData(): Promise<FiltersDto> {
     const [genres, creators] = await Promise.all([
       this.client
-        .get(`${this.baseUrl}/browse`, Fetch.DOCUMENT)
-        .then((response) => this.extractAstroPropFromResponse<AvailableGenres>(response, "availableGenres").availableGenres),
-      this.client.get(`${this.apiUrl}/creators`, Fetch.XHR).then((response) => response.parseAs<DataDto<Creators>>().data!),
+        .get(browseUrl(this.baseUrl), Fetch.DOCUMENT)
+        .then((response) => extractAstroProp<AvailableGenres>(response.asJsoup(), "availableGenres").availableGenres),
+      this.client.get(creatorsUrl(), Fetch.XHR).then((response) => response.parseAs<DataDto<Creators>>().data!),
     ]);
 
     return { genres, authors: creators.authors, artists: creators.artists };
@@ -294,64 +198,11 @@ class AsuraScans extends KeiSource {
     return filters;
   }
 
-  // ============================= Utilities =============================
-
-  private getMangaSlug(url: string): string {
-    if (url.includes("/series/")) return substringBefore(substringAfter(url, "/series/"), "/");
-    if (url.includes("/comics/")) return substringBefore(substringAfter(url, "/comics/"), "/");
-    if (url.includes("/manga/")) {
-      return OLD_FORMAT_MANGA_REGEX.exec(url)?.[2] ?? substringBefore(substringAfter(url, "/manga/"), "/");
-    }
-    return url.replace(/^\/+|\/+$/g, "");
-  }
+  // ============================== Settings ==============================
 
   override setupPreferenceScreen(screen: PreferenceScreen): void {
-    screen.addPreference(
-      new SwitchPreferenceCompat({
-        key: PREF_HIDE_PREMIUM_CHAPTERS,
-        title: "Hide premium chapters",
-        summary: "Hides the chapters that require a subscription to view",
-        defaultValue: true,
-      }),
-    );
+    settings.setupPreferenceScreen(screen);
   }
-
-  private hidePremiumChapters(): boolean {
-    return this.preferences.getBoolean(PREF_HIDE_PREMIUM_CHAPTERS, true);
-  }
-
-  private extractAstroProp<T>(document: Document, ...key: string[]): T {
-    const selector = key.map((it) => `[props*=${it}]`).join("");
-    const prop = document.selectFirst(selector)?.attr("props");
-    if (prop === undefined) throw new Error(`Unable to find prop with [${key.join(", ")}]`);
-    const json = JSON.parse(prop) as unknown;
-    return unwrapAstro(json) as T;
-  }
-
-  private extractAstroPropFromResponse<T>(response: Response, key: string): T {
-    return this.extractAstroProp<T>(response.asJsoup(), key);
-  }
-}
-
-/** kotlinx's `JsonPrimitive.intOrNull`: a whole number, or a string holding one. */
-function isIntPrimitive(value: unknown): boolean {
-  if (typeof value === "number") return Number.isInteger(value);
-  if (typeof value === "string") return /^[+-]?\d+$/.test(value);
-  return false;
-}
-
-/** Astro serialises props as `[type, value]` pairs; this strips them as upstream's `unwrapAstro`. */
-function unwrapAstro(json: unknown): unknown {
-  if (Array.isArray(json)) {
-    if (json.length === 0) return null;
-    if (json.length === 1 && isIntPrimitive(json[0])) return null;
-    if (json.length === 2 && isIntPrimitive(json[0])) return unwrapAstro(json[1]);
-    return json.map(unwrapAstro);
-  }
-  if (json !== null && typeof json === "object") {
-    return Object.fromEntries(Object.entries(json).map(([key, value]) => [key, unwrapAstro(value)]));
-  }
-  return json;
 }
 
 export default defineExtension([new AsuraScans()]);
