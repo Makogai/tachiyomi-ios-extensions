@@ -83,7 +83,7 @@ if (!/^[a-z0-9]+$/.test(pkgName)) fail(`Package folder must be lowercase letters
 const langDir = lang === "all" ? "all" : lang.split("-")[0].toLowerCase();
 const pkg = `${langDir}.${pkgName}`;
 const nsfw = flags.nsfw ?? upstream?.nsfw ?? false;
-const versionId = Number(flags["version-id"] ?? 1);
+const versionId = Number(flags["version-id"] ?? firstSource.versionId ?? 1);
 const fixedId = flags.id ?? firstSource.id ?? null;
 let commit = flags.commit ?? null;
 if (upstreamPath && !commit) {

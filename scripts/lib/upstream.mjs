@@ -71,6 +71,7 @@ export function parseGradle(text) {
     baseUrl: /baseUrl\s*=\s*"([^"]*)"/.exec(body)?.[1] ?? null,
     name: /name\s*=\s*"([^"]*)"/.exec(body)?.[1] ?? null,
     id: /\bid\s*=\s*(\d+)L?/.exec(body)?.[1] ?? null,
+    versionId: Number(/\bversionId\s*=\s*(\d+)/.exec(body)?.[1] ?? 1),
   });
   // `listOf("en", "es", …).forEach { source { lang = it … } }`: one source per listed language.
   let rest = text;
