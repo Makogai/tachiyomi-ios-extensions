@@ -1,5 +1,5 @@
 // Port of src/en/weebcentral/.../Filters.kt @ d9420cd1.
-import { CheckBox, type Filter, Group, type HttpUrlBuilder, Select, Text, TriState } from "@sdk";
+import { CheckBox, type Filter, type FilterList, Group, type HttpUrlBuilder, Select, Text, TriState } from "@sdk";
 
 export interface UriFilter {
   addToUri(builder: HttpUrlBuilder): void;
@@ -194,4 +194,19 @@ export class TagFilter extends UriMultiTriSelectFilter {
       ]),
     );
   }
+}
+
+/** Every filter, in upstream's order, with `sortFilter` first (popular and latest pass their own sort). */
+export function defaultFilterList(sortFilter: SortFilter): FilterList {
+  return [
+    sortFilter,
+    new SortOrderFilter(),
+    new OfficialTranslationFilter(),
+    new AnimeAdaptationFilter(),
+    new AdultContentFilter(),
+    new AuthorFilter(),
+    new StatusFilter(),
+    new TypeFilter(),
+    new TagFilter(),
+  ];
 }
